@@ -16,7 +16,16 @@ npm install
 npm start
 ```
 
-3. The node app will then run locally on your computer. If you see no errors that probably means its working fine. To head to the port that the app runs on, type the following into your web browser:
+3. The node app will then run locally on your computer. If you see the following (with a different directory based on where you've placed your files, the app has booted up properly).
+
+```
+> HealthWeb@0.0.0 start /Users/shivtoolsidass/Desktop/Tutorials/HealthWeb
+> node ./bin/www
+
+```
+
+
+ To head to the port that the app runs on, type the following into your web browser:
 
 ```
 http://localhost:3000
@@ -25,9 +34,3 @@ http://localhost:3000
 4. Please make all of your changes in separate branches and do not commit to the master branch (I've made this mistake countless times and it is a pain to refactor code). To figure out how to branch, use this [git tutorial](http://rogerdudler.github.io/git-guide/). 
 
 5. Feel free to reach out with questions!
-
-2) Once you do that, use the npm package manager to install node and express. To do this, use the following commands (note that you'll have to use Git Bash if you have Windows - download git bash in this case!): 
-
-```
-npm install -g node
-npm```
