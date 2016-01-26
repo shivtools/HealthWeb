@@ -7,16 +7,16 @@ Note that this will code is meant for a Mac/Unix environment. If you have Window
 
 *Note:* If you have Windows, you'll have to use Git Bash to do the following!
 
-1. You'll need to head over to the Node.js web page to install the node package. With this you'll get npm (the package manager that we will use to install dependencies for our app) to get our app running. [Visit the nodejs download page](https://nodejs.org/en/download/) and follow the instructions depending on which OS you have.
+* You'll need to head over to the Node.js web page to install the node package. With this you'll get npm (the package manager that we will use to install dependencies for our app) to get our app running. [Visit the nodejs download page](https://nodejs.org/en/download/) and follow the instructions depending on which OS you have.
 
-2. Once you have that installed, navigate to the directory where you have cloned a copy of this repo and use the following commands:
+* Once you have that installed, navigate to the directory where you have cloned a copy of this repo and use the following commands:
 
 ```
 npm install 
 npm start
 ```
 
-3. The node app will then run locally on your computer. If you see the following (with a different directory based on where you've placed your files, the app has booted up properly).
+* The node app will then run locally on your computer. If you see the following (with a different directory based on where you've placed your files, the app has booted up properly).
 
 ```
 > HealthWeb@0.0.0 start /Users/shivtoolsidass/Desktop/Tutorials/HealthWeb
@@ -31,6 +31,6 @@ npm start
 http://localhost:3000
 ```
 
-4. Please make all of your changes in separate branches and do not commit to the master branch (I've made this mistake countless times and it is a pain to refactor code). To figure out how to branch, use this [git tutorial](http://rogerdudler.github.io/git-guide/). 
+* Please make all of your changes in separate branches and do not commit to the master branch (I've made this mistake countless times and it is a pain to refactor code). To figure out how to branch, use this [git tutorial](http://rogerdudler.github.io/git-guide/). 
 
-5. Feel free to reach out with questions!
+* Feel free to reach out with questions!

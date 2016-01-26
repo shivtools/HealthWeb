@@ -4,9 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var mongoose = require('mongoose'); 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+
+var fs = require('fs'); //file system to load in models 
 
 var app = express();
 
@@ -23,7 +24,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -44,7 +44,14 @@ if (app.get('env') === 'development') {
       error: err
     });
   });
+  mongoose.connect('mongodb://55.55.55.5/mongo'); //**will be changed later
 }
+
+//load up models in models dir into app using fs from models directory
+fs.readdirSync(__dirname + '/models').forEach(function(filename){
+  //console.log(filename);
+  if(~filename.indexOf('.js')) require(__dirname + '/models/' + filename);
+});
 
 // production error handler
 // no stacktraces leaked to user

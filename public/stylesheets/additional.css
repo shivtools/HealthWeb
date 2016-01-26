@@ -1,0 +1,64 @@
+/* Banner styles for each page */
+.banner { 
+  max-width: 100%; /* actual img width */
+  background-size: cover;
+  background-position: center;
+
+  display: block; 
+  width: 100%; 
+  padding-top: 4.918%; /* slope */
+  height: 375px; /* start height */
+
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+}
+
+/* Support Multi-line Phrases */
+.banner_text {
+	left: 0;
+	display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    color: white;
+    font-size: 60px;
+	text-shadow: rgba(0, 0, 0, .2) 3px 3px 3px;
+	-webkit-text-stroke: 1px black;
+}
+
+/* Code for the homepage */
+.home_styles {
+  padding: 30px 15px 10px 15px;
+  text-align: center;
+}
+
+
+/* Code needed for sticky footer */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+.container .footer_text {
+  margin: 20px 0;
+}
+
+.col-md-7, .col-md-5 {
+  padding: 0 20px 15px 20px;
+}
