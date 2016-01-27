@@ -15,6 +15,9 @@ var mongoose = require('mongoose');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var mongoose = require('mongoose'); 
+var routes = require('./routes/index');
+
 var fs = require('fs'); //file system to load in models 
 
 var app = express();
@@ -40,6 +43,7 @@ app.use(function(req,res,next){
 //middleware for express 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -61,6 +65,8 @@ if (app.get('env') === 'development') {
     });
   });
   //mongoose.connect('mongodb://55.55.55.5/mongo'); //**will be changed later
+
+  mongoose.connect('mongodb://55.55.55.5/mongo'); //**will be changed later
 }
 
 //load up models in models dir into app using fs from models directory

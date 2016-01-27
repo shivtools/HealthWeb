@@ -52,4 +52,12 @@ router.post('/additem', function(req, res){
 	});
 });
 
+// Get users page - no users page as of now, but soon to come.
+router.get('/users', function(req,res,next){
+	mongoose.model('users').find(function(err, users){
+		res.send(users);
+	});
+});
+
+
 module.exports = router;

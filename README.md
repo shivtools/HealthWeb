@@ -7,6 +7,7 @@ Express + Node web app for ACM group project
 * Create several pages for each sub-category 
 * Search functionality
 
+
 ### Instructions on how to set up this app and run it locally in your browser: 
 
 Note that this will code is meant for a Mac/Unix environment. If you have Windows, you'll have to download the Node.js msi file from the node website. Here are step by step instructions:

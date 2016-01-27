@@ -18,5 +18,6 @@
     "monk": "https://github.com/vccabral/monk.git",
     "mongodb": "2.0",
     "kerberos": "~0.0"
+    "mongoose": "latest"
   }
 }
