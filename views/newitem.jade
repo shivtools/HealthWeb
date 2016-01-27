@@ -1,0 +1,16 @@
+extends layout
+
+block content
+	br
+	br
+	br
+	//- Form to add listings to different pages. Will be accessible only to admin.
+	h1=title
+	form#formAddUser(role="form" name="additem",method="post",action="/additem")
+		.form-group
+			label(for="name") Organization name
+			input#inputUserName(type="text" class="form-control" placeholder="Organization name", name="itemname")
+		.form-group
+			label(for="email") Email address
+			input#inputUserEmail(type="text",class="form-control",placeholder = "Organization email", name="itememail")
+		button#btnSubmit(type="submit").btn.btn-default Submit

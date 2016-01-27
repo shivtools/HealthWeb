@@ -1,0 +1,16 @@
+extends layout
+
+block content
+	br 
+	br
+		//- To display items on each page. Will be extended to include all domains.
+	br
+	h1.
+		Item List  
+	//- Pull in documents called userlist in route file
+	//- For each user extract information and print
+	ul
+		each item, i in itemlist
+			li 
+				p=item.username
+				p=item.email
