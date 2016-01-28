@@ -34,22 +34,29 @@ router.post('/additem', function(req, res){
 	//get form values
 	var itemName = req.body.itemname;
 	var itemEmail = req.body.itememail;
-	//console.log(req.body); // works fine
+	
+	if(itemName == null || itemEmail == null){
+		// $('#warning').modal('show');
+		//handle this on the front end - warn user if sufficient details aren't entered
+		//prompt them with modal to try again
+		res.status(500).send({ error: 'Insufficient info for listing!' });
+	}
+	else{
+		var collection = db.get('usercollection');
 
-	var collection = db.get('usercollection');
-
-	collection.insert({
-		"username": itemName,
-		"email": itemEmail
-	}, function(err, doc){
-		if(err){
-			//It fail return error - pls dont
-			res.send("There was an issue with adding info to the db");
-		}
-		else{
-			res.redirect("itemlist");
-		}
-	});
+		collection.insert({
+			"username": itemName,
+			"email": itemEmail
+		}, function(err, doc){
+			if(err){
+				//It fail return error - pls dont
+				res.send("There was an issue with adding info to the db");
+			}
+			else{
+				res.redirect("itemlist");
+			}
+		});
+	}	
 });
 
 // Get users page - no users page as of now, but soon to come.

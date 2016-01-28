@@ -4,12 +4,41 @@ block content
 	br
 	br
 	br
-	h1=title
-	form#formAddUser(role="form" name="additem",method="post",action="/additem")
-		.form-group
-			label(for="name") Organization name
-			input#inputUserName(type="text" class="form-control" placeholder="Organization name", name="itemname")
-		.form-group
-			label(for="email") Email address
-			input#inputUserEmail(type="text",class="form-control",placeholder = "Organization email", name="itememail")
-		button#btnSubmit(type="submit").btn.btn-default Submit
+	h1#addHeader Item lists
+	.col-md-2
+	.col-md-8
+		form#formAddUser(role="form" name="additem",method="post",action="/additem")
+			.form-group
+				label(for="itemname") Organization name
+				input#inputUserName(type="text" class="form-control" placeholder="Organization name", name="itemname")
+			.form-group
+				label(for="itememail") Email address
+				input#inputUserEmail(type="text",class="form-control",placeholder = "Organization email", name="itememail")
+			//- Some weird shit is happening here with the alignment
+			.input-group
+				label(for="") Enter your secret username and select a listing
+				input.form-control(type="text" placeholder="Enter your user name and select the listing you'd like to add your item to", name="secretkey")
+				.input-group-btn
+					button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+						span Listing 
+							.caret
+					ul.dropdown-menu
+						li
+							a(href="#") Diabetes
+						li
+							a(href="#") Children
+						li
+							a(href="#") Emergency services
+						li
+							a(href="#") Another random example
+						li
+							a(href="#") Alex is sexy
+			br
+			button.btn-danger#btnSubmit(type="submit").btn.btn-default Submit
+
+		//- Modal triggered if user has not entered sufficient info
+		.modal.fade.bs-example-modal-sm#warning(tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel")
+			.modal-dialog.modal-sm
+				.modal-content
+					| Please make sure that you've entered all the information necessary and try again
+	.col-md-2
