@@ -1,3 +1,19 @@
+@font-face {
+    font-family: 'museo_sans500';
+    src: url('../fonts/museosans/MuseoSans_500-webfont.eot');
+    src: url('../fonts/museosans/MuseoSans_500-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/museosans/MuseoSans_500-webfont.woff2') format('woff2'),
+         url('../fonts/museosans/MuseoSans_500-webfont.woff') format('woff'),
+         url('../fonts/museosans/MuseoSans_500-webfont.ttf') format('truetype'),
+         url('../fonts/museosans/MuseoSans_500-webfont.svg#museo_sans500') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+table .collapse.in {
+  display:table-row;
+}
+
 /* Banner styles for each page */
 .banner { 
   max-width: 100%; /* actual img width */
@@ -18,15 +34,22 @@
 .banner_text {
 	left: 0;
 	display: inline-block;
-    position: relative;
-    vertical-align: middle;
-    text-align: center;
-    width: 100%;
-    color: white;
-    font-size: 60px;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+  color: white;
+  font-size: 100px;
 	text-shadow: rgba(0, 0, 0, .2) 3px 3px 3px;
 	-webkit-text-stroke: 1px black;
+  font-family: 'museo_sans500', 'Arial', sans-serif;
 }
+
+.lead{
+  font-size: 28px;
+  margin-bottom: 0px;
+}
+
 
 /* Code for the homepage */
 .home_styles {
@@ -52,19 +75,117 @@ body {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
-  background-color: #f5f5f5;
+  background-color: #4f8e83;
 }
 
 .container .footer_text {
   margin: 20px 0;
+  text-align: center;
+  color:  #ecf0f1;
 }
 
+
+/* Code for the columns */
 .col-md-7, .col-md-5 {
   padding: 0 20px 15px 20px;
 }
 
-/*Add item page styling*/
 
-#addHeader, #itemlistHeader{
-  text-align: center;
+/* Code for the logo */
+.navbar-brand {
+  padding: 0px; /* firefox bug fix */
+  float: left;
+}
+.navbar-brand>img {
+  height: 100%;
+  padding: 5px; /* firefox bug fix */
+  position: relative;
+  float: left !important;
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.navbar-default {
+  background-color: #f8f8f8;
+  border-color: #4f8e83;
+}
+.navbar-default .navbar-brand {
+  color: #3e3e3e;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-text {
+  color: #3e3e3e;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #3e3e3e;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #ecf0f1;
+  background-color: #4f8e83;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #ecf0f1;
+  background-color: #4f8e83;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #ecf0f1;
+  background-color: #4f8e83;
+}
+.navbar-default .navbar-toggle {
+  border-color: #4f8e83;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #4f8e83;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #3e3e3e;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #3e3e3e;
+}
+.navbar-default .navbar-link {
+  color: #3e3e3e;
+}
+.navbar-default .navbar-link:hover {
+  color: #ecf0f1;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #3e3e3e;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ecf0f1;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ecf0f1;
+    background-color: #4f8e83;
+  }
 }
