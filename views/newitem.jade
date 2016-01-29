@@ -15,6 +15,15 @@ block content
 				label(for="itememail") Email address
 				input#inputUserEmail(type="text",class="form-control",placeholder = "Organization email", name="itememail")
 			//- Some weird shit is happening here with the alignment
+			.form-group
+				label(for="itemnumber") Phone number
+				input#inputUserNumber(type="text",class="form-control",placeholder = "Organization contact number", name="itemnumber")
+			.form-group
+				label(for="itemlocation") Location
+				input#inputUserAddress(type="text",class="form-control",placeholder = "Organization location", name="itemlocation")
+			.form-group
+				label(for="itemwebsite") Website
+				input#inputUserWebsite(type="text",class="form-control",placeholder = "Organization website", name="itemwebsite")
 			.input-group
 				label(for="") Enter your secret username and select a listing
 				input.form-control(type="text" placeholder="Enter your user name and select the listing you'd like to add your item to", name="secretkey")
@@ -42,3 +51,4 @@ block content
 				.modal-content
 					| Please make sure that you've entered all the information necessary and try again
 	.col-md-2
+
