@@ -1,11 +1,25 @@
 # HealthWeb
 Express + Node web app for ACM group project 
 
-### To do:
+### To do on (UI)
 
+* Jade
+* Sub listings
+* About page
+* Contact page
+* Listings (Sliding child rows) - David! 
+* Home page
+* Google Maps integration (Matt)
+
+### To do on (backend)
+
+* Db instance is failing occasionally - correct this!
+* Integrate Mongoose models
+* Contact us - send us an email - sendgrid
 * Connect db to mongolab instance
 * Create several pages for each sub-category 
 * Search functionality
+* Secret user names - so that only select users can add to the website
 
 
 ### Instructions on how to set up this app and run it locally in your browser: 
