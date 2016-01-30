@@ -25,6 +25,9 @@ block content
 				label(for="itemwebsite") Website
 				input#inputUserWebsite(type="text",class="form-control",placeholder = "Organization website", name="itemwebsite")
 			.form-group
+				label(for="itemImage") Organization logo
+				input(type="file" name="userPhoto")
+			.form-group
 				label(for="") Enter your secret username and select a listing to add your post to (you can even check multiple listings)
 				input.form-control(type="text" placeholder="You must be an authorized user to list entries. Enter your user name, select the listing(s) and hit submit once you're done.", name="secretkey")
 				.input-group-btn

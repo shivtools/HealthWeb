@@ -1,6 +1,23 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
+var multer = require('multer');
+var fs = require('fs');
+
+
+//multer code
+var storage =   multer.diskStorage({
+  destination: function (req, file, callback) {
+  	console.log("ADDED DESTINATION PROPERLY");
+    callback(null, './uploads');
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.fieldname + '-' + Date.now());
+  }
+});
+var upload = multer({ storage : storage}).single('userPhoto');
+
+
 
 //add all schemas for different pages
 var Food = require('../models/food');
@@ -23,6 +40,7 @@ router.get('/food', function(req, res) {
 		if(err) throw err; //pls dont throw error
 		console.log(items);
 		res.render('food', {
+			title: 'Food listings',
 			"foodlist": items
 		});
 	});
@@ -36,6 +54,7 @@ router.get('/housing', function(req, res) {
 		if(err) throw err; //pls dont throw error
 		console.log(items);
 		res.render('housing', {
+			title: 'Housing listings',
 			"housinglist": items
 		});
 	});
@@ -49,6 +68,7 @@ router.get('/family', function(req, res) {
 		if(err) throw err; //pls dont throw error
 		console.log(items);
 		res.render('family', {
+			title: 'Family listings',
 			"familylist": items
 		});
 	});
@@ -62,6 +82,7 @@ router.get('/legal', function(req, res) {
 		if(err) throw err; //pls dont throw error
 		console.log(items);
 		res.render('legal', {
+			title: 'Legal listings',
 			"legallist": items
 		});
 	});
@@ -75,6 +96,7 @@ router.get('/forms', function(req, res) {
 		if(err) throw err; //pls dont throw error
 		console.log(items);
 		res.render('forms', {
+			title: 'Form listings',
 			"formslist": items
 		});
 	});
@@ -89,14 +111,13 @@ router.get('/newitem', function(req,res){
 
 //search functionality for website
 router.post('/search', function(req,res){
-	console.log("HELLO HELLO " + searchText);
-	var searchText = req.body.searchQuery;
+	var searchText = req.body.searchItem;
 
 
-	Item.find({name: searchText}, function(err, results){
+	Forms.find({name: searchText}, function(err, results){
 		if(err) throw err;
 		//console.log(items);
-		res.render('/searchresults', {
+		res.render('searchresults', {
 			"searchresults": results
 		});
 	});
@@ -114,12 +135,27 @@ router.post('/additem', function(req, res){
 	var itemWebsite = req.body.itemwebsite;
 	var secretuser = req.body.secretkey;
 
+	//console.log(itemName + " email: " + itemEmail);
+
+	console.log(__dirname);
+		//multer config functions
+	//image upload code
+	upload(req,res,function(err) {
+        if(err) {
+        	console.log(err);
+            return res.end("Error uploading file.");
+        }
+        console.log("Successfully added file");
+        //res.end("File is uploaded");
+    });
+
 	//get all checkbox values
 	var options = req.body.options;
 
 	//depending on what checkboxes were marked, search necessary db and render listings
 	//if statements so that they can be added to multiple dbs
 	if(options == "food"){
+		console.log("food");
 		var food = new Food({
 			name: itemName,
 			email: itemEmail,
@@ -134,7 +170,9 @@ router.post('/additem', function(req, res){
 			console.log('Food Item added successfully wooooot!');
 		});
 	}
+
 	if(options == "housing"){
+		console.log("housing");
 		var housing = new Housing({
 			name: itemName,
 			email: itemEmail,
@@ -150,6 +188,7 @@ router.post('/additem', function(req, res){
 		});
 	}
 	if(options == "family"){
+		console.log("family");
 		var family = new Family({
 			name: itemName,
 			email: itemEmail,
@@ -165,6 +204,7 @@ router.post('/additem', function(req, res){
 		});
 	}
 	if(options == "legal"){
+		console.log("legal");
 		var legal = new Legal({
 			name: itemName,
 			email: itemEmail,
@@ -178,8 +218,10 @@ router.post('/additem', function(req, res){
 			res.redirect("legal");
 			console.log('Item added successfully wooooot!');
 		});
+
 	}
 	if(options == "forms"){
+		console.log("forms");
 		var form = new Forms({
 			name: itemName,
 			email: itemEmail,
@@ -193,6 +235,7 @@ router.post('/additem', function(req, res){
 			res.redirect("forms");
 			console.log('Item added successfully wooooot!');
 		});
+
 	}
 
 	var approved = false;
