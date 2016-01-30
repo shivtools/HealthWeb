@@ -2,23 +2,80 @@ var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
 
-var Item = require('../models/item');
+//add all schemas for different pages
+var Food = require('../models/food');
+var Housing = require('../models/housing');
+var Family = require('../models/family');
+var Legal = require('../models/legal');
+var Forms = require('../models/forms');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'HealthWeb' });
 });
 
-/* GET Userlist page. */
-router.get('/itemlist', function(req, res) {
+/* create get routes to get these pages. */
+router.get('/food', function(req, res) {
 
-	console.log("im working");
+	console.log("food working");
 
-	Item.find({}, function(err, items){
+	Food.find({}, function(err, items){
 		if(err) throw err; //pls dont throw error
 		console.log(items);
-		res.render('itemlist', {
-			"itemlist": items
+		res.render('food', {
+			"foodlist": items
+		});
+	});
+});
+
+router.get('/housing', function(req, res) {
+
+	console.log("housing working");
+
+	Housing.find({}, function(err, items){
+		if(err) throw err; //pls dont throw error
+		console.log(items);
+		res.render('housing', {
+			"housinglist": items
+		});
+	});
+});
+
+router.get('/family', function(req, res) {
+
+	console.log("family working"); //lol
+
+	Family.find({}, function(err, items){
+		if(err) throw err; //pls dont throw error
+		console.log(items);
+		res.render('family', {
+			"familylist": items
+		});
+	});
+});
+
+router.get('/legal', function(req, res) {
+
+	console.log("legal working");
+
+	Legal.find({}, function(err, items){
+		if(err) throw err; //pls dont throw error
+		console.log(items);
+		res.render('legal', {
+			"legallist": items
+		});
+	});
+});
+
+router.get('/forms', function(req, res) {
+
+	console.log("forms working");
+
+	Forms.find({}, function(err, items){
+		if(err) throw err; //pls dont throw error
+		console.log(items);
+		res.render('forms', {
+			"formslist": items
 		});
 	});
 });
@@ -39,7 +96,7 @@ router.post('/search', function(req,res){
 	Item.find({name: searchText}, function(err, results){
 		if(err) throw err;
 		//console.log(items);
-		res.redirect('/searchresults', {
+		res.render('/searchresults', {
 			"searchresults": results
 		});
 	});
@@ -57,6 +114,87 @@ router.post('/additem', function(req, res){
 	var itemWebsite = req.body.itemwebsite;
 	var secretuser = req.body.secretkey;
 
+	//get all checkbox values
+	var options = req.body.options;
+
+	//depending on what checkboxes were marked, search necessary db and render listings
+	//if statements so that they can be added to multiple dbs
+	if(options == "food"){
+		var food = new Food({
+			name: itemName,
+			email: itemEmail,
+			number: itemNumber,
+			location: itemLocation,
+			website: itemWebsite
+		});
+
+		food.save(function(err){
+			if(err) throw err;
+			res.redirect("food");
+			console.log('Food Item added successfully wooooot!');
+		});
+	}
+	if(options == "housing"){
+		var housing = new Housing({
+			name: itemName,
+			email: itemEmail,
+			number: itemNumber,
+			location: itemLocation,
+			website: itemWebsite
+		});
+
+		housing.save(function(err){
+			if(err) throw err;
+			res.redirect("housing");
+			console.log('Item added successfully wooooot!');
+		});
+	}
+	if(options == "family"){
+		var family = new Family({
+			name: itemName,
+			email: itemEmail,
+			number: itemNumber,
+			location: itemLocation,
+			website: itemWebsite
+		});
+
+		family.save(function(err){
+			if(err) throw err;
+			res.redirect("family");
+			console.log('Item added successfully wooooot!');
+		});
+	}
+	if(options == "legal"){
+		var legal = new Legal({
+			name: itemName,
+			email: itemEmail,
+			number: itemNumber,
+			location: itemLocation,
+			website: itemWebsite
+		});
+
+		legal.save(function(err){
+			if(err) throw err;
+			res.redirect("legal");
+			console.log('Item added successfully wooooot!');
+		});
+	}
+	if(options == "forms"){
+		var form = new Forms({
+			name: itemName,
+			email: itemEmail,
+			number: itemNumber,
+			location: itemLocation,
+			website: itemWebsite
+		});
+
+		form.save(function(err){
+			if(err) throw err;
+			res.redirect("forms");
+			console.log('Item added successfully wooooot!');
+		});
+	}
+
 	var approved = false;
 	
 	if(itemName == null || itemEmail == null){
@@ -68,27 +206,8 @@ router.post('/additem', function(req, res){
 	else if(secretusers == null || secretusers.indexOf(secretuser) == -1){
 		//if you're not one of the assigned users for healthweb, bugger off.
 		 res.send('You are not allowed to add listings to HealthWeb. Please get in touch with the team to request user privileges if you are part of Global Health');
-		 throw err;
+		 //throw err;
 	}
-	else{
-
-		var itemToAdd = new Item({
-			name: itemName,
-			email: itemEmail,
-			number: itemNumber,
-			location: itemLocation,
-			website: itemWebsite
-		});
-
-		itemToAdd.save(function(err){
-			if(err) throw err;
-			res.redirect("itemlist");
-			console.log('Item added successfully wooooot!');
-		});
-
-		//render this to front end so that modal is triggered
-		approved = true; //approved user
-	}	
 });
 
 // Get users page - no users page as of now, but soon to come.

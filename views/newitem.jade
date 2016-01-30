@@ -4,7 +4,7 @@ block content
 	br
 	br
 	br
-	h1#addHeader Item lists
+	h1#addHeader Add a listing to HealthWeb
 	.col-md-2
 	.col-md-8
 		form#formAddUser(role="form" name="additem",method="post",action="/additem")
@@ -24,24 +24,31 @@ block content
 			.form-group
 				label(for="itemwebsite") Website
 				input#inputUserWebsite(type="text",class="form-control",placeholder = "Organization website", name="itemwebsite")
-			.input-group
-				label(for="") Enter your secret username and select a listing
-				input.form-control(type="text" placeholder="Enter your user name and select the listing you'd like to add your item to", name="secretkey")
+			.form-group
+				label(for="") Enter your secret username and select a listing to add your post to (you can even check multiple listings)
+				input.form-control(type="text" placeholder="You must be an authorized user to list entries. Enter your user name, select the listing(s) and hit submit once you're done.", name="secretkey")
 				.input-group-btn
-					button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
-						span Listing 
-							.caret
-					ul.dropdown-menu
-						li
-							a(href="#") Diabetes
-						li
-							a(href="#") Children
-						li
-							a(href="#") Emergency services
-						li
-							a(href="#") Another random example
-						li
-							a(href="#") Alex is sexy
+
+			.checkbox
+				label
+					input(type="checkbox" name="options", value = "food")
+					| Food and nutrition 
+			.checkbox
+				label
+					input(type="checkbox" name="options", value = "housing")
+					| Housing
+			.checkbox
+				label
+					input(type="checkbox" name="options", value = "family")
+					| Family Services
+			.checkbox
+				label
+					input(type="checkbox" name="options" value = "legal")
+					| Immigration and Legal
+			.checkbox
+				label
+					input(type="checkbox" name="options", value = "forms")
+					| Forms
 			br
 			button.btn-danger#btnSubmit(type="submit").btn.btn-default Submit
 

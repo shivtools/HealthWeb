@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	br
+	h1#itemlistHeader Search Results
+	//- Pull in documents called userlist in route file
+	//- For each user extract information and print
+	.container
+		ul.list-group
+			each item, i in searchresults
+				li.list-group-item
+					.row
+					h5 Organization name:
+					p=item.name
+					.row
+					h5 Organization email:
+					p=item.email
+					.row
+					h5 Organization number:
+					p=item.email
+					.row
+					h5 Organization location:
+					p=item.email
+					.row
+					h5 Organization website:
+					p=item.email
+
+				br
