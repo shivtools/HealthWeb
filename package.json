@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "mongoose-schema-extend": "latest",
     "multer": "latest",
     "fs": "latest",
     "cheerio": "latest",

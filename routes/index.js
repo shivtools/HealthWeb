@@ -110,17 +110,96 @@ router.get('/newitem', function(req,res){
 });
 
 //search functionality for website
+//I wanted to learn about promises in JS so I decided to use them to query each db
+//JS is cool af
+
+//promises dont work :(
+
 router.post('/search', function(req,res){
 	var searchText = req.body.searchItem;
 
+	var posts = []; //posts to be pushed to array
 
-	Forms.find({name: searchText}, function(err, results){
-		if(err) throw err;
-		//console.log(items);
-		res.render('searchresults', {
-			"searchresults": results
+	var promise1 =  new Promise(function(resolve, reject) {
+
+	  	Forms.find({name: searchText}, function(err, results){
+			if(err) reject(Error("It broke"));
+
+			if(results.length != 0){
+				results.forEach(function(item){
+					posts.push(item);
+				});
+			}
+			resolve("Stuff worked");
 		});
 	});
+
+	var promise2 =  new Promise(function(resolve, reject) {
+
+	  	Food.find({name: searchText}, function(err, results){
+			if(err) reject(Error("It broke"));
+
+			if(results.length != 0){
+				results.forEach(function(item){
+					posts.push(item);
+				});
+			}
+			resolve("Stuff worked");
+		});
+	});
+
+	var promise3 =  new Promise(function(resolve, reject) {
+
+	  	Family.find({name: searchText}, function(err, results){
+			if(err) reject(Error("It broke"));
+
+			if(results.length != 0){
+				results.forEach(function(item){
+					posts.push(item);
+				});
+			}
+			resolve("Stuff worked");
+
+		});
+	});
+
+	var promise4 =  new Promise(function(resolve, reject) {
+
+	  	Legal.find({name: searchText}, function(err, results){
+			if(err) reject(Error("It broke"));
+
+			if(results.length != 0){
+				results.forEach(function(item){
+					posts.push(item);
+				});
+			}
+			resolve("Stuff worked");
+		});
+	});
+
+	var promise5 =  new Promise(function(resolve, reject) {
+
+	  	Housing.find({name: searchText}, function(err, results){
+			if(err) reject(Error("It broke"));
+
+			if(results.length != 0){
+				results.forEach(function(item){
+					posts.push(item);
+				});
+			}
+			resolve("Stuff worked");
+		});
+	});
+
+	//that moment when you realize this isn't working because node is async
+	Promise.all([promise1, promise2, promise3, promise4, promise5]).then(function() { 
+			console.log("yoyoyoyo");
+  			res.render('searchresults', {
+			title: 'Search Results',
+			"searchresults": posts
+		});
+	});
+
 });
 
 //successfully added item!
