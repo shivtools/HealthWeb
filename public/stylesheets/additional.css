@@ -65,6 +65,6 @@ body {
 
 /*Add item page styling*/
 
-#addHeader, #itemlistHeader{
+#addHeader, #itemlistHeader, #homebutton, #success{
   text-align: center;
 }

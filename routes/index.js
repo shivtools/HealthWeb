@@ -123,6 +123,12 @@ router.post('/search', function(req,res){
 	});
 });
 
+//successfully added item!
+router.get('/addsucess', function(req,res){
+	console.log("calling add success");
+	res.render('addsuccess', {title: 'Successfully added!'});
+});
+
 // Add item to db with a post request
 
 router.post('/additem', function(req, res){
@@ -151,10 +157,11 @@ router.post('/additem', function(req, res){
 
 	//get all checkbox values
 	var options = req.body.options;
+	console.log(options);
 
 	//depending on what checkboxes were marked, search necessary db and render listings
 	//if statements so that they can be added to multiple dbs
-	if(options == "food"){
+	if(options.indexOf("food") != -1){
 		console.log("food");
 		var food = new Food({
 			name: itemName,
@@ -166,12 +173,12 @@ router.post('/additem', function(req, res){
 
 		food.save(function(err){
 			if(err) throw err;
-			res.redirect("food");
+			//res.redirect("food");
 			console.log('Food Item added successfully wooooot!');
 		});
 	}
 
-	if(options == "housing"){
+	if(options.indexOf("housing") != -1){
 		console.log("housing");
 		var housing = new Housing({
 			name: itemName,
@@ -183,11 +190,11 @@ router.post('/additem', function(req, res){
 
 		housing.save(function(err){
 			if(err) throw err;
-			res.redirect("housing");
+			//res.redirect("housing");
 			console.log('Item added successfully wooooot!');
 		});
 	}
-	if(options == "family"){
+	if(options.indexOf("family") != -1){
 		console.log("family");
 		var family = new Family({
 			name: itemName,
@@ -199,11 +206,11 @@ router.post('/additem', function(req, res){
 
 		family.save(function(err){
 			if(err) throw err;
-			res.redirect("family");
+			//res.redirect("family");
 			console.log('Item added successfully wooooot!');
 		});
 	}
-	if(options == "legal"){
+	if(options.indexOf("legal") != -1){
 		console.log("legal");
 		var legal = new Legal({
 			name: itemName,
@@ -215,12 +222,12 @@ router.post('/additem', function(req, res){
 
 		legal.save(function(err){
 			if(err) throw err;
-			res.redirect("legal");
+			//res.redirect("legal");
 			console.log('Item added successfully wooooot!');
 		});
 
 	}
-	if(options == "forms"){
+	if(options.indexOf("forms") != -1){
 		console.log("forms");
 		var form = new Forms({
 			name: itemName,
@@ -232,13 +239,11 @@ router.post('/additem', function(req, res){
 
 		form.save(function(err){
 			if(err) throw err;
-			res.redirect("forms");
+			//res.redirect("forms");
 			console.log('Item added successfully wooooot!');
 		});
 
 	}
-
-	var approved = false;
 	
 	if(itemName == null || itemEmail == null){
 		// $('#warning').modal('show');
@@ -251,6 +256,9 @@ router.post('/additem', function(req, res){
 		 res.send('You are not allowed to add listings to HealthWeb. Please get in touch with the team to request user privileges if you are part of Global Health');
 		 //throw err;
 	}
+
+	res.redirect('addsucess');
+
 });
 
 // Get users page - no users page as of now, but soon to come.
