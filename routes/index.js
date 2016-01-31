@@ -113,8 +113,6 @@ router.get('/newitem', function(req,res){
 //I wanted to learn about promises in JS so I decided to use them to query each db
 //JS is cool af
 
-//promises dont work :(
-
 router.post('/search', function(req,res){
 	var searchText = req.body.searchItem;
 
@@ -193,11 +191,19 @@ router.post('/search', function(req,res){
 
 	//that moment when you realize this isn't working because node is async
 	Promise.all([promise1, promise2, promise3, promise4, promise5]).then(function() { 
-			console.log("yoyoyoyo");
-  			res.render('searchresults', {
-			title: 'Search Results',
-			"searchresults": posts
-		});
+			
+			if(posts.length > 0){
+	  			res.render('searchresults', {
+					title: 'Search Results',
+					"searchresults": posts
+				});
+	  		}
+	  		else{
+	  			res.render('noresults', {
+	  				title: 'No results'
+	  			})
+	  		}
+		
 	});
 
 });
