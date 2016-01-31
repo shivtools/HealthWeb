@@ -14,8 +14,12 @@ var users = require('./routes/users');
 
 //link db to localhost for the time being. 
 //once app is deployed, will connect to mongolab
+
 mongoose.connect('mongodb://localhost/healthweb');
-//console.log('conntected to db');
+
+//To be connected once deployed on digital ocean or any other hosting service.
+//remember to include host in url in connect.js
+//dbconnection = require('./config/connect.js')
 
 var fs = require('fs'); //file system to load in models 
 
