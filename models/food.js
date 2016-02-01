@@ -8,8 +8,8 @@ var foodSchema = new Schema({
 	number: "String",
 	location: "String",
 	website: "String",
-	created_at: Date,
-	updated_at: Date,
+	date: { type: Date, default: Date.now }
+	// image: "Binary" //to store images for each entry.
 });
 
 //create a model that uses the schema

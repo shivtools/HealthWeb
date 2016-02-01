@@ -6,22 +6,22 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "mongoose-schema-extend": "latest",
-    "multer": "latest",
-    "fs": "latest",
-    "cheerio": "latest",
-    "request": "latest",
     "body-parser": "~1.13.2",
+    "cheerio": "latest",
+    "connect-form": "latest",
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
     "express": "~4.13.1",
+    "fs": "latest",
     "jade": "~1.11.0",
-    "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0",
-    "mongoose": "latest",
-    "monk": "^1.0.1",
-    "monk": "https://github.com/vccabral/monk.git",
+    "kerberos": "~0.0",
     "mongodb": "2.0",
-    "kerberos": "~0.0"
+    "mongoose": "latest",
+    "mongoose-schema-extend": "latest",
+    "monk": "https://github.com/vccabral/monk.git",
+    "morgan": "~1.6.1",
+    "multer": "^1.1.0",
+    "request": "latest",
+    "serve-favicon": "~2.3.0"
   }
 }

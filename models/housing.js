@@ -8,8 +8,7 @@ var housingSchema = new Schema({
 	number: "String",
 	location: "String",
 	website: "String",
-	created_at: Date,
-	updated_at: Date,
+	date: { type: Date, default: Date.now }
 });
 
 //create a model that uses the schema

@@ -10,19 +10,40 @@ block content
 			each item, i in familylist
 				li.list-group-item
 					.row
-					h5 Organization name:
-					p=item.name
+						.col-md-2
+						.col-md-3
+							h5 Organization name:
+							p=item.name
+						.col-md-2
+						.col-md-3
+							h5 Organization email:
+							p=item.email
 					.row
-					h5 Organization email:
-					p=item.email
+						.col-md-2
+						.col-md-3
+							h5 Organization number:
+								p=item.number
+						.col-md-2
+						.col-md-3
+							h5 Organization location:
+							p=item.location
 					.row
-					h5 Organization number:
-					p=item.email
+						.col-md-2
+						.col-md-3
+							h5 Organization website:
+							p=item.website
+						.col-md-2
+						.col-md-3
+							h5 Organization location:
+							p=item.date
 					.row
-					h5 Organization location:
-					p=item.email
-					.row
-					h5 Organization website:
-					p=item.email
+						.col-md-2
+						.col-md-3
+							a(href="/delete")
+								.btn.btn-danger Delete post
+						.col-md-3
+						.col-m3-3
+							a(href="/edit")
+								.btn.btn-info Edit post
 
 				br
