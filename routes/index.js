@@ -217,6 +217,71 @@ router.get('/addsucess', function(req,res){
 	res.render('addsuccess', {title: 'Successfully added!'});
 });
 
+router.get('/delete/:Item/:id', function(req,res){
+	var id = req.params.id;
+	var ItemType = req.params.Item;
+	console.log("Type of item is: " + ItemType);
+	
+	// ItemType.findById(id, function(err, item){
+	// 	if(err) throw err;
+	// 	res.render('edititem', {title: "Edit item", "editpost": item});
+	// });
+
+	//could not avoid this boilerplate code because mongodb doesn't recognize variable names!
+	if(ItemType == "Forms"){
+		Forms.findById(id, function(err, item){
+	  		if(err) throw err;
+	  		console.log(item);
+	  		item.remove(function(err){
+	  			console.log("Item removed!");
+	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  	 	});
+	 	});
+	}
+
+	else if(ItemType === "Family"){
+		Family.findById(id, function(err, item){
+	  		if(err) throw err;
+	  		item.remove(function(err){
+	  			console.log("Item removed!");
+	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  	 	});
+		});
+	}
+
+	else if(ItemType === "Housing"){
+		Housing.findById(id, function(err, item){
+	  		if(err) throw err;
+	  		item.remove(function(err){
+	  			console.log("Item removed!");
+	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  	 	});
+		});
+	}
+
+	else if(ItemType === "Food"){
+		Food.findById(id, function(err, item){
+	  		if(err) throw err;
+	  		item.remove(function(err){
+	  			console.log("Item removed!");
+	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  	 	});
+		});
+	}
+
+	else if(ItemType === "Legal"){
+		Legal.findById(id, function(err, item){
+	  		if(err) throw err;
+	  		item.remove(function(err){
+	  			console.log("Item removed!");
+	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  	 	});
+	  });
+	}
+
+
+});
+
 // Add item to db with a post request
 
 router.post('/additem', function(req, res){
