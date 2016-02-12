@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var router = express.Router();
 var multer = require('multer');
 var fs = require('fs');
+var popup = require('window-popup').windowPopup; //popups woooot!
 
 //try connect-form to upload images
 // form = require('connect-form');
@@ -105,7 +106,9 @@ router.get('/forms', function(req, res) {
 	});
 });
 
-var secretusers = ['dbrackmahn', 'nashnash', 'shivtools', 'alexissexy'];
+//create environment variables later on to store allowed users. 
+//give access to only one person to add listing for healthweb
+secretusers = ['dbrackmahn', 'nashnash', 'shivtools', 'alexissexy'];
 
 /* GET NEW user page */
 router.get('/newitem', function(req,res){
@@ -192,7 +195,7 @@ router.post('/search', function(req,res){
 		});
 	});
 
-	//that moment when you realize this isn't working because node is async
+	//when all promises have been fulfilled i.e all dbs queried, then render search results!
 	Promise.all([promise1, promise2, promise3, promise4, promise5]).then(function() { 
 			
 			if(posts.length > 0){
@@ -218,15 +221,14 @@ router.get('/addsucess', function(req,res){
 });
 
 router.get('/delete/:Item/:id', function(req,res){
+	if(secretusers.indexOf(req.cookies.user) == -1){
+		res.end('You are not allowed to modify listings to HealthWeb!');
+	}
+
 	var id = req.params.id;
 	var ItemType = req.params.Item;
 	console.log("Type of item is: " + ItemType);
 	
-	// ItemType.findById(id, function(err, item){
-	// 	if(err) throw err;
-	// 	res.render('edititem', {title: "Edit item", "editpost": item});
-	// });
-
 	//could not avoid this boilerplate code because mongodb doesn't recognize variable names!
 	if(ItemType == "Forms"){
 		Forms.findById(id, function(err, item){
@@ -294,6 +296,12 @@ router.post('/additem', function(req, res){
 	var itemWebsite = req.body.itemwebsite;
 	var secretuser = req.body.secretkey;
 
+	//if the user does not have privileges, they cannot add listings
+	if(secretusers == null || secretusers.indexOf(secretuser) == -1){
+		//if you're not one of the assigned users for healthweb, bugger off.
+		 res.end('You are not allowed to add/edit listings to HealthWeb. Please get in touch with the team to request user privileges if you are part of Global Health!');
+	}
+
 	//console.log(itemName + " email: " + itemEmail);
 
 	console.log(__dirname);
@@ -312,8 +320,8 @@ router.post('/additem', function(req, res){
 	var options = req.body.options;
 	console.log(options);
 
-	//depending on what checkboxes were marked, search necessary db and render listings
-	//if statements so that they can be added to multiple dbs
+	//depending on what checkboxes were marked, create items of those types and add to those dbs.
+
 	if(options.indexOf("food") != -1){
 		console.log("food");
 		var food = new Food({
@@ -324,31 +332,8 @@ router.post('/additem', function(req, res){
 			website: itemWebsite
 		});
 
-		//Temporarily comment out this code.
-		/*
-		//upload image 
-		req.form.complete(function(err, fields, files){
-		    if (err) {
-		      next(err);
-		    } else {
-		      console.log('\nuploaded %s to %s'
-		        ,  files.image.filename
-		        , files.image.path);
-		      res.redirect('back');
-	    	}
-  		});
-
-  		req.form.on('progress', function(bytesReceived, bytesExpected){
-		    var percent = (bytesReceived / bytesExpected * 100) | 0;
-		    process.stdout.write('Uploading: %' + percent + '\r');
-	  	});
-*/
-
-
-
 		food.save(function(err){
 			if(err) throw err;
-			//res.redirect("food");
 			console.log('Food Item added successfully wooooot!');
 		});
 	}
@@ -365,7 +350,6 @@ router.post('/additem', function(req, res){
 
 		housing.save(function(err){
 			if(err) throw err;
-			//res.redirect("housing");
 			console.log('Item added successfully wooooot!');
 		});
 	}
@@ -381,7 +365,6 @@ router.post('/additem', function(req, res){
 
 		family.save(function(err){
 			if(err) throw err;
-			//res.redirect("family");
 			console.log('Item added successfully wooooot!');
 		});
 	}
@@ -397,7 +380,6 @@ router.post('/additem', function(req, res){
 
 		legal.save(function(err){
 			if(err) throw err;
-			//res.redirect("legal");
 			console.log('Item added successfully wooooot!');
 		});
 
@@ -414,7 +396,6 @@ router.post('/additem', function(req, res){
 
 		form.save(function(err){
 			if(err) throw err;
-			//res.redirect("forms");
 			console.log('Item added successfully wooooot!');
 		});
 
@@ -426,15 +407,18 @@ router.post('/additem', function(req, res){
 		//prompt them with modal to try again
 		res.status(500).send({ error: 'Insufficient info for listing!' });
 	}
-	else if(secretusers == null || secretusers.indexOf(secretuser) == -1){
-		//if you're not one of the assigned users for healthweb, bugger off.
-		 res.send('You are not allowed to add listings to HealthWeb. Please get in touch with the team to request user privileges if you are part of Global Health');
-		 //throw err;
+
+	if(secretusers.indexOf(secretuser) != -1){
+		res.cookie('user', secretuser, { maxAge: 900000, httpOnly: true }); //set cookie in the browser with secret user's name
+		console.log("Cookies: ", req.cookies); 
 	}
 
 	res.redirect('addsucess');
 
+
 });
+
+//NOTE: handle cookie security later!
 
 // Get users page - no users page as of now, but soon to come.
 router.get('/users', function(req,res,next){
