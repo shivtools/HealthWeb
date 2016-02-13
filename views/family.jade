@@ -36,14 +36,15 @@ block content
 						.col-md-3
 							h5 Organization location:
 							p=item.date
-					.row
-						.col-md-2
-						.col-md-3
-							a(href="/delete/Family/#{item.id}")
-								.btn.btn-danger Delete post
-						.col-md-3
-						.col-m3-3
-							a(href="/edit/Family/#{item.id}")
-								.btn.btn-info Edit post
+					if user
+						.row
+							.col-md-2
+							.col-md-3
+								a(href="/delete/Family/#{item.id}")
+									.btn.btn-danger Delete post
+							.col-md-3
+							.col-m3-3
+								a(href="/edit/Family/#{item.id}")
+									.btn.btn-info Edit post
 
 				br

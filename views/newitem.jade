@@ -5,9 +5,10 @@ block content
 	br
 	br
 	h1#addHeader Add a listing to HealthWeb
+	script(src="/js/additem.js")
 	.col-md-2
 	.col-md-8
-		form#formAddUser(role="form" name="additem",method="post",action="/additem")
+		#formAddUser(name="additem")
 			.form-group
 				label(for="itemname") Organization name
 				input#inputUserName(type="text" class="form-control" placeholder="Organization name", name="itemname")
@@ -53,8 +54,14 @@ block content
 					input(type="checkbox" name="options", value = "forms")
 					| Forms
 			br
-			button.btn-danger#btnSubmit(type="submit").btn.btn-default Submit
+			button.btn-danger#btnSubmit(onclick="validate()").btn.btn-default Submit
 
 		//- Modal triggered if user has not entered sufficient info
-	.col-md-2
+	.modal.fade#warning(tabindex="-1" role="dialog")
+		.modal-dialog.has-error
+			.modal-content
+				.modal-header
+					button.close(type="button" data-dismiss="modal")
+					h3#warning-text Error
+
 

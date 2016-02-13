@@ -5,6 +5,8 @@ var multer = require('multer');
 var fs = require('fs');
 var popup = require('window-popup').windowPopup; //popups woooot!
 
+var authenticated = false; //variable to pass to front end to check is user has privileges.
+
 //try connect-form to upload images
 // form = require('connect-form');
 
@@ -45,6 +47,7 @@ router.get('/food', function(req, res) {
 		console.log(items);
 		res.render('food', {
 			title: 'Food listings',
+			user: authenticated,
 			"foodlist": items
 		});
 	});
@@ -59,6 +62,7 @@ router.get('/housing', function(req, res) {
 		console.log(items);
 		res.render('housing', {
 			title: 'Housing listings',
+			user: authenticated,
 			"housinglist": items
 		});
 	});
@@ -73,6 +77,7 @@ router.get('/family', function(req, res) {
 		console.log(items);
 		res.render('family', {
 			title: 'Family listings',
+			user: authenticated,
 			"familylist": items
 		});
 	});
@@ -87,6 +92,7 @@ router.get('/legal', function(req, res) {
 		console.log(items);
 		res.render('legal', {
 			title: 'Legal listings',
+			user: authenticated,
 			"legallist": items
 		});
 	});
@@ -101,6 +107,7 @@ router.get('/forms', function(req, res) {
 		console.log(items);
 		res.render('forms', {
 			title: 'Form listings',
+			user: authenticated,
 			"formslist": items
 		});
 	});
@@ -126,7 +133,7 @@ router.post('/search', function(req,res){
 
 	var promise1 =  new Promise(function(resolve, reject) {
 
-	  	Forms.find({name: searchText}, function(err, results){
+	  	Forms.find({name: {$regex: new RegExp(searchText, "i")}}, function(err, results){
 			if(err) reject(Error("It broke"));
 
 			if(results.length != 0){
@@ -140,7 +147,7 @@ router.post('/search', function(req,res){
 
 	var promise2 =  new Promise(function(resolve, reject) {
 
-	  	Food.find({name: searchText}, function(err, results){
+	  	Food.find({name: {$regex: new RegExp(searchText, "i")}}, function(err, results){
 			if(err) reject(Error("It broke"));
 
 			if(results.length != 0){
@@ -154,7 +161,7 @@ router.post('/search', function(req,res){
 
 	var promise3 =  new Promise(function(resolve, reject) {
 
-	  	Family.find({name: searchText}, function(err, results){
+	  	Family.find({name: {$regex: new RegExp(searchText, "i")}}, function(err, results){
 			if(err) reject(Error("It broke"));
 
 			if(results.length != 0){
@@ -169,7 +176,7 @@ router.post('/search', function(req,res){
 
 	var promise4 =  new Promise(function(resolve, reject) {
 
-	  	Legal.find({name: searchText}, function(err, results){
+	  	Legal.find({name: {$regex: new RegExp(searchText, "i")}}, function(err, results){
 			if(err) reject(Error("It broke"));
 
 			if(results.length != 0){
@@ -183,7 +190,7 @@ router.post('/search', function(req,res){
 
 	var promise5 =  new Promise(function(resolve, reject) {
 
-	  	Housing.find({name: searchText}, function(err, results){
+	  	Housing.find({name: {$regex: new RegExp(searchText, "i")}}, function(err, results){
 			if(err) reject(Error("It broke"));
 
 			if(results.length != 0){
@@ -215,12 +222,13 @@ router.post('/search', function(req,res){
 });
 
 //successfully added item!
-router.get('/addsucess', function(req,res){
+router.get('/addsuccess', function(req,res){
 	console.log("calling add success");
 	res.render('addsuccess', {title: 'Successfully added!'});
 });
 
 router.get('/delete/:Item/:id', function(req,res){
+	
 	if(secretusers.indexOf(req.cookies.user) == -1){
 		res.end('You are not allowed to modify listings to HealthWeb!');
 	}
@@ -409,11 +417,11 @@ router.post('/additem', function(req, res){
 	}
 
 	if(secretusers.indexOf(secretuser) != -1){
+		authenticated = true;
 		res.cookie('user', secretuser, { maxAge: 900000, httpOnly: true }); //set cookie in the browser with secret user's name
-		console.log("Cookies: ", req.cookies); 
 	}
 
-	res.redirect('addsucess');
+	res.redirect('addsuccess');
 
 
 });
