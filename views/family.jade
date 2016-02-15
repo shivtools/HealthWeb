@@ -1,11 +1,47 @@
 extends layout
 
 block content
+	// Banner place to change image
+	.banner(style='background-image: url(../images/banner/family5.jpg);')
+      .banner_text Family Services
+    .container
+      .sub_text
+        p.lead Family services to fit all your needs
+      hr
+
 	br
 	h1#itemlistHeader Family list
 	//- Pull in documents called userlist in route file
 	//- For each user extract information and print
-	.container
+	.container-fluid
+		.row
+			.col-md-5
+				#my_table.panel.panel-default
+			      table.table.table-responsive.table-hover
+			        tbody
+			        	each item, i in familylist
+			        	  rowNum= "row" + i
+				          tr#rowNum.clickable(data-toggle='collapse', data-target='.rowNum')
+				            td item.name
+				          tr.collapse.rowNum
+				            td.details-control
+				            Website: 
+				            p=item.website
+				            Services: 
+				            p=item.services
+				            Requirements to Get Aid:
+				            p=item.requirements
+				            Hours of Operation: 
+				            p=item.hours
+				            Address: 
+				            p=item.location
+				            Number: 
+				            p=item.number
+				            p=item.logo //Add logo hereee, idk how to do that
+            .col-md-7
+            	input#pac-input.controls(type='text', placeholder='Enter your home address')
+            	#map-canvas
+		<!--
 		ul.list-group
 			each item, i in familylist
 				li.list-group-item
@@ -47,4 +83,4 @@ block content
 								a(href="/edit/Family/#{item.id}")
 									.btn.btn-info Edit post
 
-				br
+				br -->
