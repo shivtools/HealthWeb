@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,28 +8,29 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../favicon.ico">
+       <link rel="icon" href="../public/images/favicon/favicon.ico">
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src='../js/additem.js'></script>
 
     <title>HealthWeb</title>
 
-    <!-- Temporarily putting script tags on top to fix navbar issue -->
-    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src='/js/additem.js'></script>
-    <script>
-     
-    </script>
-
     <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/stylesheets/additional.css" rel="stylesheet">
+    <link href="../stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="../stylesheets/additional.css" rel="stylesheet">
 
+    <!-- Inline CSS based on choices in "Settings" tab -->
+<style>.bootstrap-iso form button, .bootstrap-iso form button:hover{color: #ffffff !important;} .asteriskField{color: red;}</style>
+
+
+    <link rel="icon" type="image/png" href="../images/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="../images/favicon-16x16.png" sizes="16x16" />
   </head>
 
   <body>
 
     <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+      <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -37,33 +39,41 @@
             <span class="icon-bar"></span>
           </button>
          
-          <a href="/" class="pull-left navbar-brand">HealthWeb</a>
+          <a href="/" class="navbar-brand pull-left"><img src="../images/logo.jpg"></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <!-- Right hrefs have to be put in! -->
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="/newitem">Add</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About Us</a></li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listings <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/food">Food</a></li>
-                  <li><a href="/housing">Housing</a></li>
-                  <li><a href="/family">Family</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="/legal">Legal</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="/forms">Forms</a></li>
-                </ul>
-          </li>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Resources<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/food">Food & Nutrition</a></li>
+                <li><a href="/housing">Housing</a></li>
+                <li><a href="/family">Family Services</a></li>
+                <li><a href="/legal">Immigration & Legal</a></li>
+              </ul>
+            </li>
+            <li><a href="/volunteer">Volunteer</a></li>
+            <li class="active"><a href="/contact">Contact Us</a></li>
           </ul>
-          <!-- Add search to nav bar -->
+
           <form class="navbar-left navbar-form pull-right", method="post", action="/search">
               <input name="searchItem" class="form-control" placeholder="Search for a listing">
             <button type="submit" class="btn btn-default">Submit</button>
       </form>
+
         </div><!--/.nav-collapse -->
+
+
+
       </div>
     </nav>
+
+       <footer class="footer">
+      <div class="container">
+        <p class="footer_text">Place sticky footer content here.</p>
+      </div>
+    </footer>
   </body>
 </html>

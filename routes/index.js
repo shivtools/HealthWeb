@@ -115,11 +115,15 @@ router.get('/forms', function(req, res) {
 
 //create environment variables later on to store allowed users. 
 //give access to only one person to add listing for healthweb
-secretusers = ['dbrackmahn', 'nashnash', 'shivtools', 'alexissexy'];
+var secretusers = ['dbrackmahn', 'nashnash', 'shivtools', 'alexissexy'];
 
 /* GET NEW user page */
 router.get('/newitem', function(req,res){
 	res.render('newitem', {title: 'Add a new listing'});
+});
+
+router.get('/contact', function(req,res){
+	res.render('contact', {title: 'Contact us'});
 });
 
 //search functionality for website
@@ -307,23 +311,15 @@ router.post('/additem', function(req, res){
 	//if the user does not have privileges, they cannot add listings
 	if(secretusers == null || secretusers.indexOf(secretuser) == -1){
 		//if you're not one of the assigned users for healthweb, bugger off.
-		 res.end('You are not allowed to add/edit listings to HealthWeb. Please get in touch with the team to request user privileges if you are part of Global Health!');
+		 res.send('You are not allowed to add/edit listings to HealthWeb. Please get in touch with the team to request user privileges if you are part of Global Health!');
 	}
 
-	//console.log(itemName + " email: " + itemEmail);
-
-	console.log(__dirname);
-		//multer config functions
-	//image upload code
-	upload(req,res,function(err) {
-        if(err) {
-        	console.log(err);
-            return res.end("Error uploading file.");
-        }
-        console.log("Successfully added file");
-        //res.end("File is uploaded");
-    });
-
+	if(secretusers.indexOf(secretuser) != -1){
+		console.log("sending cookie");
+		authenticated = true;
+		res.cookie('user', secretuser, { maxAge: 900000, httpOnly: true }); //set cookie in the browser with secret user's name
+	}
+	
 	//get all checkbox values
 	var options = req.body.options;
 	console.log(options);
@@ -407,18 +403,6 @@ router.post('/additem', function(req, res){
 			console.log('Item added successfully wooooot!');
 		});
 
-	}
-	
-	if(itemName == null || itemEmail == null){
-		// $('#warning').modal('show');
-		//handle this on the front end - warn user if sufficient details aren't entered
-		//prompt them with modal to try again
-		res.status(500).send({ error: 'Insufficient info for listing!' });
-	}
-
-	if(secretusers.indexOf(secretuser) != -1){
-		authenticated = true;
-		res.cookie('user', secretuser, { maxAge: 900000, httpOnly: true }); //set cookie in the browser with secret user's name
 	}
 
 	res.redirect('addsuccess');

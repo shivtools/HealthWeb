@@ -1,4 +1,20 @@
-/* Banner styles for each page */
+/*Nasheya's awesome front end styling*/
+
+/* Fonts for the page */
+@font-face {
+    font-family: 'museo_sans500';
+    src: url('../fonts/museosans/MuseoSans_500-webfont.eot');
+    src: url('../fonts/museosans/MuseoSans_500-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/museosans/MuseoSans_500-webfont.woff2') format('woff2'),
+         url('../fonts/museosans/MuseoSans_500-webfont.woff') format('woff'),
+         url('../fonts/museosans/MuseoSans_500-webfont.ttf') format('truetype'),
+         url('../fonts/museosans/MuseoSans_500-webfont.svg#museo_sans500') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* Banner styles for each page - supports multi-line phrases*/
 .banner { 
   max-width: 100%; /* actual img width */
   background-size: cover;
@@ -14,24 +30,61 @@
   align-items: center; /* align vertical */
 }
 
-/* Support Multi-line Phrases */
-.banner_text {
-	left: 0;
-	display: inline-block;
-    position: relative;
-    vertical-align: middle;
-    text-align: center;
-    width: 100%;
-    color: white;
-    font-size: 60px;
-	text-shadow: rgba(0, 0, 0, .2) 3px 3px 3px;
-	-webkit-text-stroke: 1px black;
+/* Tried to fix the banner text for safari without affecting chrome */
+::i-block-chrome,.banner_text {
+     -webkit-transform: translateY(50%);
 }
 
-/* Code for the homepage */
-.home_styles {
+/* Original Way to Do It*/
+.banner_text {
+  left: 0;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+  color: white;
+  font-size: 100px;
+  text-shadow: rgba(0, 0, 0, .2) 3px 3px 3px;
+  -webkit-text-stroke: 1px black;
+  font-family: 'museo_sans500', 'Arial', sans-serif;
+}
+
+/*.banner_text {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -webkit-transform: translateX(25%);
+  -ms-transform: translateY(-100%);
+  transform: translateY(-100%);
+  color: white;
+  font-size: 100px;
+  text-shadow: rgba(0, 0, 0, .2) 3px 3px 3px;
+  -webkit-text-stroke: 1px black;
+  font-family: 'museo_sans500', 'Arial', sans-serif;
+}*/
+
+/* Fixes the stroke problem for Firefox */
+@-moz-document url-prefix() {
+    .banner_text {
+    color: white;
+    font-size: 100px;
+    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+            -1px 1px 0 #000, 2px 2px 2px #000;
+    font-family: 'museo_sans500', 'Arial', sans-serif;
+    } ​
+}
+
+
+/* Code for the little bit of subtext */
+.sub_text {
   padding: 30px 15px 10px 15px;
   text-align: center;
+}
+
+.lead{
+  font-size: 28px;
+  margin-bottom: 0px;
 }
 
 
@@ -52,19 +105,174 @@ body {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
-  background-color: #f5f5f5;
+  background-color: #75ABA5;
 }
 
 .container .footer_text {
   margin: 20px 0;
+  text-align: center;
+  color:  #ecf0f1;
 }
 
+
+/* Code for the columns */
 .col-md-7, .col-md-5 {
   padding: 0 20px 15px 20px;
 }
 
-/*Add item page styling*/
 
-#addHeader, #itemlistHeader, #homebutton, #success{
-  text-align: center;
+/* Code for the logo */
+.navbar-brand {
+  padding: 0px; /* firefox bug fix */
+  position: relative;
+  left: 0;
+  margin-left: -1000px;
 }
+
+.navbar-brand>img {
+  height: 100%;
+  padding: 0px; /* firefox bug fix */
+  position: relative;
+  float: left !important;
+  
+}
+
+.navbar .container-fluid, .navbar-brand {
+    padding-left:8px;
+}
+
+
+/* Hidden child rows */
+table .collapse.in {
+  display: table-row;
+}
+
+.slider{
+  display: none;
+}
+
+
+/* Code for navbar */
+.navbar-default {
+  background-color: #f8f8f8;
+  border-color: #75ABA5;
+}
+.navbar-default .navbar-brand {
+  color: #3e3e3e;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-text {
+  color: #3e3e3e;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #3e3e3e;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #ecf0f1;
+  background-color: #75ABA5;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #ecf0f1;
+  background-color: #75ABA5;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #ecf0f1;
+  background-color: #75ABA5;
+}
+.navbar-default .navbar-toggle {
+  border-color: #75ABA5;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #75ABA5;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #3e3e3e;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #3e3e3e;
+}
+.navbar-default .navbar-link {
+  color: #3e3e3e;
+}
+.navbar-default .navbar-link:hover {
+  color: #ecf0f1;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #3e3e3e;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ecf0f1;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ecf0f1;
+    background-color: #75ABA5;
+  }
+}
+
+/*Styling for the map*/
+#map-canvas {
+  height: 500px;
+}
+
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#target {
+        width: 345px;
+}
+Status API Training Shop Blog About Pricing
+© 2016 GitHub, Inc. Terms Privacy Security Contact Help
