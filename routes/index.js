@@ -10,18 +10,39 @@ var authenticated = false; //variable to pass to front end to check is user has 
 //try connect-form to upload images
 // form = require('connect-form');
 
+var nodemailer = require('sendgrid')('healthweb','Richmond15');
 
-//multer code
-var storage =   multer.diskStorage({
-  destination: function (req, file, callback) {
-  	console.log("ADDED DESTINATION PROPERLY");
-    callback(null, './uploads');
-  },
-  filename: function (req, file, callback) {
-    callback(null, file.fieldname + '-' + Date.now());
-  }
-});
-var upload = multer({ storage : storage}).single('userPhoto');
+var email = function sendEmail(){
+	//Added email template for selling emails
+	var email_template ="<p><span class='sg-image' style='float: none; display: block; text-align: center;'><img height='128'"+ 
+	"src=''" + 
+	"style='width: 128px; height: 128px;' width='128' /></span></p>"+
+	"<p style='text-align: center;'><span style='font-size:28px;'><span style='font-family:comic sans ms,cursive;'>URStash</span></span></p>"+
+	"<p style='text-align: center;'><span style='font-size:16px;'><span style='font-family:georgia,serif;'>"; 
+
+	var email_footer = "</span></span></p><hr/><p style='text-align: center;'><span style='font-size:14px;'><span style='font-family:trebuchet ms,helvetica,sans-serif;'>If you have any concerns "+
+	"email us at rvahealthweb@gmail.com</span></span></p>";
+
+	var msg = new nodemailer.Email();
+	msg.addTo("rvahealthweb@gmail.com");
+	msg.setFrom('Contact request <rvahealthweb@sendgrid.com>');
+	msg.setSubject("Request for information ");
+	msg.setHtml("Please get in touch with user"); // plaintext body
+
+
+	    // send mail with defined sendmail object
+	nodemailer.send(msg, function(error, info){
+	    if(error){
+	        console.log(error);
+	    }else{
+	        console.log('Message sent!');
+	    }
+	});
+}
+
+// email();
+
+
 
 
 
@@ -34,7 +55,7 @@ var Forms = require('../models/forms');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'HealthWeb' });
+  res.render('index', { title: 'Home | HealthWeb' });
 });
 
 /* create get routes to get these pages. */
@@ -119,19 +140,19 @@ var secretusers = ['dbrackmahn', 'nashnash', 'shivtools', 'alexissexy'];
 
 /* GET NEW user page */
 router.get('/newitem', function(req,res){
-	res.render('newitem', {title: 'Add a new listing'});
+	res.render('newitem', {title: 'Add a new listing | HealthWeb'});
 });
 
 router.get('/contact', function(req,res){
-	res.render('contact', {title: 'Contact us'});
+	res.render('contact', {title: 'Contact us | HealthWeb'});
 });
 
 router.get('/volunteer', function(req,res){
-	res.render('volunteer', {title: 'Volunteer'});
+	res.render('volunteer', {title: 'Volunteer | HealthWeb'});
 });
 
 router.get('/about', function(req,res){
-	res.render('about', {title: 'About HealthWeb'});
+	res.render('about', {title: 'About HealthWeb | HealthWeb'});
 });
 
 //search functionality for website
@@ -230,6 +251,12 @@ router.post('/search', function(req,res){
 	  		}
 		
 	});
+
+});
+
+//code for sending email from contact us page
+
+router.post('/sendemail', function(req,res){
 
 });
 

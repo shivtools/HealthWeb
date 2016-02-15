@@ -18,7 +18,7 @@ block content
                   | Contact Form
                 p
                   | Whether you have a general inquiry or need specific help, feel free to email us! All emails will be sent to rvahealthweb@gmail.com.
-              form(method='post')
+              form(method='post', action='/sendemail')
                 .form-group
                   label.control-label.requiredField(for='name')
                     | Name
