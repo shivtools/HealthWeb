@@ -254,6 +254,12 @@ router.post('/search', function(req,res){
 
 });
 
+//code for sending email from contact us page
+
+router.post('/sendemail', function(req,res){
+
+});
+
 //successfully added item!
 router.get('/addsuccess', function(req,res){
 	console.log("calling add success");
