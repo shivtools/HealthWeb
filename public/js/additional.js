@@ -8,12 +8,12 @@ $(document).ready(function () {
     // var heading = new Array();
     // heading[0] = "Request Type"
 
-    var stock = new Array()
-    stock[0] = new Array("Cars", "88.625", "85.50", "85.81", "987")
-    stock[1] = new Array("Veggies", "88.62dfdf", "85.50", "85.81", "988")
-    stock[2] = new Array("Colors", "88.62dcolors5", "85.50", "85.81", "989")
-    stock[3] = new Array("Numbers", "88.6num25", "85.50", "85.81", "990")
-    stock[4] = new Array("Requests", "88.6rew25", "85.50", "85.81", "991")
+    // var stock = new Array()
+    // stock[0] = new Array("Cars", "88.625", "85.50", "85.81", "987")
+    // stock[1] = new Array("Veggies", "88.62dfdf", "85.50", "85.81", "988")
+    // stock[2] = new Array("Colors", "88.62dcolors5", "85.50", "85.81", "989")
+    // stock[3] = new Array("Numbers", "88.6num25", "85.50", "85.81", "990")
+    // stock[4] = new Array("Requests", "88.6rew25", "85.50", "85.81", "991")
 
     //TABLE COLUMNS
     // var tr = document.createElement('TR');
@@ -37,7 +37,7 @@ $(document).ready(function () {
 
         // for (j = 0; j < stock[i].length; j++) {
             var td = document.createElement('TD');
-            td.appendChild(document.createTextNode(stock[i][0]));
+            td.appendChild(document.createTextNode(item.name));
 
             tr.appendChild(td);
         // }

@@ -3,84 +3,80 @@ extends layout
 block content
 	// Banner place to change image
 	.banner(style='background-image: url(../images/banner/family5.jpg);')
-      .banner_text Family Services
-    .container
-      .sub_text
-        p.lead Family services to fit all your needs
-      hr
+		.banner_text Family Services
+	.container
+		.sub_text
+			p.lead Family services to fit all your needs
+	hr
 
-	br
-	h1#itemlistHeader Family list
-	//- Pull in documents called userlist in route file
-	//- For each user extract information and print
 	.container-fluid
 		.row
 			.col-md-5
 				#my_table.panel.panel-default
-			      table.table.table-responsive.table-hover
-			        tbody
-			        	each item, i in familylist
-			        	  rowNum= "row" + i
-				          tr#rowNum.clickable(data-toggle='collapse', data-target='.rowNum')
-				            td item.name
-				          tr.collapse.rowNum
-				            td.details-control
-				            Website: 
-				            p=item.website
-				            Services: 
-				            p=item.services
-				            Requirements to Get Aid:
-				            p=item.requirements
-				            Hours of Operation: 
-				            p=item.hours
-				            Address: 
-				            p=item.location
-				            Number: 
-				            p=item.number
-				            p=item.logo //Add logo hereee, idk how to do that
-            .col-md-7
-            	input#pac-input.controls(type='text', placeholder='Enter your home address')
-            	#map-canvas
-		<!--
-		ul.list-group
-			each item, i in familylist
-				li.list-group-item
-					.row
-						.col-md-2
-						.col-md-3
-							h5 Organization name:
-							p=item.name
-						.col-md-2
-						.col-md-3
-							h5 Organization email:
-							p=item.email
-					.row
-						.col-md-2
-						.col-md-3
-							h5 Organization number:
-								p=item.number
-						.col-md-2
-						.col-md-3
-							h5 Organization location:
-							p=item.location
-					.row
-						.col-md-2
-						.col-md-3
-							h5 Organization website:
-							p=item.website
-						.col-md-2
-						.col-md-3
-							h5 Organization location:
-							p=item.date
-					if user
-						.row
-							.col-md-2
-							.col-md-3
-								a(href="/delete/Family/#{item.id}")
-									.btn.btn-danger Delete post
-							.col-md-3
-							.col-m3-3
-								a(href="/edit/Family/#{item.id}")
-									.btn.btn-info Edit post
-
-				br -->
+					table.table.table-responsive.table-hover
+						tbody
+							rows = [familylist.length]
+							each item, i in familylist
+								rows[i]="row" + i
+							each item, i in familylist
+								tr#rows[i].clickable(data-toggle='collapse', data-target='.rows[i]')
+									td item.name
+								tr.collapse.rows[i]
+									td.details-control
+										h5 Website: 
+										p=item.website
+										h5 Services: 
+										p=item.services
+										h5 Requirements to Get Aid:
+										p=item.requirements
+										h5 Hours of Operation: 
+										p=item.hours
+										h5 Address: 
+										item.location
+										h5 Number: 
+										p=item.number
+										//p=item.logo Add logo hereee, idk how to do that
+			.col-md-7
+				input#pac-input.controls(type='text', placeholder='Enter your home address')
+				#map-canvas
+		
+		//- ul.list-group
+		//- 	each item, i in familylist
+		//- 		li.list-group-item
+		//- 			.row
+		//- 				.col-md-2
+		//- 				.col-md-3
+		//- 					h5 Organization name:
+		//- 					p=item.name
+		//- 				.col-md-2
+		//- 				.col-md-3
+		//- 					h5 Organization email:
+		//- 					p=item.email
+		//- 			.row
+		//- 				.col-md-2
+		//- 				.col-md-3
+		//- 					h5 Organization number:
+		//- 						p=item.number
+		//- 				.col-md-2
+		//- 				.col-md-3
+		//- 					h5 Organization location:
+		//- 					p=item.location
+		//- 			.row
+		//- 				.col-md-2
+		//- 				.col-md-3
+		//- 					h5 Organization website:
+		//- 					p=item.website
+		//- 				.col-md-2
+		//- 				.col-md-3
+		//- 					h5 Organization location:
+		//- 					p=item.date
+		//- 			if user
+		//- 				.row
+		//- 					.col-md-2
+		//- 					.col-md-3
+		//- 						a(href="/delete/Family/#{item.id}")
+		//- 							.btn.btn-danger Delete post
+		//- 					.col-md-3
+		//- 					.col-m3-3
+		//- 						a(href="/edit/Family/#{item.id}")
+		//- 							.btn.btn-info Edit post
