@@ -126,6 +126,14 @@ router.get('/contact', function(req,res){
 	res.render('contact', {title: 'Contact us'});
 });
 
+router.get('/volunteer', function(req,res){
+	res.render('volunteer', {title: 'Volunteer'});
+});
+
+router.get('/about', function(req,res){
+	res.render('about', {title: 'About HealthWeb'});
+});
+
 //search functionality for website
 //I wanted to learn about promises in JS so I decided to use them to query each db
 //JS is cool af

@@ -1,4 +1,74 @@
 extends layout
 
 block content
-	include contact.html
+    // Banner place to change image
+    .banner(style="background-image: url('../images/banner/volunteer.jpg');")
+      .banner_text Contact Us
+    .container
+      .sub_text
+        p.lead The link between patients and resources
+      hr
+    .bootstrap-iso
+      .container-fluid
+        .row
+          .col-md-8
+            .panel(style='padding: 0px 15px 0px 15px;')
+              .formden_header
+                h2
+                  | Contact Form
+                p
+                  | Whether you have a general inquiry or need specific help, feel free to email us! All emails will be sent to rvahealthweb@gmail.com.
+              form(method='post')
+                .form-group
+                  label.control-label.requiredField(for='name')
+                    | Name
+                    span.asteriskField
+                      | *
+                  input#name.form-control(name='name', type='text')
+                .form-group
+                  label.control-label.requiredField(for='email')
+                    | Email
+                    span.asteriskField
+                      | *
+                  input#email.form-control(name='email', type='text')
+                .form-group
+                  label.control-label(for='tel')
+                    | Telephone #
+                  input#tel.form-control(name='tel', type='text')
+                  span#hint_tel.help-block
+                    | This is not required, but provide it if you wish!
+                .form-group
+                  label.control-label.requiredField(for='select')
+                    | What are you contacting us about?
+                    span.asteriskField
+                      | *
+                  select#select.select.form-control(name='select')
+                    option(value='Question')
+                      | Question
+                    option(value='Volunteering')
+                      | Volunteering
+                    option(value='Resource Listing')
+                      | Resource Listing
+                    option(value='Other')
+                      | Other
+                  span#hint_select.help-block
+                    | Choose other if none of the options fit your needs.
+                .form-group
+                  label.control-label(for='other')
+                    | If other, please specify a little more in a few words.
+                  input#other.form-control(name='other', type='text')
+                .form-group
+                  label.control-label.requiredField(for='message')
+                    | Message
+                    span.asteriskField
+                      | *
+                  textarea#message.form-control(cols='40', name='message', placeholder='Start typing email message here...', rows='10')
+                .form-group
+                  div
+                    button.btn.btn-info(name='submit', type='submit')
+                      | Submit
+          .col-md-4
+            .panel.panel-default(style='background: #eee;')
+              .panel-body
+                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis commodo diam et interdum. Suspendisse dictum lectus eget odio sollicitudin pulvinar ac id tellus. Vivamus id mi ligula. Donec quis accumsan nisi, quis tincidunt lacus. Suspendisse velit est, porta vehicula ligula et, vehicula molestie urna. Cras quam est, egestas vitae orci elementum, imperdiet hendrerit nisi. Phasellus lobortis tempus odio. Suspendisse interdum turpis rhoncus lacus scelerisque dignissim. Etiam vulputate, turpis non congue interdum, sapien ante mattis diam, vel imperdiet nisi tellus nec erat. Duis mattis augue felis. Pellentesque orci sapien, vestibulum ultricies lectus vitae, elementum tristique nisi. Mauris ac dolor et libero convallis cursus vulputate et arcu. Donec sed tempus neque, pellentesque ullamcorper metus. Fusce sit amet augue porttitor, efficitur felis sit amet, varius velit. Curabitur in ultricies nibh.
+                | Integer sollicitudin nunc neque, et convallis est mattis vitae. Nam ac est at purus dapibus commodo. Sed nec dapibus libero. In volutpat mauris eget dolor condimentum dignissim. Cras eget facilisis libero, non auctor dui. Nullam id nisl eget nisl consequat ultrices vitae vitae metus. Phasellus efficitur mattis neque in placerat. Fusce quam nunc, faucibus ultricies magna feugiat, semper consequat erat. Maecenas luctus, turpis non tincidunt congue, arcu libero vestibulum nibh, sit amet sodales ex arcu ac urna. Curabitur massa nibh, ultricies eu ullamcorper et, dapibus eget libero. Sed nunc dolor, rhoncus quis elit id, sodales tempus dui. Vivamus rutrum neque est, vel convallis dui vulputate quis. Sed porta sit amet magna scelerisque placerat. Praesent dictum id ligula id dapibus. Curabitur sed finibus mi, vitae porttitor erat.
