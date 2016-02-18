@@ -220,8 +220,7 @@ router.post('/search', function(req,res){
 
 });
 
-//code for sending email from contact us page
-
+//post request for sending email
 router.post('/sendemail', function(req,res){
 	var contactName = req.body.name;
 	var contactEmail = req.body.email;
@@ -237,6 +236,7 @@ router.post('/sendemail', function(req,res){
 
 });
 
+//Sends an email to HealthWeb's email address with message and user details
 var sendEmail = function email(contactName, contactEmail, contactNumber, optionSelected, contactOther, contactMessage){
 	//Added email template for selling emails
 	var email_message = "Hey there, HealthWeb just received a message from: " + contactName + ". Their email id is: " + contactEmail + " and their number is: " + contactNumber + ".\n";
@@ -351,7 +351,14 @@ router.post('/additem', function(req, res){
 	var itemNumber = req.body.itemnumber;
 	var itemLocation = req.body.itemlocation;
 	var itemWebsite = req.body.itemwebsite;
+	console.log(itemWebsite);
 	var secretuser = req.body.secretkey;
+
+	if(secretusers.indexOf(secretuser) != -1){
+		console.log("sending cookie");
+		authenticated = true;
+		res.cookie('user', secretuser, { maxAge: 900000, httpOnly: true }); //set cookie in the browser with secret user's name
+	}
 
 	//if the user does not have privileges, they cannot add listings
 	if(secretusers == null || secretusers.indexOf(secretuser) == -1){
@@ -359,15 +366,11 @@ router.post('/additem', function(req, res){
 		 res.send('You are not allowed to add/edit listings to HealthWeb. Please get in touch with the team to request user privileges if you are part of Global Health!');
 	}
 
-	if(secretusers.indexOf(secretuser) != -1){
-		console.log("sending cookie");
-		authenticated = true;
-		res.cookie('user', secretuser, { maxAge: 900000, httpOnly: true }); //set cookie in the browser with secret user's name
-	}
+
 	
 	//get all checkbox values
 	var options = req.body.options;
-	console.log(options);
+	console.log("OPTIONS: " + options);
 
 	//depending on what checkboxes were marked, create items of those types and add to those dbs.
 

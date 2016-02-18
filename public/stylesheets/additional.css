@@ -13,6 +13,15 @@
     font-style: normal;
 }
 
+h1{
+  text-align: center;
+}
+
+#btnSubmit{
+  margin: auto;
+
+}
+
 
 /* Banner styles for each page - supports multi-line phrases*/
 .banner { 
