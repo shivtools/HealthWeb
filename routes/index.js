@@ -293,7 +293,6 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		console.log(item);
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
 	  	 	});
 	 	});
 	}
@@ -303,7 +302,6 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
 	  	 	});
 		});
 	}
@@ -313,7 +311,6 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
 	  	 	});
 		});
 	}
@@ -323,7 +320,7 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  		
 	  	 	});
 		});
 	}
@@ -333,13 +330,22 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
 	  	 	});
 	  });
 	}
 
+	res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+
 
 });
+
+router.get('/login', function(req, res){
+		console.log("sending cookie");
+		authenticated = true;
+		res.cookie('user', "secretuser", { maxAge: 900000, httpOnly: true }); //set cookie in the browser with secret user's name
+
+	}
+	);
 
 // Add item to db with a post request
 

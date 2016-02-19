@@ -1,6 +1,8 @@
 extends layout
 block content
 	script(src="http://maps.googleapis.com/maps/api/js")
+	script(src='../js/mapScript.js')
+
 	// Banner place to change image
 	.banner(style='background-image: url(../images/banner/family5.jpg);')
 		.banner_text Family Services
@@ -12,126 +14,22 @@ block content
 	.container-fluid
 		.row
 			.col-md-5
-				#my_table.panel.panel-default
-					table.table.table-responsive.table-hover
-						tbody
-							each item, i in familylist
-								tr
-									td.details-control
-										h5 Name: 
-										p=item.name
-										h5 Email: 
-										p=item.email
-										h5 Number:
-										p=item.number
-										h5 Location: 
-										p=item.location
-										h5 Website: 
-										p=item.website
+				each item, i in familylist
+					.panel.panel-default
+						.panel-heading.collapse-button
+							h3.panel-title=item.name
+						.panel-body.panel-collapse.collapse
+							table.table.table-responsive.table-hover
+								tbody
+									tr
+										td.details-control
+											h5 Email: 
+											p=item.email
+											h5 Number:
+											p=item.number
+											h5 Location: 
+											p.location=item.location
+											h5 Website: 
+											p=item.website
 			.col-md-7
 				#mapholder(style="width:100%;height:600px;")
-					script.
-						var map;
-						var x = document.getElementById("mapholder");
-						function getLocation() {
-						if (navigator.geolocation) {
-						navigator.geolocation.getCurrentPosition(showPosition, showError);
-						} else {
-						x.innerHTML = "Geolocation is not supported by this browser.";
-						}
-						}
-
-						function showPosition(position) {
-						var latlon = position.coords.latitude + "," + position.coords.longitude;
-						var mapProp = {
-						center:new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-						zoom:16,
-						mapTypeId:google.maps.MapTypeId.ROADMAP
-						};
-						map=new google.maps.Map(document.getElementById("mapholder"), mapProp);
-						map.addListener('center_changed', function(){
-						window.setTimeout(setData(), 200);});
-						setData();
-						var marker = new google.maps.Marker({
-						map: map,
-						icon: '../images/mapping/currentlocation.png'
-						});
-						marker.bindTo('position', map, 'center'); 
-						}
-						function showError(error) {
-						switch(error.code) {
-						case error.PERMISSION_DENIED:
-						x.innerHTML = "User denied the request for Geolocation."
-						break;
-						case error.POSITION_UNAVAILABLE:
-						x.innerHTML = "Location information is unavailable."
-						break;
-						case error.TIMEOUT:
-						x.innerHTML = "The request to get user location timed out."
-						break;
-						case error.UNKNOWN_ERROR:
-						x.innerHTML = "An unknown error occurred."
-						break;
-						}
-						}
-						
-						window.onload = getLocation;
-						
-						function updateCenter(){
-						var mylat = map.getCenter().lat();
-						var mylng = map.getCenter().lng();
-						console.log(mylat);
-						console.log(mylng);
-						}
-						
-						function wrongPos(){
-						$('#wrong-pos').modal({
-						show: true
-						});
-						}
-						
-						function setData(){
-						document.form.lat.value = map.getCenter().lat();
-						document.form.lon.value = map.getCenter().lng();
-						}
-		
-		//- ul.list-group
-		//- 	each item, i in familylist
-		//- 		li.list-group-item
-		//- 			.row
-		//- 				.col-md-2
-		//- 				.col-md-3
-		//- 					h5 Organization name:
-		//- 					p=item.name
-		//- 				.col-md-2
-		//- 				.col-md-3
-		//- 					h5 Organization email:
-		//- 					p=item.email
-		//- 			.row
-		//- 				.col-md-2
-		//- 				.col-md-3
-		//- 					h5 Organization number:
-		//- 						p=item.number
-		//- 				.col-md-2
-		//- 				.col-md-3
-		//- 					h5 Organization location:
-		//- 					p=item.location
-		//- 			.row
-		//- 				.col-md-2
-		//- 				.col-md-3
-		//- 					h5 Organization website:
-		//- 					p=item.website
-		//- 				.col-md-2
-		//- 				.col-md-3
-		//- 					h5 Organization location:
-		//- 					p=item.date
-		//- 			if user
-		//- 				.row
-		//- 					.col-md-2
-		//- 					.col-md-3
-		//- 						a(href="/delete/Family/#{item.id}")
-		//- 							.btn.btn-danger Delete post
-		//- 					.col-md-3
-		//- 					.col-m3-3
-		//- 						a(href="/edit/Family/#{item.id}")
-		//- 							.btn.btn-info Edit post

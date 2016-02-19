@@ -1,106 +1,92 @@
-//Map options
-var latAndLng = new google.maps.LatLng(37.5260016, -77.438847);
-var mapOptions = {
-	zoom: 11,
-	center: latAndLng,
-	scrollwheel:  false
-};
+var latlon;
+var lat;
+var lon;
+var directionsService;
+var directionsDisplay;
 
-//Create map
-var element = document.getElementById('map-canvas');
-var map = new google.maps.Map(element, mapOptions);
+function initMap() {
+  directionsService = new google.maps.DirectionsService;
+  directionsDisplay = new google.maps.DirectionsRenderer;
+  console.log(document.getElementById('mapholder'));
+  var map = new google.maps.Map(document.getElementById('mapholder'), {
+    zoom: 14,
+    center: {lat: lat, lng: lon}
+  });
+  directionsDisplay.setMap(map);
+}
 
-// Create the search box and link it to the UI element.
-var input = document.getElementById('pac-input');
-console.log(input);
-var searchBox = new google.maps.places.SearchBox(input);
-map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+function calculateAndDisplayRoute(directionsService, directionsDisplay, destination) {
+  console.log("destination: " + destination);
+  console.log("latlon: " + latlon);
 
-var markers = [];
-// Listen for the event fired when the user selects a prediction and retrieve
-// more details for that place.
-searchBox.addListener('places_changed', function() {
-    var places = searchBox.getPlaces();
-
-    if (places.length === 0) {
-    	return;
+  directionsService.route({
+    origin: latlon,
+    destination: destination,
+    travelMode: google.maps.TravelMode.DRIVING
+  }, function(response, status) {
+    console.log(response);
+    if (status === google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+      
+    } else {
+      window.alert('Directions request failed due to ' + status);
     }
-
-    // Clear out the old markers.
-    markers.forEach(function(marker) {
-    	marker.setMap(null);
-    });
-    markers = [];
-
-    // For each place, get the icon, name and location.
-    var bounds = new google.maps.LatLngBounds();
-    places.forEach(function(place) {
-
-      // Create a marker for each place.
-     	markers.push(new google.maps.Marker({
-      		map: map,
-        	title: place.name,
-        	position: place.geometry.location,
-        	icon: "../images/mapping/home.png",
-        	animation: google.maps.Animation.DROP
-      	}));
-
-      	if (place.geometry.viewport) {
-        	// Only geocodes have viewport.
-       		bounds.union(place.geometry.viewport);
-      	} else {
-        	bounds.extend(place.geometry.location);
-      	}
-   	});
-});
-	
-
-//Grabs location of user if geolocation is available and places marker at current location
-var currentLocationMarker = new google.maps.Marker({
-	map: map,
-	icon: "../images/mapping/currentlocation.png"
-});
-if (navigator.geolocation) {
-	navigator.geolocation.getCurrentPosition(function(position){
-		var pos = {
-			lat: position.coords.latitude,
-			lng: position.coords.longitude,
-		};
-		currentLocationMarker.setPosition(pos);
-
-		var locationInfoWindow = new google.maps.InfoWindow();
-		google.maps.event.addListener(currentLocationMarker, 'click', function() {
-			locationInfoWindow.setContent("Current Location");
-			locationInfoWindow.open(map, currentLocationMarker);
-		});
-	});
+  });
 }
 
-// createMarker("108 Cowardin Avenue, Richmond, VA 23224", "one");
-// createMarker("8600 Quioccasin Road, Suite 105, Richmond, VA 23229", "one");
+var map;
 
-
-//Create markers given address
-//className is provided to place innerHTML into info window
-function createMarker(address, className) {
-	var geocoder = new google.maps.Geocoder();
-	geocoder.geocode({
-		address: address,
-	}, function(results, status) {
-		if (status === google.maps.GeocoderStatus.OK) {
-			var result = results[0];
-			var marker = new google.maps.Marker({
-				map: map,
-				position: {
-					lat: result.geometry.location.lat(),
-					lng: result.geometry.location.lng(),
-				}
-			}); 
-			var infowindow = new google.maps.InfoWindow();
-			google.maps.event.addListener(marker, 'click', function() {
-				infowindow.setContent(document.getElementsByClassName(className)[0].innerHTML);
-				infowindow.open(map, marker);
-			});
-		}
-	});
+var x = document.getElementById("mapholder");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+  console.log("calling getLocaiton");
 }
+
+function showPosition(position) {
+  latlon = position.coords.latitude + "," + position.coords.longitude;
+  lat=position.coords.latitude;
+  lon=position.coords.longitude;
+  initMap();
+}
+
+function showError(error) {
+  switch(error.code) {
+  case error.PERMISSION_DENIED:
+  x.innerHTML = "User denied the request for Geolocation."
+  break;
+  case error.POSITION_UNAVAILABLE:
+  x.innerHTML = "Location information is unavailable."
+  break;
+  case error.TIMEOUT:
+  x.innerHTML = "The request to get user location timed out."
+  break;
+  case error.UNKNOWN_ERROR:
+  x.innerHTML = "An unknown error occurred."
+  break;
+  }
+}
+
+window.onload = getLocation;
+
+$(document).on("click", ".collapse-button", function(){
+  $(this).parent().find('.panel-collapse').collapse('toggle');
+
+  var address = $(this).parent().find('.location').text();
+
+  console.log(address);
+
+  var geocoder = new google.maps.Geocoder();
+
+  geocoder.geocode({
+    "address": address
+    }, function(results, status){
+      console.log(results);
+
+    calculateAndDisplayRoute(directionsService, directionsDisplay, address);
+  });
+
+});
