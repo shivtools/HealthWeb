@@ -1,7 +1,6 @@
 extends layout
-script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBuuz0eL6-alw6zJFuv422uv8DEar98Bsg&callback=initMap' async defer)
-script(src='../js/mapScript.js')
 block content
+	script(src="http://maps.googleapis.com/maps/api/js")
 	// Banner place to change image
 	.banner(style='background-image: url(../images/banner/family5.jpg);')
 		.banner_text Family Services
@@ -16,30 +15,85 @@ block content
 				#my_table.panel.panel-default
 					table.table.table-responsive.table-hover
 						tbody
-							rows = [familylist.length]
 							each item, i in familylist
-								rows[i]="row" + i
-							each item, i in familylist
-								tr#rows[i].clickable(data-toggle='collapse', data-target='.rows[i]')
-									td item.name
-								tr.collapse.rows[i]
+								tr
 									td.details-control
+										h5 Name: 
+										p=item.name
+										h5 Email: 
+										p=item.email
+										h5 Number:
+										p=item.number
+										h5 Location: 
+										p=item.location
 										h5 Website: 
 										p=item.website
-										h5 Services: 
-										p=item.services
-										h5 Requirements to Get Aid:
-										p=item.requirements
-										h5 Hours of Operation: 
-										p=item.hours
-										h5 Address: 
-										item.location
-										h5 Number: 
-										p=item.number
-										//p=item.logo Add logo hereee, idk how to do that
 			.col-md-7
-				input#pac-input.controls(type='text', placeholder='Enter your home address')
-				#map-canvas
+				#mapholder(style="width:100%;height:600px;")
+					script.
+						var map;
+						var x = document.getElementById("mapholder");
+						function getLocation() {
+						if (navigator.geolocation) {
+						navigator.geolocation.getCurrentPosition(showPosition, showError);
+						} else {
+						x.innerHTML = "Geolocation is not supported by this browser.";
+						}
+						}
+
+						function showPosition(position) {
+						var latlon = position.coords.latitude + "," + position.coords.longitude;
+						var mapProp = {
+						center:new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+						zoom:16,
+						mapTypeId:google.maps.MapTypeId.ROADMAP
+						};
+						map=new google.maps.Map(document.getElementById("mapholder"), mapProp);
+						map.addListener('center_changed', function(){
+						window.setTimeout(setData(), 200);});
+						setData();
+						var marker = new google.maps.Marker({
+						map: map,
+						icon: '../images/mapping/currentlocation.png'
+						});
+						marker.bindTo('position', map, 'center'); 
+						}
+						function showError(error) {
+						switch(error.code) {
+						case error.PERMISSION_DENIED:
+						x.innerHTML = "User denied the request for Geolocation."
+						break;
+						case error.POSITION_UNAVAILABLE:
+						x.innerHTML = "Location information is unavailable."
+						break;
+						case error.TIMEOUT:
+						x.innerHTML = "The request to get user location timed out."
+						break;
+						case error.UNKNOWN_ERROR:
+						x.innerHTML = "An unknown error occurred."
+						break;
+						}
+						}
+						
+						window.onload = getLocation;
+						
+						function updateCenter(){
+						var mylat = map.getCenter().lat();
+						var mylng = map.getCenter().lng();
+						console.log(mylat);
+						console.log(mylng);
+						}
+						
+						function wrongPos(){
+						$('#wrong-pos').modal({
+						show: true
+						});
+						}
+						
+						function setData(){
+						document.form.lat.value = map.getCenter().lat();
+						document.form.lon.value = map.getCenter().lng();
+						}
 		
 		//- ul.list-group
 		//- 	each item, i in familylist

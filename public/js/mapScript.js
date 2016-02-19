@@ -12,6 +12,7 @@ var map = new google.maps.Map(element, mapOptions);
 
 // Create the search box and link it to the UI element.
 var input = document.getElementById('pac-input');
+console.log(input);
 var searchBox = new google.maps.places.SearchBox(input);
 map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -40,7 +41,7 @@ searchBox.addListener('places_changed', function() {
       		map: map,
         	title: place.name,
         	position: place.geometry.location,
-        	icon: "../public/images/mapping/home.png",
+        	icon: "../images/mapping/home.png",
         	animation: google.maps.Animation.DROP
       	}));
 
@@ -57,7 +58,7 @@ searchBox.addListener('places_changed', function() {
 //Grabs location of user if geolocation is available and places marker at current location
 var currentLocationMarker = new google.maps.Marker({
 	map: map,
-	icon: "../public/images/mapping/currentlocation.png"
+	icon: "../images/mapping/currentlocation.png"
 });
 if (navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition(function(position){
