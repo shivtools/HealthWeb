@@ -100,6 +100,10 @@ router.get('/forms', function(req, res) {
 	});
 });
 
+router.get('/itemremoved', function(req,res){
+	res.render('itemremoved', {title: 'Removed item | HealthWeb'});
+});
+
 //create environment variables later on to store allowed users. 
 //give access to only one person to add listing for healthweb
 var secretusers = ['dbrackmahn', 'nashnash', 'shivtools', 'alexissexy'];
@@ -293,6 +297,7 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		console.log(item);
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
+	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
 	  	 	});
 	 	});
 	}
@@ -302,6 +307,7 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
+	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
 	  	 	});
 		});
 	}
@@ -311,6 +317,7 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
+	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
 	  	 	});
 		});
 	}
@@ -320,7 +327,7 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  		
+	  			res.redirect('/itemremoved');
 	  	 	});
 		});
 	}
@@ -330,11 +337,10 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
+	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
 	  	 	});
 	  });
 	}
-
-	res.render('itemremoved', {title: 'Item removed from HealthWeb'});
 
 
 });
