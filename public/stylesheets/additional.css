@@ -17,9 +17,13 @@ h1{
   text-align: center;
 }
 
-#btnSubmit{
-  margin: auto;
 
+#success, #homebutton, #addnew, #btnSubmit{
+  text-align: center;
+}
+
+#github{
+  text-decoration: none;
 }
 
 
@@ -84,6 +88,9 @@ h1{
     } ​
 }
 
+#mapholder {background: transparent url('../images/ajax-loader.gif') no-repeat center center;}
+
+
 
 /* Code for the little bit of subtext */
 .sub_text {
@@ -94,6 +101,10 @@ h1{
 .lead{
   font-size: 28px;
   margin-bottom: 0px;
+}
+
+#additem{
+  width: 70%;
 }
 
 

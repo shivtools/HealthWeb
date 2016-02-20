@@ -346,12 +346,11 @@ router.get('/delete/:Item/:id', function(req,res){
 });
 
 router.get('/login', function(req, res){
-		console.log("sending cookie");
-		authenticated = true;
-		res.cookie('user', "secretuser", { maxAge: 900000, httpOnly: true }); //set cookie in the browser with secret user's name
-
-	}
-	);
+	console.log("sending cookie");
+	authenticated = true;
+	res.cookie('user', "secretuser", { maxAge: 900000, httpOnly: true }); //set cookie in the browser with secret user's name
+	res.render('login', {title: 'Successfully logged in!'});
+});
 
 // Add item to db with a post request
 
@@ -466,8 +465,6 @@ router.post('/additem', function(req, res){
 	}
 
 	res.redirect('addsuccess');
-
-
 });
 
 //NOTE: handle cookie security later!

@@ -1,50 +1,45 @@
 extends layout
-
 block content
-	br
-	h1#itemlistHeader Housing listings
-	//- Pull in documents called userlist in route file
-	//- For each user extract information and print
-	.container
-		ul.list-group
-			each item, i in housinglist
-				li.list-group-item
-					.row
-						.col-md-2
-						.col-md-3
-							h5 Organization name:
-							p=item.name
-						.col-md-2
-						.col-md-3
-							h5 Organization email:
-							p=item.email
-					.row
-						.col-md-2
-						.col-md-3
-							h5 Organization number:
-							p=item.number
-						.col-md-2
-						.col-md-3
-							h5 Organization location:
-							p=item.location
-					.row
-						.col-md-2
-						.col-md-3
-							h5 Organization website:
-							p=item.website
-						.col-md-2
-						.col-md-3
-							h5 Organization location:
-							p=item.date
-					if user
-						.row
-							.col-md-2
-							.col-md-3
-								a(href="/delete/Housing/#{item.id}")
-									.btn.btn-danger Delete post
-							.col-md-3
-							.col-m3-3
-								a(href="/edit/Housing/#{item.id}")
-									.btn.btn-info Edit post
+	script(src="http://maps.googleapis.com/maps/api/js")
+	script(src='../js/mapScript.js')
 
-				br
+	// Banner place to change image
+	.banner(style='background-image: url(../images/banner/housing.jpg);')
+		.banner_text Housing Services
+	.container
+		.sub_text
+			p.lead Housing services to fit all your needs
+	hr
+
+	.container-fluid
+		.row
+			.col-md-5
+				each item, i in housinglist
+					.panel.panel-default
+						.panel-heading.collapse-button
+							h3.panel-title=item.name
+						.panel-body.panel-collapse.collapse
+							table.table.table-responsive.table-hover
+								tbody
+									tr
+										td.details-control
+											h5 Email: 
+											p=item.email
+											h5 Number:
+											p=item.number
+											h5 Location: 
+											p.location=item.location
+											h5 Website: 
+											p=item.website
+											if user
+												.row
+													.col-md-2
+													.col-md-3
+														a(href="/delete/Housing/#{item.id}")
+															.btn.btn-danger Delete post
+													.col-md-3
+													.col-m3-3
+														a(href="/edit/Housing/#{item.id}")
+															.btn.btn-info Edit post
+			.col-md-7
+				#mapholder(style="width:100%;height:600px;")
