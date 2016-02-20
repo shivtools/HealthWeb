@@ -1,0 +1,21 @@
+extends layout
+
+block content
+	br
+	br
+	br
+	.page-header
+		.container
+			h1#success You're now logged in to HealthWeb :)
+			br
+			h4#success You can now add/edit/delete any listing you'd like! Also make sure cookies are enabled in your browser!
+			br
+			.row#homebutton
+				.col-xs-3
+				.col-xs-3.text-left
+					a(href="/")
+						button.btn.btn-primary#home Homepage
+				.col-xs-1
+				.col-xs-3
+					a(href="/newitem")
+						button.btn.btn-info#home Add item
