@@ -281,10 +281,6 @@ router.get('/addsuccess', function(req,res){
 });
 
 router.get('/delete/:Item/:id', function(req,res){
-	
-	if(secretusers.indexOf(req.cookies.user) == -1){
-		res.end('You are not allowed to modify listings to HealthWeb!');
-	}
 
 	var id = req.params.id;
 	var ItemType = req.params.Item;
@@ -337,7 +333,7 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  			res.redirect('/itemremoved');
 	  	 	});
 	  });
 	}
