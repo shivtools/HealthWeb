@@ -262,8 +262,6 @@ var sendEmail = function email(contactName, contactEmail, contactNumber, optionS
 	        console.log('Message sent!');
 	    }
 	});
-
-
 }
 
 //successfully sent email to HealthWeb team!
@@ -293,7 +291,7 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		console.log(item);
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  			res.redirect('/itemremoved');
 	  	 	});
 	 	});
 	}
@@ -303,7 +301,7 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  			res.redirect('/itemremoved');
 	  	 	});
 		});
 	}
@@ -313,7 +311,7 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  			res.redirect('/itemremoved');
 	  	 	});
 		});
 	}
