@@ -34,9 +34,9 @@ html(lang='en')
             img(src='../images/logo.jpg')
         #navbar.collapse.navbar-collapse
           ul.nav.navbar-nav
-            li.active
+            li(class=path=='/'?'active':undefined)
               a(href='/') Home
-            li
+            li(class=path=='/about'?'active':undefined)
               a(href='/about') About Us
             li.dropdown
               a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
@@ -51,11 +51,11 @@ html(lang='en')
                   a(href='/family') Family Services
                 li
                   a(href='/legal') Immigration & Legal
-            li
+            li(class=path=='/volunteer'?'active':undefined)
               a(href='/volunteer') Volunteer
-            li
+            li(class=path=='/contact'?'active':undefined)
               a(href='/contact') Contact Us
-          form.navbar-left.navbar-form.pull-right(,='', method='post', action='/search')
+          form.navbar-left.navbar-form.pull-right.hidden-sm.hidden-xs(,='', method='post', action='/search')
             input.form-control(name='searchItem', placeholder='Search')
             button.btn.btn-default(type='submit') 
               span.glyphicon.glyphicon-search(aria-hidden='true')
