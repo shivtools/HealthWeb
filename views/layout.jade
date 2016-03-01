@@ -11,7 +11,6 @@ html(lang='en')
     script(src='//code.jquery.com/jquery-1.12.0.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
     script(src='../js/additem.js')
-    script(src='../js/additional.js')
     title HealthWeb
     // Bootstrap core CSS
     link(href='../stylesheets/bootstrap.min.css', rel='stylesheet')
@@ -57,15 +56,18 @@ html(lang='en')
             li
               a(href='/contact') Contact Us
           form.navbar-left.navbar-form.pull-right(,='', method='post', action='/search')
-            input.form-control(name='searchItem', placeholder='Search for a listing')
-            button.btn.btn-default(type='submit') Submit
-        // /.nav-collapse
+            input.form-control(name='searchItem', placeholder='Search')
+            button.btn.btn-default(type='submit') 
+              span.glyphicon.glyphicon-search(aria-hidden='true')
+    block content
+
+    br
     br
     br
     footer.footer
       .container
         p.footer_text
           | Made with 
-          i.fa.fa-heart  by UR's ACM group.
+          i.fa.fa-heart  by UR's ACM Web Dev group - check out the geekiness behind this @ 
+            a#github(href="https://github.com/shivtools/HealthWeb") Github repo.
 
-block content

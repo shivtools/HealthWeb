@@ -12,40 +12,6 @@ var authenticated = false; //variable to pass to front end to check is user has 
 
 var nodemailer = require('sendgrid')('healthweb','Richmond15');
 
-var email = function sendEmail(){
-	//Added email template for selling emails
-	var email_template ="<p><span class='sg-image' style='float: none; display: block; text-align: center;'><img height='128'"+ 
-	"src=''" + 
-	"style='width: 128px; height: 128px;' width='128' /></span></p>"+
-	"<p style='text-align: center;'><span style='font-size:28px;'><span style='font-family:comic sans ms,cursive;'>URStash</span></span></p>"+
-	"<p style='text-align: center;'><span style='font-size:16px;'><span style='font-family:georgia,serif;'>"; 
-
-	var email_footer = "</span></span></p><hr/><p style='text-align: center;'><span style='font-size:14px;'><span style='font-family:trebuchet ms,helvetica,sans-serif;'>If you have any concerns "+
-	"email us at rvahealthweb@gmail.com</span></span></p>";
-
-	var msg = new nodemailer.Email();
-	msg.addTo("rvahealthweb@gmail.com");
-	msg.setFrom('Contact request <rvahealthweb@sendgrid.com>');
-	msg.setSubject("Request for information ");
-	msg.setHtml("Please get in touch with user"); // plaintext body
-
-
-	    // send mail with defined sendmail object
-	nodemailer.send(msg, function(error, info){
-	    if(error){
-	        console.log(error);
-	    }else{
-	        console.log('Message sent!');
-	    }
-	});
-}
-
-// email();
-
-
-
-
-
 //add all schemas for different pages
 var Food = require('../models/food');
 var Housing = require('../models/housing');
@@ -132,6 +98,10 @@ router.get('/forms', function(req, res) {
 			"formslist": items
 		});
 	});
+});
+
+router.get('/itemremoved', function(req,res){
+	res.render('itemremoved', {title: 'Removed item | HealthWeb'});
 });
 
 //create environment variables later on to store allowed users. 
@@ -254,11 +224,53 @@ router.post('/search', function(req,res){
 
 });
 
-//code for sending email from contact us page
-
+//post request for sending email
 router.post('/sendemail', function(req,res){
+	var contactName = req.body.name;
+	var contactEmail = req.body.email;
+	var contactNumber = req.body.tel;
+	var optionSelected = req.body.select;
+	var contactOther = req.body.other;
+	var contactMessage = req.body.message;
+
+	sendEmail(contactName, contactEmail, contactNumber, optionSelected, contactOther, contactMessage);
+
+	res.render('emailsuccess', {title: 'Thank you!'});
+
 
 });
+
+//Sends an email to HealthWeb's email address with message and user details
+var sendEmail = function email(contactName, contactEmail, contactNumber, optionSelected, contactOther, contactMessage){
+	//Added email template for selling emails
+	var email_message = "Hey there, HealthWeb just received a message from: " + contactName + ". Their email id is: " + contactEmail + " and their number is: " + contactNumber + ".\n";
+	var email_message2 = "\n They're getting in touch about: " + optionSelected + ". Other information they provided is: " + contactOther + ".\n \n";
+	var email_message3 = "The message they left for you is: \n \n" + contactMessage;
+ 
+	var msg = new nodemailer.Email();
+	msg.addTo("rvahealthweb@gmail.com");
+	msg.setFrom('Contact request <rvahealthweb@sendgrid.com>');
+	msg.setSubject("Request for information from: " + contactName);
+	msg.setHtml(email_message + email_message2 + email_message3); // plaintext body
+
+
+	    // send mail with defined sendmail object
+	nodemailer.send(msg, function(error, info){
+	    if(error){
+	        console.log(error);
+	    }else{
+	        console.log('Message sent!');
+	    }
+	});
+}
+
+//successfully sent email to HealthWeb team!
+router.get('/addsuccess', function(req,res){
+	console.log("calling add success");
+	res.render('addsuccess', {title: 'Successfully added!'});
+});
+
+
 
 //successfully added item!
 router.get('/addsuccess', function(req,res){
@@ -267,10 +279,6 @@ router.get('/addsuccess', function(req,res){
 });
 
 router.get('/delete/:Item/:id', function(req,res){
-	
-	if(secretusers.indexOf(req.cookies.user) == -1){
-		res.end('You are not allowed to modify listings to HealthWeb!');
-	}
 
 	var id = req.params.id;
 	var ItemType = req.params.Item;
@@ -283,7 +291,7 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		console.log(item);
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  			res.redirect('/itemremoved');
 	  	 	});
 	 	});
 	}
@@ -293,7 +301,7 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  			res.redirect('/itemremoved');
 	  	 	});
 		});
 	}
@@ -303,7 +311,7 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  			res.redirect('/itemremoved');
 	  	 	});
 		});
 	}
@@ -313,7 +321,7 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  			res.redirect('/itemremoved');
 	  	 	});
 		});
 	}
@@ -323,12 +331,19 @@ router.get('/delete/:Item/:id', function(req,res){
 	  		if(err) throw err;
 	  		item.remove(function(err){
 	  			console.log("Item removed!");
-	  			res.render('itemremoved', {title: 'Item removed from HealthWeb'});
+	  			res.redirect('/itemremoved');
 	  	 	});
 	  });
 	}
 
 
+});
+
+router.get('/login', function(req, res){
+	console.log("sending cookie");
+	authenticated = true;
+	res.cookie('user', "secretuser", { maxAge: 900000, httpOnly: true }); //set cookie in the browser with secret user's name
+	res.render('login', {title: 'Successfully logged in!'});
 });
 
 // Add item to db with a post request
@@ -341,7 +356,14 @@ router.post('/additem', function(req, res){
 	var itemNumber = req.body.itemnumber;
 	var itemLocation = req.body.itemlocation;
 	var itemWebsite = req.body.itemwebsite;
+	console.log(itemWebsite);
 	var secretuser = req.body.secretkey;
+
+	if(secretusers.indexOf(secretuser) != -1){
+		console.log("sending cookie");
+		authenticated = true;
+		res.cookie('user', secretuser, { maxAge: 900000, httpOnly: true }); //set cookie in the browser with secret user's name
+	}
 
 	//if the user does not have privileges, they cannot add listings
 	if(secretusers == null || secretusers.indexOf(secretuser) == -1){
@@ -349,15 +371,11 @@ router.post('/additem', function(req, res){
 		 res.send('You are not allowed to add/edit listings to HealthWeb. Please get in touch with the team to request user privileges if you are part of Global Health!');
 	}
 
-	if(secretusers.indexOf(secretuser) != -1){
-		console.log("sending cookie");
-		authenticated = true;
-		res.cookie('user', secretuser, { maxAge: 900000, httpOnly: true }); //set cookie in the browser with secret user's name
-	}
+
 	
 	//get all checkbox values
 	var options = req.body.options;
-	console.log(options);
+	console.log("OPTIONS: " + options);
 
 	//depending on what checkboxes were marked, create items of those types and add to those dbs.
 
@@ -441,8 +459,6 @@ router.post('/additem', function(req, res){
 	}
 
 	res.redirect('addsuccess');
-
-
 });
 
 //NOTE: handle cookie security later!

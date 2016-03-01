@@ -1,28 +1,42 @@
 extends layout
-
 block content
-	br
-	h1#itemlistHeader Search Results
-	//- Pull in documents called userlist in route file
-	//- For each user extract information and print
-	.container
-		ul.list-group
-			each item, i in searchresults
-				li.list-group-item
-					.row
-					h5 Organization name:
-					p=item.name
-					.row
-					h5 Organization email:
-					p=item.email
-					.row
-					h5 Organization number:
-					p=item.email
-					.row
-					h5 Organization location:
-					p=item.email
-					.row
-					h5 Organization website:
-					p=item.email
+	script(src="http://maps.googleapis.com/maps/api/js")
+	script(src='../js/mapScript.js')
 
-				br
+	// Banner place to change image
+	.banner(style='background-image: url(../images/banner/home.jpg);')
+		.banner_text Search results
+	.container
+		.sub_text
+			p.lead This is what we have for you!
+	hr
+
+	.container-fluid
+		.row
+			.col-md-5
+				each item, i in searchresults
+					.panel.panel-default
+						.panel-heading.collapse-button
+							h3.panel-title=item.name
+						.panel-body.panel-collapse.collapse
+							table.table.table-responsive.table-hover
+								tbody
+									tr
+										td.details-control
+											h5 Email: 
+											p=item.email
+											h5 Number:
+											p=item.number
+											h5 Location: 
+											p.location=item.location
+											h5 Website: 
+											p=item.website
+											if user
+												.row
+													.col-md-2
+													.col-md-3
+														a(href="/delete/Legal/#{item.id}")
+															.btn.btn-danger Delete post
+													.col-md-3
+			.col-md-7
+				#mapholder(style="width:100%;height:600px;")

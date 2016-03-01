@@ -13,6 +13,19 @@
     font-style: normal;
 }
 
+h1{
+  text-align: center;
+}
+
+
+#success, #homebutton, #addnew, #btnSubmit{
+  text-align: center;
+}
+
+#github{
+  text-decoration: none;
+}
+
 
 /* Banner styles for each page - supports multi-line phrases*/
 .banner { 
@@ -75,6 +88,9 @@
     } ​
 }
 
+#mapholder {background: transparent url('../images/ajax-loader.gif') no-repeat center center;}
+
+
 
 /* Code for the little bit of subtext */
 .sub_text {
@@ -85,6 +101,10 @@
 .lead{
   font-size: 28px;
   margin-bottom: 0px;
+}
+
+#additem{
+  width: 70%;
 }
 
 

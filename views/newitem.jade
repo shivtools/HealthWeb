@@ -1,14 +1,15 @@
 extends layout
 
 block content
+	script(src="/js/additem.js")
 	br
 	br
 	br
 	h1#addHeader Add a listing to HealthWeb
-	script(src="/js/additem.js")
-	.col-md-2
-	.col-md-8
-		#formAddUser(name="additem")
+	br
+
+	.container-fluid#additem
+		form#formAddUser(name="additem")
 			.form-group
 				label(for="itemname") Organization name
 				input#inputUserName(type="text" class="form-control" placeholder="Organization name", name="itemname")
@@ -30,9 +31,8 @@ block content
 				input(type="file" name="userPhoto")
 			.form-group
 				label(for="") Enter your secret username and select a listing to add your post to (you can even check multiple listings)
-				input.form-control(type="text" placeholder="You must be an authorized user to list entries. Enter your user name, select the listing(s) and hit submit once you're done.", name="secretkey")
+				input.form-control(type="text" placeholder="You must be an authorized user to add entries.", name="secretkey")
 				.input-group-btn
-
 			.checkbox
 				label
 					input(type="checkbox" name="options", value = "food")
@@ -55,13 +55,4 @@ block content
 					| Forms
 			br
 			button.btn-danger#btnSubmit(onclick="validate()").btn.btn-default Submit
-
-		//- Modal triggered if user has not entered sufficient info
-	.modal.fade#warning(tabindex="-1" role="dialog")
-		.modal-dialog.has-error
-			.modal-content
-				.modal-header
-					button.close(type="button" data-dismiss="modal")
-					h3#warning-text Error
-
 
