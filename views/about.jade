@@ -6,30 +6,44 @@ block content
       .banner_text About Us
     .container
       .sub_text
-        p.lead The team that brought HealthWeb to you
+        p.lead A group of college students wanting to address the issue of external factors of healthcare within the Richmond community
       hr
     .container-fluid
       .row
         .col-md-5
           #my_table.panel.panel-default
-            //
-              <table class="table table-responsive table-hover" id="my_table">
-              <tbody>
-              <tr class="clickable" data-toggle="collapse" id="row1" data-target=".row1">
-              <td>data</td>
-              </tr>
-              <tr class="collapse row1">
-              <td class="details-control">- child row what up I mean it<p>ayy<p>lmao<p>whatup</td>
-              </tr>
-              <tr class="clickable" data-toggle="collapse" id="row2" data-target=".row2">
-              <td class="details-control">data</td>
-              </tr>
-              <tr class="collapse row2">
-              <td>- child row</td>
-              </tr>
-              </tbody>
-              </table>
+            table#my_table.table.table-responsive.table-hover
+              tbody
+                tr#row1.clickable(data-toggle='collapse', data-target='.row1')
+                  td 
+                    span.glyphicon.glyphicon-plus(style='margin-right:1em')
+                    | Mission
+                tr.collapse.row1
+                  td.details-control
+                    | Over here at HealthWeb, we believe that when a patient visits a doctor room, there are so many other factors going on than just the illness at hand. If the doctor is treating for weakened bones, what are the chances it was because the patient does not have enough food and nutrition in their home? If a patient has gone to the ER because of broken limbs, what are the chances it was because of an abusive spouse? What are the chances it will happen again? Our mission is to eliminate or diminish the sources of the problem that are rooted in lack of a basic essential - whether that be safety, shelter, food, or etc. We hope to do this by navigating community resources for patients, including food and nutrition resources, housing resources, family services resources, and even immigration resources.
+                tr#row2.clickable(data-toggle='collapse', data-target='.row2')
+                  td
+                    span.glyphicon.glyphicon-plus(style='margin-right:1em')
+                    | Who We Are
+                tr.collapse.row2
+                  td
+                    | We are a group of college students from the University of Richmond who believe in the vision of a better, more affordable health care system and who want the help make the change happen. Most of us are part of the Sophomore Scholars in Residence (SSIR) program, Global Health, in which we learn about the issues of the healthcare system and then have a capstone project to help the community or do research in some way.
+                tr#row3.clickable(data-toggle='collapse', data-target='.row3')
+                  td 
+                    span.glyphicon.glyphicon-plus(style='margin-right:1em')
+                    | What We Do
+                tr.collapse.row3
+                  td
+                    | We help patients navigate resources within the community of Richmond to better address their needs. We work with CrossOver Ministries, and help the social workers complete their tasks. As for seeing patients, patients will be referred to us by doctors, where then we will sit down with them, ask about their situation, and try to suggest the best places for them. Alternatively, patients may also navigate the resources on their own on this website by clicking on their area of need and seeing what resources best fit their need and are closest to them.
+                tr#row4.clickable(data-toggle='collapse', data-target='.row4')
+                  td 
+                    span.glyphicon.glyphicon-plus(style='margin-right:1em')
+                    | History
+                tr.collapse.row4
+                  td
+                    | HealthWeb was originally started as a capstone project a few years before 2015 in the Sophomore Scholars in Residence (SSIR) program, Global Health. It was started as a website, listing free or cheap local, state, and national resources relative to the city of Richmond. As time went on, different people managed the website, having different visions for it. Then in Fall of 2015, two individuals, Chiara Solitario and Rachel Bringewatt, overtook the HealthWeb project. Then in collaboration with the Global Health SSIR class of Fall 2015 - Spring 2016 and other interested individuals, HealthWeb took off as not only a website but as a way to navigate resources for patients and act as assistants to social workers. With the help of University of Richmond’s Association for Computing Machinery (ACM) chapter, the website was revamped to better reflect the needs of the patients and the volunteers.
+
         .col-md-7
-          | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis commodo diam et interdum. Suspendisse dictum lectus eget odio sollicitudin pulvinar ac id tellus. Vivamus id mi ligula. Donec quis accumsan nisi, quis tincidunt lacus. Suspendisse velit est, porta vehicula ligula et, vehicula molestie urna. Cras quam est, egestas vitae orci elementum, imperdiet hendrerit nisi. Phasellus lobortis tempus odio. Suspendisse interdum turpis rhoncus lacus scelerisque dignissim. Etiam vulputate, turpis non congue interdum, sapien ante mattis diam, vel imperdiet nisi tellus nec erat. Duis mattis augue felis. Pellentesque orci sapien, vestibulum ultricies lectus vitae, elementum tristique nisi. Mauris ac dolor et libero convallis cursus vulputate et arcu. Donec sed tempus neque, pellentesque ullamcorper metus. Fusce sit amet augue porttitor, efficitur felis sit amet, varius velit. Curabitur in ultricies nibh.
-          | Integer sollicitudin nunc neque, et convallis est mattis vitae. Nam ac est at purus dapibus commodo. Sed nec dapibus libero. In volutpat mauris eget dolor condimentum dignissim. Cras eget facilisis libero, non auctor dui. Nullam id nisl eget nisl consequat ultrices vitae vitae metus. Phasellus efficitur mattis neque in placerat. Fusce quam nunc, faucibus ultricies magna feugiat, semper consequat erat. Maecenas luctus, turpis non tincidunt congue, arcu libero vestibulum nibh, sit amet sodales ex arcu ac urna. Curabitur massa nibh, ultricies eu ullamcorper et, dapibus eget libero. Sed nunc dolor, rhoncus quis elit id, sodales tempus dui. Vivamus rutrum neque est, vel convallis dui vulputate quis. Sed porta sit amet magna scelerisque placerat. Praesent dictum id ligula id dapibus. Curabitur sed finibus mi, vitae porttitor erat.
+          center
+            img(src= "../images/logoFull.jpg" width='100%', height='100%')
     // /.container

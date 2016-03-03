@@ -10,7 +10,8 @@ function initMap() {
   console.log(document.getElementById('mapholder'));
   var map = new google.maps.Map(document.getElementById('mapholder'), {
     zoom: 14,
-    center: {lat: lat, lng: lon}
+    center: {lat: lat, lng: lon},
+    scrollwheel:  false
   });
   directionsDisplay.setMap(map);
 }
