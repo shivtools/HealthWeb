@@ -34,26 +34,26 @@ html(lang='en')
             img(src='../images/logo.jpg')
         #navbar.collapse.navbar-collapse
           ul.nav.navbar-nav
-            li(class=path=='/'?'active':undefined)
+            li(class=title=='Home | HealthWeb'?'active':undefined)
               a(href='/') Home
-            li(class=path=='/about'?'active':undefined)
+            li(class=title=='About HealthWeb | HealthWeb'?'active':undefined)
               a(href='/about') About Us
             li.dropdown
               a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                 | Resources
                 span.caret
               ul.dropdown-menu
-                li
+                li(class=title=='Food listings'?'active':undefined)
                   a(href='/food') Food & Nutrition
-                li
+                li(class=title=='Housing listings'?'active':undefined)
                   a(href='/housing') Housing
-                li
+                li(class=title=='Family listings'?'active':undefined)
                   a(href='/family') Family Services
-                li
+                li(class=title=='Legal listings'?'active':undefined)
                   a(href='/legal') Immigration & Legal
-            li(class=path=='/volunteer'?'active':undefined)
+            li(class=title=='Volunteer | HealthWeb'?'active':undefined)
               a(href='/volunteer') Volunteer
-            li(class=path=='/contact'?'active':undefined)
+            li(class=title=='Contact us | HealthWeb'?'active':undefined)
               a(href='/contact') Contact Us
           form.navbar-left.navbar-form.pull-right.hidden-sm.hidden-xs(,='', method='post', action='/search')
             input.form-control(name='searchItem', placeholder='Search')
