@@ -1,6 +1,5 @@
 extends layout
 block content
-	script(src="http://maps.googleapis.com/maps/api/js")
 	script(src='../js/mapScript.js')
 
 	// Banner place to change image
@@ -39,4 +38,5 @@ block content
 															.btn.btn-danger Delete post
 													.col-md-3
 			.col-md-7
+				input#search.controls(type="text" placeholder="Enter your home address")
 				#mapholder(style="width:100%;height:600px;")

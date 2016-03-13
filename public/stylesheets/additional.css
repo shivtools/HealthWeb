@@ -23,7 +23,7 @@ h1{
 }
 
 #github{
-  text-decoration: none;
+  color: #fff;
 }
 
 
@@ -264,11 +264,10 @@ table .collapse.in {
   background-color: #fff;
   font-family: Roboto;
   font-size: 15px;
-  font-weight: 300;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
+  margin: auto;
+  text-align: center;
   text-overflow: ellipsis;
-  width: 300px;
+  width: 30%;
 }
 
 #pac-input:focus {
