@@ -10,10 +10,7 @@ var authenticated = false; //variable to pass to front end to check is user has 
 //try connect-form to upload images
 // form = require('connect-form');
 
-<<<<<<< HEAD
-=======
 //get account credentials from environment variables - please restore my sendgrid account now :)!
->>>>>>> 13589adc4f8a94d52055c82b484841f823af74d3
 var nodemailer = require('sendgrid')(process.env.SENDGRID_USERNAME,process.env.SENDGRID_PASSWORD);
 
 //add all schemas for different pages
