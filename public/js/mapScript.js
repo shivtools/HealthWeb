@@ -8,6 +8,7 @@ var directionsService;
 var directionsDisplay;
 var map;
 var prev_infowindow =false;
+var distance;
 
 //Initialize map given user's coordinate - fetch using HTML5's geolocation API
 function initMap() {
@@ -156,12 +157,19 @@ function displayMarkers(){
                 //Keep track of previous info window. Update it to the most current info-window
                 prev_infowindow = infowindow;
 
-                //Set the contents of the info-window
-                infowindow.setContent("<h4>" + name + "</h4>");
-                infowindow.open(map, marker);
-
                 //display route from origin to marker location!
                 calculateAndDisplayRoute(directionsService, directionsDisplay, address);
+
+                //Calculuate distance and time to location. Calls computeTotalDistance function
+                directionsDisplay.addListener('directions_changed', function() {
+                    distance = computeTotalDistance(directionsDisplay.getDirections());
+
+                    //Set the contents of the info-window
+                    infowindow.setContent("<h7>" + name + " is: " + distance + " miles away home. </h7>");
+                });
+
+                infowindow.open(map, marker);
+
               });
 
             }
@@ -176,6 +184,17 @@ function displayMarkers(){
     });
 
 }
+
+function computeTotalDistance(result) {
+    var total = 0;
+    var myroute = result.routes[0];
+    for (var i = 0; i < myroute.legs.length; i++) {
+      total += myroute.legs[i].distance.value;
+    }
+    total = 0.621371*(total / 1000); //convert to miles
+    return (Math.round(total * 100) / 100); //round to two decimal places
+}
+
 
 //More of Matt's kickass code. 
 //Allows user to search up a location to make this the home location
