@@ -157,7 +157,7 @@ function displayMarkers(){
                 prev_infowindow = infowindow;
 
                 //Set the contents of the info-window
-                infowindow.setContent(name);
+                infowindow.setContent("<h4>" + name + "</h4>");
                 infowindow.open(map, marker);
 
                 //display route from origin to marker location!
