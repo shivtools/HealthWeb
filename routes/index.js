@@ -10,7 +10,8 @@ var authenticated = false; //variable to pass to front end to check is user has 
 //try connect-form to upload images
 // form = require('connect-form');
 
-var nodemailer = require('sendgrid')('healthweb','Richmond15');
+//get account credentials from environment variables - please restore my sendgrid account now :)!
+var nodemailer = require('sendgrid')(process.env.SENDGRID_USERNAME,process.env.SENDGRID_PASSWORD);
 
 //add all schemas for different pages
 var Food = require('../models/food');

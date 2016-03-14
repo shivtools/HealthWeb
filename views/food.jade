@@ -1,6 +1,5 @@
 extends layout
 block content
-	script(src="http://maps.googleapis.com/maps/api/js")
 	script(src='../js/mapScript.js')
 
 	// Banner place to change image
@@ -11,13 +10,13 @@ block content
 			p.lead Helping you and your family gain access to the food and nourishment needed for healthy living
 	hr
 
-	.container-fluid
+	#listings.container-fluid
 		.row
 			.col-md-5
 				each item, i in foodlist
-					.panel.panel-default
+					#listing.panel.panel-default
 						.panel-heading.collapse-button
-							h3.panel-title=item.name
+							h3.name.panel-title=item.name
 						.panel-body.panel-collapse.collapse
 							table.table.table-responsive.table-hover
 								tbody
@@ -28,7 +27,7 @@ block content
 											h5 Number:
 											p=item.number
 											h5 Location: 
-											p.location=item.location
+											p#location.location=item.location
 											h5 Website: 
 											p=item.website
 											if user
@@ -39,4 +38,5 @@ block content
 															.btn.btn-danger Delete post
 													.col-md-3
 			.col-md-7
+				input#search.controls(type="text" placeholder="Enter your home address")
 				#mapholder(style="width:100%;height:600px;")
