@@ -1,6 +1,7 @@
 {
   "name": "HealthWeb",
   "version": "0.0.0",
+  "main": "app.js",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -25,5 +26,8 @@
     "sendgrid": "^2.0.0",
     "serve-favicon": "~2.3.0",
     "window-popup": "^1.0.1"
+  },
+  "engines": {
+    "node": "0.12.3"
   }
 }
