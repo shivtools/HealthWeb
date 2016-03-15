@@ -246,7 +246,7 @@ var sendEmail = function email(contactName, contactEmail, contactNumber, optionS
 	//Added email template for selling emails
 	var email_template ="<p><span class='sg-image' style='float: none; display: block; text-align: center;'><img height='128'"+ 
 	"src='https://raw.githubusercontent.com/shivtools/HealthWeb/master/public/images/logo.jpg'" + 
-	"style='width: 128px; height: 128px;' width='128' /></span></p>"+
+	"style='height: 128px;'/></span></p>"+
 	"<p style='text-align: center;'><span style='font-size:28px;'><span style='font-family:comic sans ms,cursive;'>HealthWeb</span></span></p>"+
 	"<p style='text-align: center;'><span style='font-size:16px;'><span style='font-family:georgia,serif;'>"; 
 
