@@ -1,6 +1,5 @@
 extends layout
 block content
-	script(src="http://maps.googleapis.com/maps/api/js")
 	script(src='../js/mapScript.js')
 
 	// Banner place to change image
@@ -14,7 +13,7 @@ block content
 	#listings.container-fluid
 		.row
 			.col-md-5
-				each item, i in legallist
+				each item, i in searchresults
 					#listing.panel.panel-default
 						.panel-heading.collapse-button
 							h3.name.panel-title=item.name
