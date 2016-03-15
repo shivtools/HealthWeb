@@ -244,15 +244,21 @@ router.post('/sendemail', function(req,res){
 //Sends an email to HealthWeb's email address with message and user details
 var sendEmail = function email(contactName, contactEmail, contactNumber, optionSelected, contactOther, contactMessage){
 	//Added email template for selling emails
-	var email_message = "Hey there, HealthWeb just received a message from: " + contactName + ". Their email id is: " + contactEmail + " and their number is: " + contactNumber + ".\n";
-	var email_message2 = "\n They're getting in touch about: " + optionSelected + ". Other information they provided is: " + contactOther + ".\n \n";
-	var email_message3 = "The message they left for you is: \n \n" + contactMessage;
+	var email_template ="<p><span class='sg-image' style='float: none; display: block; text-align: center;'><img height='128'"+ 
+	"src='https://github.com/shivtools/HealthWeb/blob/master/public/images/logoFull.jpg'" + 
+	"style='width: 128px; height: 128px;' width='128' /></span></p>"+
+	"<p style='text-align: center;'><span style='font-size:28px;'><span style='font-family:comic sans ms,cursive;'>HealthWeb</span></span></p>"+
+	"<p style='text-align: center;'><span style='font-size:16px;'><span style='font-family:georgia,serif;'>"; 
+
+	var email_message = "Hey there, HealthWeb just received a message from: <strong>" + contactName + "</strong>. Their email id is: <strong>" + contactEmail + "</strong> and their number is: <strong>" + contactNumber + "</strong>.\n";
+	var email_message2 = "\n They're getting in touch about:<strong>" + optionSelected + "</strong>. Other information they provided is: <em>" + contactOther + "</em>.\n \n";
+	var email_message3 = "The message they left for you is: \n \n<em>" + contactMessage + "</em>";
  
 	var msg = new nodemailer.Email();
 	msg.addTo("rvahealthweb@gmail.com");
 	msg.setFrom('Contact request <rvahealthweb@sendgrid.com>');
 	msg.setSubject("Request for information from: " + contactName);
-	msg.setHtml(email_message + email_message2 + email_message3); // plaintext body
+	msg.setHtml(email_template + email_message + email_message2 + email_message3); // plaintext body
 
 
 	    // send mail with defined sendmail object
