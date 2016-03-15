@@ -245,7 +245,7 @@ router.post('/sendemail', function(req,res){
 var sendEmail = function email(contactName, contactEmail, contactNumber, optionSelected, contactOther, contactMessage){
 	//Added email template for selling emails
 	var email_template ="<p><span class='sg-image' style='float: none; display: block; text-align: center;'><img height='128'"+ 
-	"src='https://github.com/shivtools/HealthWeb/blob/master/public/images/logoFull.jpg'" + 
+	"src='https://raw.githubusercontent.com/shivtools/HealthWeb/master/public/images/logo.jpg'" + 
 	"style='width: 128px; height: 128px;' width='128' /></span></p>"+
 	"<p style='text-align: center;'><span style='font-size:28px;'><span style='font-family:comic sans ms,cursive;'>HealthWeb</span></span></p>"+
 	"<p style='text-align: center;'><span style='font-size:16px;'><span style='font-family:georgia,serif;'>"; 
