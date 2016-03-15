@@ -22,6 +22,7 @@ function initMap() {
   });
 
   directionsDisplay.setMap(map);
+  directionsDisplay.setOptions( { suppressMarkers: true } );
 
   displayMarkers(); //display all the markers of listings
   enableSearch(); //enable search feauture once markers have been placed
@@ -33,6 +34,8 @@ function initMap() {
 function calculateAndDisplayRoute(directionsService, directionsDisplay, destination) {
   // console.log("destination: " + destination);
   // console.log("latlon: " + latlon);
+  //NASHEYA
+  var distance = 0;
 
   directionsService.route({
     origin: latlon,
@@ -41,11 +44,19 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, destinat
   }, function(response, status) {
     if (status === google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
-      
+      //NASHEYA
+      //WHY DOESN'T DISTANCE WORK?
+      //IF WE FIGURE THIS OUT, COULD GET TIME SIMILARLY
+      distance = response.rows[0].elements[0].distance.value;
     } else {
       window.alert('We could not find this address, sorry!');
     }
   });
+
+  //NASHEYA
+  //DISTANCE IS 0 HERE
+  alert(distance);
+  // return response.rows[0].elements[0];
 }
 
 var x = document.getElementById("mapholder");
@@ -54,6 +65,7 @@ var x = document.getElementById("mapholder");
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition, showError);
+    
   } else {
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
@@ -64,6 +76,7 @@ function showPosition(position) {
   latlon = position.coords.latitude + "," + position.coords.longitude;
   lat=position.coords.latitude;
   lon=position.coords.longitude;
+
   initMap();
 }
 
@@ -108,7 +121,6 @@ var geocoder = new google.maps.Geocoder();
 //This was mostly Matt Santa's code, shoutout to him for this :) 
 
 function displayMarkers(){
-
   //Go through each listing with ID 'listing' and add markers yo!
   $('*[id*=listing]').each(function() {
 
@@ -156,12 +168,14 @@ function displayMarkers(){
                 //Keep track of previous info window. Update it to the most current info-window
                 prev_infowindow = infowindow;
 
-                //Set the contents of the info-window
-                infowindow.setContent("<h4>" + name + "</h4>");
-                infowindow.open(map, marker);
-
                 //display route from origin to marker location!
+                // var elements = 
                 calculateAndDisplayRoute(directionsService, directionsDisplay, address);
+
+                //Set the contents of the info-window
+                //NASHEYA
+                infowindow.setContent(name + "<br> Distance: " + "<br> Time: ");
+                infowindow.open(map, marker);
               });
 
             }
@@ -224,7 +238,6 @@ function enableSearch(){
         }
 
         //Update lat and long of home location
-
         lat = place.geometry.location.lat();
         lng = place.geometry.location.lng();
 

@@ -263,11 +263,7 @@ table .collapse.in {
   }
 }
 
-/*Styling for the map*/
-#map-canvas {
-  height: 500px;
-}
-
+/*Styling for the map address space*/
 .controls {
   margin-top: 10px;
   border: 1px solid transparent;
@@ -279,22 +275,19 @@ table .collapse.in {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-#pac-input {
+#search {
   background-color: #fff;
-  font-family: Roboto;
-  font-size: 15px;
+  font-family: Roboto, Arial;
+  font-size: 12px;
   margin: auto;
+  margin-top: 10px;
   text-align: center;
   text-overflow: ellipsis;
   width: 30%;
 }
 
-#pac-input:focus {
+#search:focus {
   border-color: #4d90fe;
-}
-
-.pac-container {
-  font-family: Roboto;
 }
 
 #type-selector {
@@ -312,5 +305,3 @@ table .collapse.in {
 #target {
         width: 345px;
 }
-Status API Training Shop Blog About Pricing
-© 2016 GitHub, Inc. Terms Privacy Security Contact Help
