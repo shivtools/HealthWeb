@@ -21,6 +21,18 @@ function initMap() {
     scrollwheel:  false
   });
 
+  //Add the current position marker, the home marker will not replace that
+  //but that is fine! Once an address is entered though, all the paths will be updated.
+  var currPos = new google.maps.Marker({
+    map: map,
+    animation: google.maps.Animation.DROP,
+    icon: "images/mapping/currentlocation.png",
+    position: {
+      lat: lat,
+      lng: lon,
+    }
+  });
+
   directionsDisplay.setMap(map);
   directionsDisplay.setOptions( { suppressMarkers: true } );
 
@@ -30,7 +42,6 @@ function initMap() {
 }
 
 //Display route between locations with a blue line.
-
 function calculateAndDisplayRoute(directionsService, directionsDisplay, destination) {
   // console.log("destination: " + destination);
   // console.log("latlon: " + latlon);
@@ -101,7 +112,6 @@ $(document).on("click", ".collapse-button", function(){
 
   //Display route from origin till this listing's location
   calculateAndDisplayRoute(directionsService, directionsDisplay, address);
-
 });
 
 var geocoder = new google.maps.Geocoder();
@@ -142,13 +152,10 @@ function displayMarkers(){
               }); 
 
               //Add info window for location name and distance from home (client's house)
-
               var infowindow = new google.maps.InfoWindow();
 
               //When marker is clicked, show box containing name and distance from home
               google.maps.event.addListener(marker, 'click', function() {
-                //fix this - name not appearing in infowindow!
-
                 //If previous_info window is open, then close it
                 if( prev_infowindow ) {
                    prev_infowindow.close();
@@ -158,7 +165,6 @@ function displayMarkers(){
                 prev_infowindow = infowindow;
 
                 //display route from origin to marker location!
-                // var elements = 
                 calculateAndDisplayRoute(directionsService, directionsDisplay, address);
 
                 //Calculuate distance and time to location. Calls computeTotalDistance function
