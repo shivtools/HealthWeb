@@ -34,8 +34,6 @@ function initMap() {
 function calculateAndDisplayRoute(directionsService, directionsDisplay, destination) {
   // console.log("destination: " + destination);
   // console.log("latlon: " + latlon);
-  //NASHEYA
-  var distance = 0;
 
   directionsService.route({
     origin: latlon,
@@ -44,19 +42,10 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, destinat
   }, function(response, status) {
     if (status === google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
-      //NASHEYA
-      //WHY DOESN'T DISTANCE WORK?
-      //IF WE FIGURE THIS OUT, COULD GET TIME SIMILARLY
-      distance = response.rows[0].elements[0].distance.value;
     } else {
       window.alert('We could not find this address, sorry!');
     }
   });
-
-  //NASHEYA
-  //DISTANCE IS 0 HERE
-  alert(distance);
-  // return response.rows[0].elements[0];
 }
 
 var x = document.getElementById("mapholder");
@@ -172,9 +161,14 @@ function displayMarkers(){
                 // var elements = 
                 calculateAndDisplayRoute(directionsService, directionsDisplay, address);
 
-                //Set the contents of the info-window
-                //NASHEYA
-                infowindow.setContent(name + "<br> Distance: " + "<br> Time: ");
+                //Calculuate distance and time to location. Calls computeTotalDistance function
+                directionsDisplay.addListener('directions_changed', function() {
+                    distance = computeTotalDistance(directionsDisplay.getDirections());
+
+                    //Set the contents of the info-window
+                    infowindow.setContent(name + "<br> Distance: " + distance + " miles");
+                });
+
                 infowindow.open(map, marker);
               });
 
@@ -189,6 +183,16 @@ function displayMarkers(){
         });
     });
 
+}
+
+function computeTotalDistance(result) {
+    var total = 0;
+    var myroute = result.routes[0];
+    for (var i = 0; i < myroute.legs.length; i++) {
+      total += myroute.legs[i].distance.value;
+    }
+    total = 0.621371*(total / 1000); //convert to miles
+    return (Math.round(total * 100) / 100); //round to two decimal places
 }
 
 //More of Matt's kickass code. 
