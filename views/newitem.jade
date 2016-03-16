@@ -14,8 +14,8 @@ block content
 				label(for="itemname") Organization name
 				input#inputUserName(type="text" class="form-control" placeholder="Organization name", name="itemname")
 			.form-group
-				label(for="itememail") Email address
-				input#inputUserEmail(type="text",class="form-control",placeholder = "Organization email", name="itememail")
+				label(for="itemservices") Services
+				input#inputServices(type="text",class="form-control",placeholder = "Services offered by organization", name="itemservices")
 			//- Some weird shit is happening here with the alignment
 			.form-group
 				label(for="itemnumber") Phone number
@@ -27,10 +27,16 @@ block content
 				label(for="itemwebsite") Website
 				input#inputUserWebsite(type="text",class="form-control",placeholder = "Organization website", name="itemwebsite")
 			.form-group
-				label(for="itemImage") Organization logo URL
+				label(for="itemhours") Hours of operation
+				input#inputUserWebsite(type="text",class="form-control",placeholder = "Hours of Operation (eg. 9am-9pm)", name="itemhours")
+			.form-group
+				label(for="itemrequirements") Requirements to get aid
+				input#inputUserWebsite(type="text",class="form-control",placeholder = "Requirements to get aid", name="itemrequirements")
+			.form-group
+				label(for="itemLogoURL") Organization logo URL
 				input#inputImageURL(type="text",class="form-control",placeholder = "URL for logo (hosted on Imgur or any other image storage service)", name="itemLogoURL")
 			.form-group
-				label(for="") Enter your secret username and select a listing to add your post to (you can even check multiple listings)
+				label(for="secretkey") Enter your secret username and select a listing to add your post to (you can even check multiple listings)
 				input.form-control(type="text" placeholder="You must be an authorized user to add entries.", name="secretkey")
 				.input-group-btn
 			.checkbox
@@ -55,4 +61,12 @@ block content
 					| Forms
 			br
 			button.btn-danger#btnSubmit(onclick="validate()").btn.btn-default Submit
+
+	//- Modal triggered if user has not entered sufficient info
+	.modal.fade#warning(tabindex="-1" role="dialog")
+		.modal-dialog.has-error
+			.modal-content
+				.modal-header
+					button.close(type="button" data-dismiss="modal")
+					h3#warning-text Error
 

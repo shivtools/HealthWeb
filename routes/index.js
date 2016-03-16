@@ -32,7 +32,7 @@ router.get('/food', function(req, res) {
 
 	Food.find({}, function(err, items){
 		if(err) throw err; //pls dont throw error
-		console.log(items);
+		//console.log(items);
 		res.render('food', {
 			title: 'Food listings',
 			user: authenticated,
@@ -47,7 +47,7 @@ router.get('/housing', function(req, res) {
 
 	Housing.find({}, function(err, items){
 		if(err) throw err; //pls dont throw error
-		console.log(items);
+		//console.log(items);
 		res.render('housing', {
 			title: 'Housing listings',
 			user: authenticated,
@@ -62,7 +62,7 @@ router.get('/family', function(req, res) {
 
 	Family.find({}, function(err, items){
 		if(err) throw err; //pls dont throw error
-		console.log(items);
+		//console.log(items);
 		res.render('family', {
 			title: 'Family listings',
 			user: authenticated,
@@ -77,7 +77,7 @@ router.get('/legal', function(req, res) {
 
 	Legal.find({}, function(err, items){
 		if(err) throw err; //pls dont throw error
-		console.log(items);
+		//console.log(items);
 		res.render('legal', {
 			title: 'Legal listings',
 			user: authenticated,
@@ -92,7 +92,7 @@ router.get('/forms', function(req, res) {
 
 	Forms.find({}, function(err, items){
 		if(err) throw err; //pls dont throw error
-		console.log(items);
+		//console.log(items);
 		res.render('forms', {
 			title: 'Form listings',
 			user: authenticated,
@@ -359,13 +359,17 @@ router.post('/additem', function(req, res){
 
 	//get form values
 	var itemName = req.body.itemname;
-	var itemEmail = req.body.itememail;
+	var itemServices = req.body.itemeservices;
 	var itemNumber = req.body.itemnumber;
 	var itemLocation = req.body.itemlocation;
 	var itemWebsite = req.body.itemwebsite;
+	var itemHours = req.body.itemhours;
+	var itemRequirements = req.body.itemrequirements;
 	var itemLogoURL = req.body.itemLogoURL; //URL for image - to be hosted on Imgur or a service. App will render image from URL.
 
+
 	console.log(itemWebsite);
+
 	var secretuser = req.body.secretkey;
 
 	if(secretusers.indexOf(secretuser) != -1){
@@ -390,16 +394,23 @@ router.post('/additem', function(req, res){
 
 	if(options.indexOf("food") != -1){
 		console.log("food");
+
 		var food = new Food({
 			name: itemName,
-			email: itemEmail,
 			number: itemNumber,
 			location: itemLocation,
-			imageURL: itemLogoURL
+			imageURL: itemLogoURL,
+			services: itemServices,
+			requirements: itemRequirements,
+			hours: itemHours,
+			website: itemWebsite
 		});
 
 		food.save(function(err){
-			if(err) throw err;
+			if(err){
+				throw err;
+				console.log(err);
+			}
 			console.log('Food Item added successfully wooooot!');
 		});
 	}
@@ -408,10 +419,13 @@ router.post('/additem', function(req, res){
 		console.log("housing");
 		var housing = new Housing({
 			name: itemName,
-			email: itemEmail,
 			number: itemNumber,
 			location: itemLocation,
-			imageURL: itemLogoURL
+			imageURL: itemLogoURL,
+			services: itemServices,
+			requirements: itemRequirements,
+			hours: itemHours,
+			website: itemWebsite
 		});
 
 		housing.save(function(err){
@@ -423,10 +437,13 @@ router.post('/additem', function(req, res){
 		console.log("family");
 		var family = new Family({
 			name: itemName,
-			email: itemEmail,
 			number: itemNumber,
 			location: itemLocation,
-			imageURL: itemLogoURL
+			imageURL: itemLogoURL,
+			services: itemServices,
+			requirements: itemRequirements,
+			hours: itemHours,
+			website: itemWebsite
 		});
 
 		family.save(function(err){
@@ -438,10 +455,13 @@ router.post('/additem', function(req, res){
 		console.log("legal");
 		var legal = new Legal({
 			name: itemName,
-			email: itemEmail,
 			number: itemNumber,
 			location: itemLocation,
-			imageURL: itemLogoURL
+			imageURL: itemLogoURL,
+			services: itemServices,
+			requirements: itemRequirements,
+			hours: itemHours,
+			website: itemWebsite
 		});
 
 		legal.save(function(err){
@@ -454,10 +474,13 @@ router.post('/additem', function(req, res){
 		console.log("forms");
 		var form = new Forms({
 			name: itemName,
-			email: itemEmail,
 			number: itemNumber,
 			location: itemLocation,
-			imageURL: itemLogoURL
+			imageURL: itemLogoURL,
+			services: itemServices,
+			requirements: itemRequirements,
+			hours: itemHours,
+			website: itemWebsite
 		});
 
 		form.save(function(err){

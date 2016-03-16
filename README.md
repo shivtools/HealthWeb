@@ -44,3 +44,5 @@ http://localhost:3000
 * Please make all of your changes in separate branches and do not commit to the master branch (I've made this mistake countless times and it is a pain to refactor code). To figure out how to branch, use this [git tutorial](http://rogerdudler.github.io/git-guide/). 
 
 * Feel free to reach out with questions!
+
+Requirements to Get Aid,

@@ -22,12 +22,17 @@ block content
 								tbody
 									tr
 										td.details-control
-											h5 Email: 
-											p=item.email
+											img#imgURL(src=item.imageURL)
 											h5 Number:
 											p=item.number
 											h5 Location: 
 											p#location.location=item.location
+											h5 Services:
+											p=item.services
+											h5 Requirements to get aid:
+											p=item.requirements
+											h5 Hours of operation
+											p=item.hours
 											h5 Website: 
 											p=item.website
 			.col-md-7

@@ -4,10 +4,13 @@ var Schema = mongoose.Schema;
 //creating a schema for each item to be listed
 var formsSchema = new Schema({
 	name: "String",
-	email: "String",
 	number: "String",
 	location: "String",
 	imageURL: "String",
+	services: "String",
+	requirements: "String",
+	hours: "String",
+	website: "String"
 });
 
 //create a model that uses the schema
