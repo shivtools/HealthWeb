@@ -26,6 +26,13 @@ h1{
   color: #fff;
 }
 
+/*Styling for logo*/
+#imgURL{
+  max-height: 200px;
+  max-width: 200px;
+  float: right;
+}
+
 
 /* Banner styles for each page - supports multi-line phrases*/
 .banner { 

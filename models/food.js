@@ -7,8 +7,7 @@ var foodSchema = new Schema({
 	email: "String",
 	number: "String",
 	location: "String",
-	website: "String",
-	date: { type: Date, default: Date.now }
+	imageURL: "String",
 	// image: "Binary" //to store images for each entry.
 });
 

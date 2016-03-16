@@ -7,8 +7,7 @@ var formsSchema = new Schema({
 	email: "String",
 	number: "String",
 	location: "String",
-	website: "String",
-	date: { type: Date, default: Date.now }
+	imageURL: "String",
 });
 
 //create a model that uses the schema

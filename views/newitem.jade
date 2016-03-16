@@ -27,8 +27,8 @@ block content
 				label(for="itemwebsite") Website
 				input#inputUserWebsite(type="text",class="form-control",placeholder = "Organization website", name="itemwebsite")
 			.form-group
-				label(for="itemImage") Organization logo
-				input(type="file" name="userPhoto")
+				label(for="itemImage") Organization logo URL
+				input#inputImageURL(type="text",class="form-control",placeholder = "URL for logo (hosted on Imgur or any other image storage service)", name="itemLogoURL")
 			.form-group
 				label(for="") Enter your secret username and select a listing to add your post to (you can even check multiple listings)
 				input.form-control(type="text" placeholder="You must be an authorized user to add entries.", name="secretkey")

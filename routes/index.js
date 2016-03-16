@@ -363,6 +363,8 @@ router.post('/additem', function(req, res){
 	var itemNumber = req.body.itemnumber;
 	var itemLocation = req.body.itemlocation;
 	var itemWebsite = req.body.itemwebsite;
+	var itemLogoURL = req.body.itemLogoURL; //URL for image - to be hosted on Imgur or a service. App will render image from URL.
+
 	console.log(itemWebsite);
 	var secretuser = req.body.secretkey;
 
@@ -393,7 +395,7 @@ router.post('/additem', function(req, res){
 			email: itemEmail,
 			number: itemNumber,
 			location: itemLocation,
-			website: itemWebsite
+			imageURL: itemLogoURL
 		});
 
 		food.save(function(err){
@@ -409,7 +411,7 @@ router.post('/additem', function(req, res){
 			email: itemEmail,
 			number: itemNumber,
 			location: itemLocation,
-			website: itemWebsite
+			imageURL: itemLogoURL
 		});
 
 		housing.save(function(err){
@@ -424,7 +426,7 @@ router.post('/additem', function(req, res){
 			email: itemEmail,
 			number: itemNumber,
 			location: itemLocation,
-			website: itemWebsite
+			imageURL: itemLogoURL
 		});
 
 		family.save(function(err){
@@ -439,7 +441,7 @@ router.post('/additem', function(req, res){
 			email: itemEmail,
 			number: itemNumber,
 			location: itemLocation,
-			website: itemWebsite
+			imageURL: itemLogoURL
 		});
 
 		legal.save(function(err){
@@ -455,7 +457,7 @@ router.post('/additem', function(req, res){
 			email: itemEmail,
 			number: itemNumber,
 			location: itemLocation,
-			website: itemWebsite
+			imageURL: itemLogoURL
 		});
 
 		form.save(function(err){
