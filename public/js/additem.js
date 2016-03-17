@@ -2,6 +2,50 @@ $(document).ready(function(){
 	//$("#warning").hide(); //hide modal - only triggers when error in form validation
 })
 
+function formcheck() {
+  $form = $("#formAddUser, input"); //get form additem
+
+  var fields = $(".ss-item-required")
+        .find("select, textarea, input").serializeArray();
+  
+  var right = true;
+  var thing ="";
+
+  $.each(fields, function(i, field) {
+    if (!field.value){
+      if(field.name=="itemname"){
+      	thing="Organization name is";
+      } else if(field.name=="itemservices"){
+      	thing="Services are";
+      }
+
+      alert(thing + ' required');
+      right=false;
+  	  }
+   }); 
+
+  	var checkedAtLeastOne = false;
+	$('input[type="checkbox"]').each(function() {
+	    if ($(this).is(":checked")) {
+	        checkedAtLeastOne = true;
+	    }
+	});
+
+	if(checkedAtLeastOne==false){
+		alert('Please choose at least one category.');
+		right=false;
+	}
+
+	if(right){
+		var posting = $.post("/additem", $("#formAddUser").serialize());
+		posting.done(function(){
+			console.log("redirecting to add success");
+
+			window.location.assign('/addsuccess');
+		});
+	}
+}
+
 //Code to validate form that is used to add items to HealthWeb
 
 function validate(){
@@ -10,7 +54,7 @@ function validate(){
 
 	$form = $("#formAddUser, input"); //get form additem
 
-	var counter = 0; //counter to keep track of how many checkboxes are checed
+	var counter = 0; //counter to keep track of how many checkboxes are checked
 
 	$form.each(function(){ //go through items in the form.
 
@@ -74,7 +118,20 @@ function validate(){
 				return;
 			}
 		}
-		if(checkbox == "itemlocation"){
+
+		if(checkbox == "itemname"){
+			if($(this).val().length <= 1){
+				console.log("Error in item number");
+				$("#warning-text").text("Please provide an organization number.")
+				$("#warning").modal({
+					show: true
+				});
+				hasError = true;
+				return;
+			}
+		}
+
+		/*if(checkbox == "itemlocation"){
 
 			if($(this).val().length <= 1){
 				console.log("error in itemlocation");
@@ -85,7 +142,7 @@ function validate(){
 				hasError = true;
 				return;
 			}
-		}
+		}*/
 
 		/*
 		if(checkbox == "itemwebsite"){
@@ -119,9 +176,4 @@ function validate(){
 					show: true
 		});
 	}
-
-
-
-
-
 }
