@@ -1,0 +1,73 @@
+extends layout
+
+block content
+    // Banner place to change image
+    .banner(style="background-image: url('../images/banner/volunteer.jpg');")
+      .banner_text Contact Us
+    .container
+      .sub_text
+        p.lead We are available throughout the academic year to answer all of your HealthWeb questions
+      hr
+    .bootstrap-iso
+      .container-fluid
+        .row
+          .col-md-8
+            .panel(style='padding: 0px 15px 0px 15px;')
+              .formden_header
+                h2
+                  | Contact Form
+                p
+                  | Whether you have a general inquiry or need specific help, feel free to email us! All emails will be sent to rvahealthweb@gmail.com.
+              form(method='post', action='/sendemail')
+                .form-group
+                  label.control-label.requiredField(for='name')
+                    | Name
+                    span.asteriskField
+                      | *
+                  input#name.form-control(name='name', type='text')
+                .form-group
+                  label.control-label.requiredField(for='email')
+                    | Email
+                    span.asteriskField
+                      | *
+                  input#email.form-control(name='email', type='text')
+                .form-group
+                  label.control-label(for='tel')
+                    | Telephone #
+                  input#tel.form-control(name='tel', type='text')
+                  span#hint_tel.help-block
+                    | This is not required, but provide it if you wish!
+                .form-group
+                  label.control-label.requiredField(for='select')
+                    | What are you contacting us about?
+                    span.asteriskField
+                      | *
+                  select#select.select.form-control(name='select')
+                    option(value='Question' name="options")
+                      | Question
+                    option(value='Volunteering' name="options")
+                      | Volunteering
+                    option(value='Resource Listing' name="options")
+                      | Resource Listing
+                    option(value='Other' name="options")
+                      | Other
+                  span#hint_select.help-block
+                    | Choose other if none of the options fit your needs.
+                .form-group
+                  label.control-label(for='other')
+                    | If other, please specify a little more in a few words.
+                  input#other.form-control(name='other', type='text')
+                .form-group
+                  label.control-label.requiredField(for='message')
+                    | Message
+                    span.asteriskField
+                      | *
+                  textarea#message.form-control(cols='40', name='message', placeholder='Start typing email message here...', rows='10')
+                .form-group
+                  div
+                    button.btn.btn-info(name='submit', type='submit')
+                      | Submit
+          .col-md-4
+            .panel.panel-default(style='background: #eee;')
+              .panel-body
+                | Please fill out the form to contact us by email. We will try to answer all your questions within 24 hours to the best of our ability. This availability may change depending on time of year, such as during winter break, spring break, or summer break because we are college students. If you would like access to the University of Richmond academic calendar, it can be accessed #[a(href="http://registrar.richmond.edu/planning/index.html") here]. If you would like to make an appointment with CrossOver or have a CrossOver-specific question, please contact CrossOver instead. 

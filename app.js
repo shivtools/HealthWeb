@@ -7,16 +7,19 @@ var bodyParser = require('body-parser');
 
 //connecting to database
 var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/healthweb'); //talk to db :D!
-
 
 var mongoose = require('mongoose'); 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-var mongoose = require('mongoose'); 
-var routes = require('./routes/index');
+//link db to localhost for the time being. 
+//once app is deployed, will connect to mongolab
+
+mongoose.connect('mongodb://shiv:Richmond15@ds023088.mlab.com:23088/healthweb');
+
+//To be connected once deployed on digital ocean or any other hosting service.
+//remember to include host in url in connect.js
+//dbconnection = require('./config/connect.js')
 
 var fs = require('fs'); //file system to load in models 
 
@@ -34,16 +37,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+/* Commented out since we are using mongoose and not monk*/
 //Make db accessible to router.
-app.use(function(req,res,next){
-    req.db = db; //add monk collection object to every http request that app makes
-    next();
-});
+// app.use(function(req,res,next){
+//     req.db = db; //add monk collection object to every http request that app makes
+//     next();
+// });
 
 //middleware for express 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -64,25 +67,13 @@ if (app.get('env') === 'development') {
       error: err
     });
   });
-  //mongoose.connect('mongodb://55.55.55.5/mongo'); //**will be changed later
 
-  mongoose.connect('mongodb://55.55.55.5/mongo'); //**will be changed later
 }
 
 //load up models in models dir into app using fs from models directory
 fs.readdirSync(__dirname + '/models').forEach(function(filename){
   //console.log(filename);
   if(~filename.indexOf('.js')) require(__dirname + '/models/' + filename);
-});
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
 });
 
 
