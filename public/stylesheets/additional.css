@@ -28,9 +28,9 @@ h1{
 
 /*Styling for logo*/
 #imgURL{
-  max-height: 200px;
-  max-width: 200px;
-  float: right;
+  max-height: 100px;
+  max-width: 50%;
+  margin: auto;
   overflow: auto;
 }
 
@@ -107,10 +107,6 @@ h1{
     font-family: 'museo_sans500', 'Arial', sans-serif;
     } ​
 }
-
-#mapholder {background: transparent url('../images/ajax-loader.gif') no-repeat center center;}
-
-
 
 /* Code for the little bit of subtext */
 .sub_text {
@@ -287,22 +283,33 @@ table .collapse.in {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-#pac-input {
+#mapholder {background: transparent url('../images/ajax-loader.gif') no-repeat center center;}
+
+/*Styling for the map address space*/
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#search {
   background-color: #fff;
-  font-family: Roboto;
-  font-size: 15px;
+  font-family: Roboto, Arial;
+  font-size: 12px;
   margin: auto;
+  margin-top: 10px;
   text-align: center;
   text-overflow: ellipsis;
   width: 30%;
 }
 
-#pac-input:focus {
+#search:focus {
   border-color: #4d90fe;
-}
-
-.pac-container {
-  font-family: Roboto;
 }
 
 #type-selector {
@@ -320,5 +327,3 @@ table .collapse.in {
 #target {
         width: 345px;
 }
-Status API Training Shop Blog About Pricing
-© 2016 GitHub, Inc. Terms Privacy Security Contact Help

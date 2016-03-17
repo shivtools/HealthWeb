@@ -22,19 +22,20 @@ block content
 								tbody
 									tr
 										td.details-control
-											img#imgURL(src=item.imageURL)
-											h5 Number:
-											p=item.number
-											h5 Location: 
-											p#location.location=item.location
-											h5 Services:
-											p=item.services
-											h5 Requirements to get aid:
-											p=item.requirements
-											h5 Hours of operation
-											p=item.hours
 											h5 Website: 
 											p=item.website
+											h5 Services:
+											p=item.services
+											h5 Requirements to get aid: 
+											p=item.requirements
+											h5 Hours of operation: 
+											p=item.hours
+											h5 Address: 
+											p#location.location=item.location
+											h5 Phone Number: 
+											p=item.number
+											center
+												img#imgURL(src=item.imageURL)
 											if user
 												.row
 													.col-md-2

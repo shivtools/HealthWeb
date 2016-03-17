@@ -22,7 +22,20 @@ function initMap() {
     scrollwheel:  false
   });
 
+  //Add the current position marker, the home marker will not replace that
+  //but that is fine! Once an address is entered though, all the paths will be updated.
+  var currPos = new google.maps.Marker({
+    map: map,
+    animation: google.maps.Animation.DROP,
+    icon: "images/mapping/currentlocation.png",
+    position: {
+      lat: lat,
+      lng: lon,
+    }
+  });
+
   directionsDisplay.setMap(map);
+  directionsDisplay.setOptions( { suppressMarkers: true } );
 
   displayMarkers(); //display all the markers of listings
   enableSearch(); //enable search feauture once markers have been placed
@@ -165,7 +178,7 @@ function displayMarkers(){
                     distance = computeTotalDistance(directionsDisplay.getDirections());
 
                     //Set the contents of the info-window
-                    infowindow.setContent("<h7>" + name + " is: " + distance + " miles away home. </h7>");
+                    infowindow.setContent(name + "<br> Distance: " + distance + " miles");
                 });
 
                 infowindow.open(map, marker);

@@ -10,28 +10,30 @@ block content
 
 	.container-fluid#additem
 		form#formAddUser(name="additem")
-			.form-group
-				label(for="itemname") Organization name
-				input#inputUserName(type="text" class="form-control" placeholder="Organization name", name="itemname")
-			.form-group
-				label(for="itemservices") Services
-				input#inputServices(type="text",class="form-control",placeholder = "Services offered by organization", name="itemservices")
+			.ss-item-required
+				.form-group
+					label(for="itemname") Organization name
+					input#inputUserName(type="text" class="form-control" placeholder="REQUIRED: Organization name", name="itemname")
+			.ss-item-required
+				.form-group
+					label(for="itemservices") Services
+					input#inputServices(type="text",class="form-control",placeholder = "REQUIRED: Services offered by organization", name="itemservices")
 			//- Some weird shit is happening here with the alignment
 			.form-group
-				label(for="itemnumber") Phone number
-				input#inputUserNumber(type="text",class="form-control",placeholder = "Organization contact number", name="itemnumber")
-			.form-group
-				label(for="itemlocation") Location
-				input#inputUserAddress(type="text",class="form-control",placeholder = "Organization location", name="itemlocation")
-			.form-group
-				label(for="itemwebsite") Website
-				input#inputUserWebsite(type="text",class="form-control",placeholder = "Organization website", name="itemwebsite")
+				label(for="itemrequirements") Requirements to get aid
+				input#inputUserWebsite(type="text",class="form-control",placeholder = "Requirements to get aid", name="itemrequirements")
 			.form-group
 				label(for="itemhours") Hours of operation
 				input#inputUserWebsite(type="text",class="form-control",placeholder = "Hours of Operation (eg. 9am-9pm)", name="itemhours")
 			.form-group
-				label(for="itemrequirements") Requirements to get aid
-				input#inputUserWebsite(type="text",class="form-control",placeholder = "Requirements to get aid", name="itemrequirements")
+				label(for="itemwebsite") Website
+				input#inputUserWebsite(type="text",class="form-control",placeholder = "Organization website", name="itemwebsite")
+			.form-group
+				label(for="itemlocation") Address
+				input#inputUserAddress(type="text",class="form-control",placeholder = "Be sure to input an address identifiable by Google Maps", name="itemlocation")
+			.form-group
+				label(for="itemnumber") Phone number
+				input#inputUserNumber(type="text",class="form-control",placeholder = "Organization contact number", name="itemnumber")
 			.form-group
 				label(for="itemLogoURL") Organization logo URL
 				input#inputImageURL(type="text",class="form-control",placeholder = "URL for logo (hosted on Imgur or any other image storage service)", name="itemLogoURL")
@@ -55,12 +57,12 @@ block content
 				label
 					input(type="checkbox" name="options" value = "legal")
 					| Immigration and Legal
-			.checkbox
-				label
-					input(type="checkbox" name="options", value = "forms")
-					| Forms
+			//.checkbox
+			//	label
+			//		input(type="checkbox" name="options", value = "forms")
+			//		| Forms
 			br
-			button.btn-danger#btnSubmit(onclick="validate()").btn.btn-default Submit
+			button.btn-danger#btnSubmit(onclick="formcheck(); return false").btn.btn-default Submit
 
 	//- Modal triggered if user has not entered sufficient info
 	.modal.fade#warning(tabindex="-1" role="dialog")
