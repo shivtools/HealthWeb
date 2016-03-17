@@ -1,0 +1,47 @@
+extends layout
+block content
+	script(src='../js/mapScript.js')
+
+	// Banner place to change image
+	.banner(style='background-image: url(../images/banner/immigration2.jpg);')
+		.banner_text Legal Services
+	.container
+		.sub_text
+			p.lead Helping those in need of immigration assistance to access the legal and language resources they need
+	hr
+
+	#listings.container-fluid
+		.row
+			.col-md-5
+				each item, i in legallist
+					#listing.panel.panel-default
+						.panel-heading.collapse-button
+							h3.name.panel-title=item.name
+						.panel-body.panel-collapse.collapse
+							table.table.table-responsive.table-hover
+								tbody
+									tr
+										td.details-control
+											img#imgURL(src=item.imageURL)
+											h5 Number:
+											p=item.number
+											h5 Location: 
+											p#location.location=item.location
+											h5 Services:
+											p=item.services
+											h5 Requirements to get aid:
+											p=item.requirements
+											h5 Hours of operation
+											p=item.hours
+											h5 Website: 
+											p=item.website
+											if user
+												.row
+													.col-md-2
+													.col-md-3
+														a(href="/delete/Legal/#{item.id}")
+															.btn.btn-danger Delete post
+													.col-md-3
+			.col-md-7
+				input#search.controls(type="text" placeholder="Enter your home address")
+				#mapholder(style="width:100%;height:600px;")

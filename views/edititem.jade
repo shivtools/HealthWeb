@@ -1,0 +1,61 @@
+extends layout
+
+block content
+	br
+	h1#itemlistHeader Food listings
+	//- Pull in documents called userlist in route file
+	//- For each user extract information and print
+	.container
+		item in editpost
+				.col-md-2
+				.col-md-8
+					form#formAddUser(role="form" name="additem",method="post",action="/additem")
+						.form-group
+							label(for="itemname") Organization name
+							input#inputUserName(type="text" class="form-control" placeholder="Organization name", name="itemname")
+						.form-group
+							label(for="itememail") Email address
+							input#inputUserEmail(type="text",class="form-control",placeholder = "Organization email", name="itememail")
+						//- Some weird shit is happening here with the alignment
+						.form-group
+							label(for="itemnumber") Phone number
+							input#inputUserNumber(type="text",class="form-control",placeholder = "Organization contact number", name="itemnumber")
+						.form-group
+							label(for="itemlocation") Location
+							input#inputUserAddress(type="text",class="form-control",placeholder = "Organization location", name="itemlocation")
+						.form-group
+							label(for="itemwebsite") Website
+							input#inputUserWebsite(type="text",class="form-control",placeholder = "Organization website", name="itemwebsite")
+						.form-group
+							label(for="itemImage") Organization logo
+							input(type="file" name="userPhoto")
+						.form-group
+							label(for="") Enter your secret username and select a listing to add your post to (you can even check multiple listings)
+							input.form-control(type="text" placeholder="You must be an authorized user to list entries. Enter your user name, select the listing(s) and hit submit once you're done.", name="secretkey")
+							.input-group-btn
+
+						.checkbox
+							label
+								input(type="checkbox" name="options", value = "food")
+								| Food and nutrition 
+						.checkbox
+							label
+								input(type="checkbox" name="options", value = "housing")
+								| Housing
+						.checkbox
+							label
+								input(type="checkbox" name="options", value = "family")
+								| Family Services
+						.checkbox
+							label
+								input(type="checkbox" name="options" value = "legal")
+								| Immigration and Legal
+						.checkbox
+							label
+								input(type="checkbox" name="options", value = "forms")
+								| Forms
+						br
+						button.btn-danger#btnSubmit(type="submit").btn.btn-default Submit
+
+					//- Modal triggered if user has not entered sufficient info
+				.col-md-2
