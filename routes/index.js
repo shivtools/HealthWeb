@@ -359,7 +359,7 @@ router.post('/additem', function(req, res){
 
 	//get form values
 	var itemName = req.body.itemname;
-	var itemServices = req.body.itemeservices;
+	var itemServices = req.body.itemservices;
 	var itemNumber = req.body.itemnumber;
 	var itemLocation = req.body.itemlocation;
 	var itemWebsite = req.body.itemwebsite;
