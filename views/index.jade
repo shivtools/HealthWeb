@@ -1,6 +1,7 @@
 extends layout
 
 block content
+    script(src='../js/analytics.js')
     script.
       if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
       alert("Please note that some of the functionality on here may not work on your phone.");
