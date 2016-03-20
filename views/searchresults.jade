@@ -7,7 +7,7 @@ block content
 		.banner_text Search results
 	.container
 		.sub_text
-			p.lead This is what we have for you!
+			p#searchtitle.lead This is what we have for you!
 	hr
 
 	#listings.container-fluid
@@ -22,19 +22,20 @@ block content
 								tbody
 									tr
 										td.details-control
-											img#imgURL(src=item.imageURL)
-											h5 Number:
-											p=item.number
-											h5 Location: 
-											p#location.location=item.location
-											h5 Services:
-											p=item.services
-											h5 Requirements to get aid:
-											p=item.requirements
-											h5 Hours of operation
-											p=item.hours
 											h5 Website: 
 											p=item.website
+											h5 Services:
+											p=item.services
+											h5 Requirements to get aid: 
+											p=item.requirements
+											h5 Hours of operation: 
+											p=item.hours
+											h5 Address: 
+											p#location.location=item.location
+											h5 Phone Number: 
+											p=item.number
+											center
+												img#imgURL(src=item.imageURL)
 			.col-md-7
 				input#search.controls(type="text" placeholder="Enter your home address")
 				#mapholder(style="width:100%;height:600px;")
