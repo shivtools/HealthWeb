@@ -381,7 +381,7 @@ router.post('/additem', function(req, res){
 	if(!(userCanDelete && authenticated)){
 		// console.log("Cannot add entry to HealthWeb");
 		//if you're not one of the assigned users for healthweb, bugger off.
-		res.flash('failMessage', 'Failed to add your item to HealthWeb');
+		res.send('Failed');
 	}
 
 	//If the user does have privileges, then go ahead and save entry in database
@@ -491,7 +491,7 @@ router.post('/additem', function(req, res){
 
 		}
 
-		res.flash('successmessage', 'You have successfully added your entry to HealthWeb!');
+		res.send('Success');
 	}
 
 	//redirect user to appropriate page based on if they are authenticated with proper username

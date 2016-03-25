@@ -37,12 +37,16 @@ function formcheck() {
 	}
 
 	if(right){
-		var posting = $.post("/additem", $("#formAddUser").serialize());
-		posting.done(function(){
-			console.log("redirecting to add success");
+		//var posting = $.post("/additem", $("#formAddUser").serialize());
 
-			//window.location.assign('/addsuccess');
-		});
+		$.post('/additem', $("#formAddUser").serialize(), function(resp) {
+            if(resp == "Success"){
+            	window.location.assign('/addsuccess');
+            }
+            else{
+            	window.location.assign('/addfail');
+            }
+        });
 	}
 }
 
