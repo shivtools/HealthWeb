@@ -41,10 +41,12 @@ function formcheck() {
 		posting.done(function(){
 			console.log("redirecting to add success");
 
-			window.location.assign('/addsuccess');
+			//window.location.assign('/addsuccess');
 		});
 	}
 }
+
+/****** //commented out since nasheya added her code for form validation
 
 //Code to validate form that is used to add items to HealthWeb
 
@@ -82,7 +84,7 @@ function validate(){
 			}
 		}
 
-		/*
+		
 		if(checkbox == "itememail"){
 			var value = $(this).val()
 			if(value.length <= 1){
@@ -105,7 +107,7 @@ function validate(){
  				}
 			}
 		}
-		*/
+		
 
 		if(checkbox == "itemnumber"){
 			if($(this).val().length <= 1){
@@ -131,7 +133,7 @@ function validate(){
 			}
 		}
 
-		/*if(checkbox == "itemlocation"){
+		if(checkbox == "itemlocation"){
 
 			if($(this).val().length <= 1){
 				console.log("error in itemlocation");
@@ -142,9 +144,9 @@ function validate(){
 				hasError = true;
 				return;
 			}
-		}*/
+		}
 
-		/*
+		
 		if(checkbox == "itemwebsite"){
 			if($(this).val().length <= 1){
 				$("#warning-text").text("Please provide an organization website.")
@@ -155,18 +157,12 @@ function validate(){
 				return;
 			}
 		}
-		*/
+		
 	});
 
 
 	if(counter > 0 && !hasError){
 		var posting = $.post("/additem", $("#formAddUser").serialize());
-		posting.done(function(){
-			console.log("redirecting to add success");
-
-			//window.location.assign('/addsuccess');
-		});
-		console.log("after posting");
 	}
 
 	else if (counter < 1){
@@ -177,3 +173,6 @@ function validate(){
 		});
 	}
 }
+
+*/
+

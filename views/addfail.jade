@@ -1,0 +1,15 @@
+extends layout
+
+block content
+	br
+	br
+	br
+	.page-header
+		.container
+			h1#success We couldn't log you in :(
+			br
+			h4#success You either do not have permission to add entries or you entered something incorrectly! Go to the previous page to correct your error and try again.
+			br
+			.row#homebutton
+				a(href="/")
+					button.btn.btn-primary#home Go back to the homepage
