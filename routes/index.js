@@ -105,7 +105,7 @@ router.get('/forms', function(req, res) {
 
 //create environment variables later on to store allowed users. 
 //give access to only one person to add listing for healthweb
-var secretusers = ['SECRET_USER0', 'SECRET_USER1', 'SECRET_USER2', 'SECRET_USER3'];
+var secretusers = [process.env.SECRET_USER0, process.env.SECRET_USER1, process.env.SECRET_USER2, process.env.SECRET_USER3];
 
 router.get('/itemremoved', function(req,res){
 	res.render('itemremoved', {title: 'Removed item | HealthWeb'});
