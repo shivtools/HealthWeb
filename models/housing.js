@@ -10,7 +10,9 @@ var housingSchema = new Schema({
 	services: "String",
 	requirements: "String",
 	hours: "String",
-	website: "String"
+	website: "String",
+	user: "String",
+	date: { type: Date, default: Date.now }
 });
 
 //create a model that uses the schema

@@ -105,7 +105,7 @@ router.get('/forms', function(req, res) {
 
 //create environment variables later on to store allowed users. 
 //give access to only one person to add listing for healthweb
-var secretusers = [process.env.SECRET_USER0, process.env.SECRET_USER1, process.env.SECRET_USER2, process.env.SECRET_USER3];
+var secretusers = ['shivtools', process.env.SECRET_USER0, process.env.SECRET_USER1, process.env.SECRET_USER2, process.env.SECRET_USER3];
 
 router.get('/itemremoved', function(req,res){
 	res.render('itemremoved', {title: 'Removed item | HealthWeb'});
@@ -404,7 +404,8 @@ router.post('/additem', function(req, res){
 				services: itemServices,
 				requirements: itemRequirements,
 				hours: itemHours,
-				website: itemWebsite
+				website: itemWebsite,
+				user: secretuser
 			});
 
 			food.save(function(err){
@@ -426,7 +427,8 @@ router.post('/additem', function(req, res){
 				services: itemServices,
 				requirements: itemRequirements,
 				hours: itemHours,
-				website: itemWebsite
+				website: itemWebsite,
+				user: secretuser
 			});
 
 			housing.save(function(err){
@@ -444,7 +446,8 @@ router.post('/additem', function(req, res){
 				services: itemServices,
 				requirements: itemRequirements,
 				hours: itemHours,
-				website: itemWebsite
+				website: itemWebsite,
+				user: secretuser
 			});
 
 			family.save(function(err){
@@ -462,7 +465,8 @@ router.post('/additem', function(req, res){
 				services: itemServices,
 				requirements: itemRequirements,
 				hours: itemHours,
-				website: itemWebsite
+				website: itemWebsite,
+				user: secretuser
 			});
 
 			legal.save(function(err){
@@ -481,7 +485,8 @@ router.post('/additem', function(req, res){
 				services: itemServices,
 				requirements: itemRequirements,
 				hours: itemHours,
-				website: itemWebsite
+				website: itemWebsite,
+				user: secretuser
 			});
 
 			form.save(function(err){
