@@ -4,16 +4,16 @@ block content
 
 	// Banner place to change image
 	.banner(style='background-image: url(../images/banner/family5.jpg);')
-		.banner_text Forms Services
+		.banner_text Health Services
 	.container
 		.sub_text
-			p.lead Forms services to fit all your needs
+			p.lead Health services to fit all your needs
 	hr
 
 	#listings.container-fluid
 		.row
 			.col-md-5
-				each item, i in formlist
+				each item, i in healthlist
 					#listing.panel.panel-default
 						.panel-heading.collapse-button
 							h3.name.panel-title=item.name
@@ -45,7 +45,7 @@ block content
 												.row
 													.col-md-2
 													.col-md-3
-														a(href="/delete/Forms/#{item.id}")
+														a(href="/delete/Health/#{item.id}")
 															.btn.btn-danger Delete post
 													.col-md-3
 			.col-md-7
