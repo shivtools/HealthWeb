@@ -1,71 +1,78 @@
 doctype html
 html(lang='en')
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-    meta(name='description', content='')
-    meta(name='author', content='')
-    link(rel='icon', href='../images/favicon/favicon.ico')
-    script(src='//code.jquery.com/jquery-1.12.0.min.js')
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
-    script(src='../js/additem.js')
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuuz0eL6-alw6zJFuv422uv8DEar98Bsg&libraries=places"></script>
-    title HealthWeb
-    // Bootstrap core CSS
-    link(href='../stylesheets/bootstrap.min.css', rel='stylesheet')
-    link(href='../stylesheets/additional.css', rel='stylesheet')
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
-    // Inline CSS based on choices in "Settings" tab
-    style.
-      .bootstrap-iso form button, .bootstrap-iso form button:hover{color: #ffffff !important;} .asteriskField{color: red;}
-    link(rel='icon', type='image/png', href='../images/favicon/favicon-32x32.png', sizes='32x32')
-    link(rel='icon', type='image/png', href='../images/favicon/favicon-16x16.png', sizes='16x16')
-  body
-    nav.navbar.navbar-default.navbar-fixed-top
-      .container-fluid
-        .navbar-header
-          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand.pull-left(href='/')
-            img(src='../images/logo.jpg')
-        #navbar.collapse.navbar-collapse
-          ul.nav.navbar-nav
-            li(class=title=='Home | HealthWeb'?'active':undefined)
-              a(href='/') Home
-            li(class=title=='About HealthWeb | HealthWeb'?'active':undefined)
-              a(href='/about') About Us
-            li.dropdown
-              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                | Resources
-                span.caret
-              ul.dropdown-menu
-                li(class=title=='Food listings'?'active':undefined)
-                  a(href='/food') Food & Nutrition
-                li(class=title=='Housing listings'?'active':undefined)
-                  a(href='/housing') Housing
-                li(class=title=='Family listings'?'active':undefined)
-                  a(href='/family') Family Services
-                li(class=title=='Legal listings'?'active':undefined)
-                  a(href='/legal') Immigration & Legal
-            li(class=title=='Volunteer | HealthWeb'?'active':undefined)
-              a(href='/volunteer') Volunteer
-            li(class=title=='Contact us | HealthWeb'?'active':undefined)
-              a(href='/contact') Contact Us
-          form.navbar-left.navbar-form.pull-right.hidden-sm.hidden-xs(,='', method='post', action='/search')
-            input.form-control(name='searchItem', placeholder='Search')
-            button.btn.btn-default(type='submit') 
-              span.glyphicon.glyphicon-search(aria-hidden='true')
-    block content
+	head
+		meta(charset='utf-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		// The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+		meta(name='description', content='')
+		meta(name='author', content='')
+		link(rel='icon', href='../images/favicon/favicon.ico')
+		script(src='//code.jquery.com/jquery-1.12.0.min.js')
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+		script(src='../js/additem.js')
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuuz0eL6-alw6zJFuv422uv8DEar98Bsg&libraries=places"></script>
+		title HealthWeb
+		// Bootstrap core CSS
+		link(href='../stylesheets/bootstrap.min.css', rel='stylesheet')
+		link(href='../stylesheets/additional.css', rel='stylesheet')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+		// Inline CSS based on choices in "Settings" tab
+		style.
+			.bootstrap-iso form button, .bootstrap-iso form button:hover{color: #ffffff !important;} .asteriskField{color: red;}
+		link(rel='icon', type='image/png', href='../images/favicon/favicon-32x32.png', sizes='32x32')
+		link(rel='icon', type='image/png', href='../images/favicon/favicon-16x16.png', sizes='16x16')
+	body
+		nav.navbar.navbar-default.navbar-fixed-top
+			.container-fluid
+				.navbar-header
+					button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+						span.sr-only Toggle navigation
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.navbar-brand.pull-left(href='/')
+						img(src='../images/logo.jpg')
+				#navbar.collapse.navbar-collapse
+					ul.nav.navbar-nav
+						li(class=title=='Home | HealthWeb'?'active':undefined)
+							a(href='/') Home
+						li(class=title=='About HealthWeb | HealthWeb'?'active':undefined)
+							a(href='/about') About Us
+						li.dropdown
+							a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+								| Resources
+								span.caret
+							ul.dropdown-menu
+								li(class=title=='Food listings'?'active':undefined)
+									a(href='/food') Food & Nutrition
+								li(class=title=='Housing listings'?'active':undefined)
+									a(href='/housing') Housing
+								li(class=title=='Family listings'?'active':undefined)
+									a(href='/family') Family Services
+								li(class=title=='Legal listings'?'active':undefined)
+									a(href='/legal') Immigration & Legal
+								li(class=title=='Education listings'?'active':undefined)
+									a(href='/education') Education
+								li(class=title=='Health listings'?'active':undefined)
+									a(href='/health') Health
+								li(class=title=='Employment listings'?'active':undefined)
+									a(href='/employment') Employment
+								li(class=title=='Dental listings'?'active':undefined)
+									a(href='/dental') Dental
+						li(class=title=='Volunteer | HealthWeb'?'active':undefined)
+							a(href='/volunteer') Volunteer
+						li(class=title=='Contact us | HealthWeb'?'active':undefined)
+							a(href='/contact') Contact Us
+					form.navbar-left.navbar-form.pull-right.hidden-sm.hidden-xs(,='', method='post', action='/search')
+						input.form-control(name='searchItem', placeholder='Search')
+						button.btn.btn-default(type='submit') 
+							span.glyphicon.glyphicon-search(aria-hidden='true')
+		block content
 
-    br
-    br
-    br
-    footer.footer
-      .container
-        <p id = "acm" class = "footer_text">Made with <i class="fa fa-heart"></i> by UR's ACM Web Development group, with the help of coffee and a lot of sweet code.</p>
-
+		br
+		br
+		br
+		footer.footer
+			.container
+				<p id = "acm" class = "footer_text">Made with <i class="fa fa-heart"></i> by UR's ACM Web Development group, with the help of coffee and a lot of sweet code.</p>

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 //creating a schema for each item to be listed
-var healthSchema = new Schema({
+var educationSchema = new Schema({
 	name: "String",
 	number: "String",
 	location: "String",
@@ -17,8 +17,8 @@ var healthSchema = new Schema({
 
 //create a model that uses the schema
 
-var Health = mongoose.model('Health', healthSchema);
+var Education = mongoose.model('Education', educationSchema);
 
 //make model available to all users in node app
 
-module.exports = Health;
+module.exports = Education;
