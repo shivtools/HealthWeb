@@ -10,7 +10,9 @@ var foodSchema = new Schema({
 	services: "String",
 	requirements: "String",
 	hours: "String",
-	website: "String"
+	website: "String",
+	user: "String",
+	date: { type: Date, default: Date.now }
 	// image: "Binary" //to store images for each entry.
 });
 
