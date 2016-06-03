@@ -552,22 +552,20 @@ router.get('/delete/:Item/:id', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-    // console.log("sending cookie");
     authenticated = true;
     res.cookie('user', "secretuser", {
         maxAge: 900000,
         httpOnly: true
-    }); //set cookie in the browser with secret user's name
+    });
     res.render('login', {
         title: 'Successfully logged in!'
     });
 });
 
-// Add item to db with a post request
-
+/* Add item to relevant DB with a post request */
 router.post('/additem', function(req, res) {
 
-    //get form values
+    //Get form values from front-end form
     var itemName = req.body.itemname;
     var itemServices = req.body.itemservices;
     var itemNumber = req.body.itemnumber;
@@ -577,7 +575,6 @@ router.post('/additem', function(req, res) {
     var itemRequirements = req.body.itemrequirements;
     var itemLogoURL = req.body.itemLogoURL; //URL for image - to be hosted on Imgur or a service. App will render image from URL.
     var secretuser = req.body.secretkey;
-
 
     if (secretusers.indexOf(secretuser) != -1) {
         // console.log("sending cookie");
@@ -590,22 +587,18 @@ router.post('/additem', function(req, res) {
 
     //if the user does not have privileges, they cannot add listings
     if (!(userCanDelete && authenticated)) {
-        // console.log("Cannot add entry to HealthWeb");
-        //if you're not one of the assigned users for healthweb, bugger off.
         res.send('Failed');
     }
 
     //If the user does have privileges, then go ahead and save entry in database
     else {
 
-        //get all checkbox values
+        //Get all checkbox values from form
         var options = req.body.options;
         console.log("OPTIONS: " + options);
 
-        //depending on what checkboxes were marked, create items of those types and add to those dbs.
-
+        //Depending on what checkboxes were marked, create items of those types and add to those dbs.
         if (options.indexOf("food") != -1) {
-            // console.log("food");
 
             var food = new Food({
                 name: itemName,
@@ -622,14 +615,12 @@ router.post('/additem', function(req, res) {
             food.save(function(err) {
                 if (err) {
                     throw err;
-                    // console.log(err);
                 }
-                // console.log('Food Item added successfully wooooot!');
             });
         }
 
         if (options.indexOf("housing") != -1) {
-            // console.log("housing");
+
             var housing = new Housing({
                 name: itemName,
                 number: itemNumber,
@@ -644,11 +635,10 @@ router.post('/additem', function(req, res) {
 
             housing.save(function(err) {
                 if (err) throw err;
-                // console.log('Item added successfully wooooot!');
             });
         }
         if (options.indexOf("family") != -1) {
-            // console.log("family");
+
             var family = new Family({
                 name: itemName,
                 number: itemNumber,
@@ -663,11 +653,10 @@ router.post('/additem', function(req, res) {
 
             family.save(function(err) {
                 if (err) throw err;
-                // console.log('Item added successfully wooooot!');
             });
         }
         if (options.indexOf("legal") != -1) {
-            // console.log("legal");
+
             var legal = new Legal({
                 name: itemName,
                 number: itemNumber,
@@ -682,12 +671,11 @@ router.post('/additem', function(req, res) {
 
             legal.save(function(err) {
                 if (err) throw err;
-                // console.log('Item added successfully wooooot!');
             });
 
         }
         if (options.indexOf("health") != -1) {
-            // console.log("forms");
+
             var health = new Health({
                 name: itemName,
                 number: itemNumber,
@@ -702,12 +690,11 @@ router.post('/additem', function(req, res) {
 
             health.save(function(err) {
                 if (err) throw err;
-                // console.log('Item added successfully wooooot!');
             });
 
         }
         if (options.indexOf("education") != -1) {
-            // console.log("forms");
+
             var education = new Education({
                 name: itemName,
                 number: itemNumber,
@@ -722,13 +709,12 @@ router.post('/additem', function(req, res) {
 
             education.save(function(err) {
                 if (err) throw err;
-                // console.log('Item added successfully wooooot!');
             });
 
         }
 
         if (options.indexOf("employment") != -1) {
-            // console.log("forms");
+
             var employment = new Employment({
                 name: itemName,
                 number: itemNumber,
@@ -743,11 +729,10 @@ router.post('/additem', function(req, res) {
 
             employment.save(function(err) {
                 if (err) throw err;
-                // console.log('Item added successfully wooooot!');
             });
 
             if (options.indexOf("dental") != -1) {
-                // console.log("forms");
+
                 var dental = new Dental({
                     name: itemName,
                     number: itemNumber,
@@ -762,7 +747,6 @@ router.post('/additem', function(req, res) {
 
                 dental.save(function(err) {
                     if (err) throw err;
-                    // console.log('Item added successfully wooooot!');
                 });
 
             }
@@ -771,12 +755,7 @@ router.post('/additem', function(req, res) {
 
         res.send('Success');
     }
-
-    //redirect user to appropriate page based on if they are authenticated with proper username
-
 });
-
-//NOTE: handle cookie security later!
 
 // Get users page - no users page as of now, but soon to come.
 router.get('/users', function(req, res, next) {
@@ -785,5 +764,5 @@ router.get('/users', function(req, res, next) {
     });
 });
 
-
+//Make router available to entire app.
 module.exports = router;
