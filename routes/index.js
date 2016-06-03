@@ -226,27 +226,8 @@ router.post('/search', function(req, res) {
 
     var posts = []; //Array that all posts found will be pushed to
 
-    //Query Forms DB and push results to posts
-    var promise1 = new Promise(function(resolve, reject) {
-
-        Forms.find({
-            name: {
-                $regex: new RegExp(searchText, "i")
-            }
-        }, function(err, results) {
-            if (err) reject(Error("Could not query forms database"));
-
-            if (results.length != 0) {
-                results.forEach(function(item) {
-                    posts.push(item);
-                });
-            }
-            resolve("Stuff worked");
-        });
-    });
-
     //Query Food DB and push results to posts
-    var promise2 = new Promise(function(resolve, reject) {
+    var foodPromise = new Promise(function(resolve, reject) {
 
         Food.find({
             name: {
@@ -265,7 +246,7 @@ router.post('/search', function(req, res) {
     });
 
     //Query Family DB and push results to posts
-    var promise3 = new Promise(function(resolve, reject) {
+    var familyPromise = new Promise(function(resolve, reject) {
 
         Family.find({
             name: {
@@ -285,7 +266,7 @@ router.post('/search', function(req, res) {
     });
 
     //Query Legal DB and push results to posts
-    var promise4 = new Promise(function(resolve, reject) {
+    var legalPromise = new Promise(function(resolve, reject) {
 
         Legal.find({
             name: {
@@ -304,7 +285,7 @@ router.post('/search', function(req, res) {
     });
 
     //Query Housing DB and push results to posts
-    var promise5 = new Promise(function(resolve, reject) {
+    var housingPromise = new Promise(function(resolve, reject) {
 
         Housing.find({
             name: {
@@ -323,7 +304,7 @@ router.post('/search', function(req, res) {
     });
 
     //Query Education DB and push results to posts
-    var promise6 = new Promise(function(resolve, reject) {
+    var educationPromise = new Promise(function(resolve, reject) {
 
         Education.find({
             name: {
@@ -343,7 +324,7 @@ router.post('/search', function(req, res) {
     });
 
     //Query Health DB and push results to posts
-    var promise7 = new Promise(function(resolve, reject) {
+    var healthPromise = new Promise(function(resolve, reject) {
 
         Health.find({
             name: {
@@ -363,7 +344,7 @@ router.post('/search', function(req, res) {
     });
 
     //Query Employment DB and push results to posts
-    var promise8 = new Promise(function(resolve, reject) {
+    var employmentPromise = new Promise(function(resolve, reject) {
 
         Employment.find({
             name: {
@@ -383,7 +364,7 @@ router.post('/search', function(req, res) {
     });
 
     //Query Dental DB and push results to posts
-    var promise9 = new Promise(function(resolve, reject) {
+    var dentalPromise = new Promise(function(resolve, reject) {
 
         Dental.find({
             name: {
@@ -403,7 +384,7 @@ router.post('/search', function(req, res) {
     });
 
     //when all promises have been fulfilled i.e all dbs queried, then render search results!
-    Promise.all([promise1, promise2, promise3, promise4, promise5, promise6, promise7, promise8, promise9]).then(function() {
+    Promise.all([foodPromise, familyPromise, legalPromise, housingPromise, educationPromise, healthPromise, employmentPromise, dentalPromise]).then(function() {
 
         //If search returned results from one (or more) of many databases, then return results to user
         if (posts.length > 0) {
