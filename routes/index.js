@@ -8,10 +8,8 @@ var popup = require('window-popup').windowPopup; //popups woooot!
 var authenticated = false; //variable to pass to front end to check is user has privileges.
 var userCanDelete = false; //variable to keep track of whether the user is authorized to delete entries
 
-//try connect-form to upload images
-// form = require('connect-form');
 
-//get account credentials from environment variables - please restore my sendgrid account now :)!
+//Get account credentials from environment variables
 var nodemailer = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
 
 //add all schemas for different pages
@@ -32,11 +30,10 @@ router.get('/', function(req, res, next) {
     });
 });
 
-/* create get routes to get these pages. */
+/* GET food page with corresponding posts */
 router.get('/food', function(req, res) {
 
-    // console.log("food working");
-
+    //Query MongoDB and return all Food items
     Food.find({}, function(err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
@@ -48,10 +45,10 @@ router.get('/food', function(req, res) {
     });
 });
 
+/* GET housing page with corresponding posts */
 router.get('/housing', function(req, res) {
 
-    // console.log("housing working");
-
+    //Query MongoDB and return all Housing items
     Housing.find({}, function(err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
@@ -63,10 +60,10 @@ router.get('/housing', function(req, res) {
     });
 });
 
+/* GET family page with corresponding posts */
 router.get('/family', function(req, res) {
 
-    // console.log("family working"); //lol
-
+    //Query MongoDB and return all Family items
     Family.find({}, function(err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
@@ -78,10 +75,10 @@ router.get('/family', function(req, res) {
     });
 });
 
+/* GET legal page with corresponding posts */
 router.get('/legal', function(req, res) {
 
-    // console.log("legal working");
-
+    //Query MongoDB and return all Legal items
     Legal.find({}, function(err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
@@ -93,10 +90,10 @@ router.get('/legal', function(req, res) {
     });
 });
 
+/* GET forms page with corresponding posts */
 router.get('/forms', function(req, res) {
 
-    // console.log("forms working");
-
+    //Query MongoDB and return all Forms items
     Forms.find({}, function(err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
@@ -108,11 +105,10 @@ router.get('/forms', function(req, res) {
     });
 });
 
-/* create get routes to get these pages. */
+/* GET education page with corresponding posts */
 router.get('/education', function(req, res) {
 
-    // console.log("food working");
-
+    //Query MongoDB and return all Education items
     Education.find({}, function(err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
@@ -124,11 +120,10 @@ router.get('/education', function(req, res) {
     });
 });
 
-/* create get routes to get these pages. */
+/* GET health page with corresponding posts */
 router.get('/health', function(req, res) {
 
-    // console.log("food working");
-
+    //Query MongoDB and return all Health items
     Health.find({}, function(err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
@@ -140,11 +135,10 @@ router.get('/health', function(req, res) {
     });
 });
 
-/* create get routes to get these pages. */
+/* GET employment page with corresponding posts */
 router.get('/employment', function(req, res) {
 
-    // console.log("food working");
-
+    //Query MongoDB and return all Employment items
     Employment.find({}, function(err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
@@ -159,8 +153,7 @@ router.get('/employment', function(req, res) {
 /* create get routes to get these pages. */
 router.get('/dental', function(req, res) {
 
-    // console.log("food working");
-
+    //Query MongoDB and return all Dental items
     Dental.find({}, function(err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
@@ -172,44 +165,45 @@ router.get('/dental', function(req, res) {
     });
 });
 
-
-//create environment variables later on to store allowed users.
-//give access to only one person to add listing for healthweb
+//Environment variables that store secret user names (to add entries to database)
 var secretusers = ['shivtools', process.env.SECRET_USER0, process.env.SECRET_USER1, process.env.SECRET_USER2, process.env.SECRET_USER3];
 
+/* GET item removed page to tell user item was removed */
 router.get('/itemremoved', function(req, res) {
     res.render('itemremoved', {
         title: 'Removed item | HealthWeb'
     });
 });
 
-/* GET NEW user page */
+/* GET new item page where user can add new posts */
 router.get('/newitem', function(req, res) {
     res.render('newitem', {
         title: 'Add a new listing | HealthWeb'
     });
 });
 
-
+/* GET contact page where user can send HealthWeb an email */
 router.get('/contact', function(req, res) {
     res.render('contact', {
         title: 'Contact us | HealthWeb'
     });
 });
 
+/* GET volunteer page*/
 router.get('/volunteer', function(req, res) {
     res.render('volunteer', {
         title: 'Volunteer | HealthWeb'
     });
 });
 
+/* GET about page*/
 router.get('/about', function(req, res) {
     res.render('about', {
         title: 'About HealthWeb | HealthWeb'
     });
 });
 
-//successfully added item!
+/* GET page to prompt user that item was added successfully */
 router.get('/addsuccess', function(req, res) {
     // console.log("calling add success");
     res.render('addsuccess', {
@@ -217,7 +211,7 @@ router.get('/addsuccess', function(req, res) {
     });
 });
 
-//failed to add item!
+/* GET page to prompt user that item was not added properly */
 router.get('/addfail', function(req, res) {
     // console.log("calling add fail");
     res.render('addfail', {
@@ -225,15 +219,14 @@ router.get('/addfail', function(req, res) {
     });
 });
 
-//search functionality for website
-//I wanted to learn about promises in JS so I decided to use them to query each db
-//JS is cool af
-
+//When user searches for item, several MongoDB databases are queried for results
+//JS promises are used to query each db. When all dbs are queried, results are returned as an array
 router.post('/search', function(req, res) {
     var searchText = req.body.searchItem;
 
-    var posts = []; //posts to be pushed to array
+    var posts = []; //Array that all posts found will be pushed to
 
+    //Query Forms DB and push results to posts
     var promise1 = new Promise(function(resolve, reject) {
 
         Forms.find({
@@ -241,7 +234,7 @@ router.post('/search', function(req, res) {
                 $regex: new RegExp(searchText, "i")
             }
         }, function(err, results) {
-            if (err) reject(Error("It broke"));
+            if (err) reject(Error("Could not query forms database"));
 
             if (results.length != 0) {
                 results.forEach(function(item) {
@@ -252,6 +245,7 @@ router.post('/search', function(req, res) {
         });
     });
 
+    //Query Food DB and push results to posts
     var promise2 = new Promise(function(resolve, reject) {
 
         Food.find({
@@ -259,7 +253,7 @@ router.post('/search', function(req, res) {
                 $regex: new RegExp(searchText, "i")
             }
         }, function(err, results) {
-            if (err) reject(Error("It broke"));
+            if (err) reject(Error("Could not query Food database"));
 
             if (results.length != 0) {
                 results.forEach(function(item) {
@@ -270,6 +264,7 @@ router.post('/search', function(req, res) {
         });
     });
 
+    //Query Family DB and push results to posts
     var promise3 = new Promise(function(resolve, reject) {
 
         Family.find({
@@ -277,7 +272,7 @@ router.post('/search', function(req, res) {
                 $regex: new RegExp(searchText, "i")
             }
         }, function(err, results) {
-            if (err) reject(Error("It broke"));
+            if (err) reject(Error("Could not query family database"));
 
             if (results.length != 0) {
                 results.forEach(function(item) {
@@ -289,6 +284,7 @@ router.post('/search', function(req, res) {
         });
     });
 
+    //Query Legal DB and push results to posts
     var promise4 = new Promise(function(resolve, reject) {
 
         Legal.find({
@@ -296,7 +292,7 @@ router.post('/search', function(req, res) {
                 $regex: new RegExp(searchText, "i")
             }
         }, function(err, results) {
-            if (err) reject(Error("It broke"));
+            if (err) reject(Error("Could not query legal database"));
 
             if (results.length != 0) {
                 results.forEach(function(item) {
@@ -307,6 +303,7 @@ router.post('/search', function(req, res) {
         });
     });
 
+    //Query Housing DB and push results to posts
     var promise5 = new Promise(function(resolve, reject) {
 
         Housing.find({
@@ -314,7 +311,7 @@ router.post('/search', function(req, res) {
                 $regex: new RegExp(searchText, "i")
             }
         }, function(err, results) {
-            if (err) reject(Error("It broke"));
+            if (err) reject(Error("Could not query housing database"));
 
             if (results.length != 0) {
                 results.forEach(function(item) {
@@ -325,6 +322,7 @@ router.post('/search', function(req, res) {
         });
     });
 
+    //Query Education DB and push results to posts
     var promise6 = new Promise(function(resolve, reject) {
 
         Education.find({
@@ -332,7 +330,7 @@ router.post('/search', function(req, res) {
                 $regex: new RegExp(searchText, "i")
             }
         }, function(err, results) {
-            if (err) reject(Error("It broke"));
+            if (err) reject(Error("Could not query education database"));
 
             if (results.length != 0) {
                 results.forEach(function(item) {
@@ -344,6 +342,7 @@ router.post('/search', function(req, res) {
         });
     });
 
+    //Query Health DB and push results to posts
     var promise7 = new Promise(function(resolve, reject) {
 
         Health.find({
@@ -351,7 +350,7 @@ router.post('/search', function(req, res) {
                 $regex: new RegExp(searchText, "i")
             }
         }, function(err, results) {
-            if (err) reject(Error("It broke"));
+            if (err) reject(Error("Could not query health database"));
 
             if (results.length != 0) {
                 results.forEach(function(item) {
@@ -363,6 +362,7 @@ router.post('/search', function(req, res) {
         });
     });
 
+    //Query Employment DB and push results to posts
     var promise8 = new Promise(function(resolve, reject) {
 
         Employment.find({
@@ -370,7 +370,7 @@ router.post('/search', function(req, res) {
                 $regex: new RegExp(searchText, "i")
             }
         }, function(err, results) {
-            if (err) reject(Error("It broke"));
+            if (err) reject(Error("Could not query Employment database"));
 
             if (results.length != 0) {
                 results.forEach(function(item) {
@@ -382,6 +382,7 @@ router.post('/search', function(req, res) {
         });
     });
 
+    //Query Dental DB and push results to posts
     var promise9 = new Promise(function(resolve, reject) {
 
         Dental.find({
@@ -389,7 +390,7 @@ router.post('/search', function(req, res) {
                 $regex: new RegExp(searchText, "i")
             }
         }, function(err, results) {
-            if (err) reject(Error("It broke"));
+            if (err) reject(Error("Could not query dental database"));
 
             if (results.length != 0) {
                 results.forEach(function(item) {
@@ -404,12 +405,15 @@ router.post('/search', function(req, res) {
     //when all promises have been fulfilled i.e all dbs queried, then render search results!
     Promise.all([promise1, promise2, promise3, promise4, promise5, promise6, promise7, promise8, promise9]).then(function() {
 
+        //If search returned results from one (or more) of many databases, then return results to user
         if (posts.length > 0) {
             res.render('searchresults', {
                 title: 'Search Results',
                 "searchresults": posts
             });
-        } else {
+        }
+        //Else return no results
+        else {
             res.render('noresults', {
                 title: 'No results'
             })
@@ -419,8 +423,10 @@ router.post('/search', function(req, res) {
 
 });
 
-//post request for sending email
+/* POST request to handle sending email to HealthWeb email address */
 router.post('/sendemail', function(req, res) {
+
+    //Fetch data from form
     var contactName = req.body.name;
     var contactEmail = req.body.email;
     var contactNumber = req.body.tel;
@@ -428,12 +434,13 @@ router.post('/sendemail', function(req, res) {
     var contactOther = req.body.other;
     var contactMessage = req.body.message;
 
+    //Pass data to sendEmail function. Email is sent using SendGrid
     sendEmail(contactName, contactEmail, contactNumber, optionSelected, contactOther, contactMessage);
 
+    //Thank user :)
     res.render('emailsuccess', {
         title: 'Thank you!'
     });
-
 
 });
 
@@ -460,27 +467,26 @@ var sendEmail = function email(contactName, contactEmail, contactNumber, optionS
     // send mail with defined sendmail object
     nodemailer.send(msg, function(error, info) {
         if (error) {
-            // console.log(error);
+            console.log("Could not send email via SendGrid ", error);
         } else {
-            // console.log('Message sent!');
+            console.log('Message sent via SendGrid!');
         }
     });
 }
 
-
+/* For given item ID, delete the particular item from MongoDB database */
 router.get('/delete/:Item/:id', function(req, res) {
 
+    //Get id of element from request
     var id = req.params.id;
     var ItemType = req.params.Item;
-    // console.log("Type of item is: " + ItemType);
 
-    //could not avoid this boilerplate code because mongodb doesn't recognize variable names!
+    //Depending on the item type of the post, delete it from respective database
     if (ItemType == "Forms") {
         Forms.findById(id, function(err, item) {
             if (err) throw err;
             // console.log(item);
             item.remove(function(err) {
-                // console.log("Item removed!");
                 res.redirect('/itemremoved');
             });
         });
@@ -488,7 +494,6 @@ router.get('/delete/:Item/:id', function(req, res) {
         Family.findById(id, function(err, item) {
             if (err) throw err;
             item.remove(function(err) {
-                // console.log("Item removed!");
                 res.redirect('/itemremoved');
             });
         });
@@ -496,7 +501,6 @@ router.get('/delete/:Item/:id', function(req, res) {
         Housing.findById(id, function(err, item) {
             if (err) throw err;
             item.remove(function(err) {
-                // console.log("Item removed!");
                 res.redirect('/itemremoved');
             });
         });
@@ -504,7 +508,6 @@ router.get('/delete/:Item/:id', function(req, res) {
         Food.findById(id, function(err, item) {
             if (err) throw err;
             item.remove(function(err) {
-                // console.log("Item removed!");
                 res.redirect('/itemremoved');
             });
         });
@@ -512,7 +515,6 @@ router.get('/delete/:Item/:id', function(req, res) {
         Legal.findById(id, function(err, item) {
             if (err) throw err;
             item.remove(function(err) {
-                // console.log("Item removed!");
                 res.redirect('/itemremoved');
             });
         });
@@ -520,7 +522,6 @@ router.get('/delete/:Item/:id', function(req, res) {
         Education.findById(id, function(err, item) {
             if (err) throw err;
             item.remove(function(err) {
-                // console.log("Item removed!");
                 res.redirect('/itemremoved');
             });
         });
@@ -528,7 +529,6 @@ router.get('/delete/:Item/:id', function(req, res) {
         Health.findById(id, function(err, item) {
             if (err) throw err;
             item.remove(function(err) {
-                // console.log("Item removed!");
                 res.redirect('/itemremoved');
             });
         });
@@ -536,7 +536,6 @@ router.get('/delete/:Item/:id', function(req, res) {
         Employment.findById(id, function(err, item) {
             if (err) throw err;
             item.remove(function(err) {
-                // console.log("Item removed!");
                 res.redirect('/itemremoved');
             });
         });
@@ -544,7 +543,6 @@ router.get('/delete/:Item/:id', function(req, res) {
         Dental.findById(id, function(err, item) {
             if (err) throw err;
             item.remove(function(err) {
-                // console.log("Item removed!");
                 res.redirect('/itemremoved');
             });
         });
@@ -748,24 +746,24 @@ router.post('/additem', function(req, res) {
                 // console.log('Item added successfully wooooot!');
             });
 
-          if (options.indexOf("dental") != -1) {
-              // console.log("forms");
-              var dental = new Dental({
-                  name: itemName,
-                  number: itemNumber,
-                  location: itemLocation,
-                  imageURL: itemLogoURL,
-                  services: itemServices,
-                  requirements: itemRequirements,
-                  hours: itemHours,
-                  website: itemWebsite,
-                  user: secretuser
-              });
+            if (options.indexOf("dental") != -1) {
+                // console.log("forms");
+                var dental = new Dental({
+                    name: itemName,
+                    number: itemNumber,
+                    location: itemLocation,
+                    imageURL: itemLogoURL,
+                    services: itemServices,
+                    requirements: itemRequirements,
+                    hours: itemHours,
+                    website: itemWebsite,
+                    user: secretuser
+                });
 
-              dental.save(function(err) {
-                  if (err) throw err;
-                  // console.log('Item added successfully wooooot!');
-              });
+                dental.save(function(err) {
+                    if (err) throw err;
+                    // console.log('Item added successfully wooooot!');
+                });
 
             }
 
