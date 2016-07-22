@@ -22,19 +22,20 @@ var Education = require('../models/education');
 var Health = require('../models/health');
 var Employment = require('../models/employment');
 var Dental = require('../models/dental');
+var Financial = require('../models/financial');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
     res.render('index', {
         title: 'Home | HealthWeb'
     });
 });
 
 /* GET food page with corresponding posts */
-router.get('/food', function(req, res) {
+router.get('/food', function (req, res) {
 
     //Query MongoDB and return all Food items
-    Food.find({}, function(err, items) {
+    Food.find({}, function (err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
         res.render('food', {
@@ -46,10 +47,10 @@ router.get('/food', function(req, res) {
 });
 
 /* GET housing page with corresponding posts */
-router.get('/housing', function(req, res) {
+router.get('/housing', function (req, res) {
 
     //Query MongoDB and return all Housing items
-    Housing.find({}, function(err, items) {
+    Housing.find({}, function (err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
         res.render('housing', {
@@ -61,10 +62,10 @@ router.get('/housing', function(req, res) {
 });
 
 /* GET family page with corresponding posts */
-router.get('/family', function(req, res) {
+router.get('/family', function (req, res) {
 
     //Query MongoDB and return all Family items
-    Family.find({}, function(err, items) {
+    Family.find({}, function (err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
         res.render('family', {
@@ -76,10 +77,10 @@ router.get('/family', function(req, res) {
 });
 
 /* GET legal page with corresponding posts */
-router.get('/legal', function(req, res) {
+router.get('/legal', function (req, res) {
 
     //Query MongoDB and return all Legal items
-    Legal.find({}, function(err, items) {
+    Legal.find({}, function (err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
         res.render('legal', {
@@ -91,10 +92,10 @@ router.get('/legal', function(req, res) {
 });
 
 /* GET forms page with corresponding posts */
-router.get('/forms', function(req, res) {
+router.get('/forms', function (req, res) {
 
     //Query MongoDB and return all Forms items
-    Forms.find({}, function(err, items) {
+    Forms.find({}, function (err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
         res.render('forms', {
@@ -106,10 +107,10 @@ router.get('/forms', function(req, res) {
 });
 
 /* GET education page with corresponding posts */
-router.get('/education', function(req, res) {
+router.get('/education', function (req, res) {
 
     //Query MongoDB and return all Education items
-    Education.find({}, function(err, items) {
+    Education.find({}, function (err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
         res.render('education', {
@@ -121,10 +122,10 @@ router.get('/education', function(req, res) {
 });
 
 /* GET health page with corresponding posts */
-router.get('/health', function(req, res) {
+router.get('/health', function (req, res) {
 
     //Query MongoDB and return all Health items
-    Health.find({}, function(err, items) {
+    Health.find({}, function (err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
         res.render('health', {
@@ -136,10 +137,10 @@ router.get('/health', function(req, res) {
 });
 
 /* GET employment page with corresponding posts */
-router.get('/employment', function(req, res) {
+router.get('/employment', function (req, res) {
 
     //Query MongoDB and return all Employment items
-    Employment.find({}, function(err, items) {
+    Employment.find({}, function (err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
         res.render('employment', {
@@ -150,11 +151,26 @@ router.get('/employment', function(req, res) {
     });
 });
 
+/* GET financial page with corresponding posts */
+router.get('/financial', function (req, res) {
+
+    //Query MongoDB and return all Employment items
+    Financial.find({}, function (err, items) {
+        if (err) throw err; //pls dont throw error
+        console.log(items);
+        res.render('financial', {
+            title: 'Emergency financial assistance',
+            user: authenticated,
+            "financial_list": items
+        });
+    });
+});
+
 /* create get routes to get these pages. */
-router.get('/dental', function(req, res) {
+router.get('/dental', function (req, res) {
 
     //Query MongoDB and return all Dental items
-    Dental.find({}, function(err, items) {
+    Dental.find({}, function (err, items) {
         if (err) throw err; //pls dont throw error
         console.log(items);
         res.render('dental', {
@@ -169,42 +185,42 @@ router.get('/dental', function(req, res) {
 var secretusers = ['shivtools', process.env.SECRET_USER0, process.env.SECRET_USER1, process.env.SECRET_USER2, process.env.SECRET_USER3];
 
 /* GET item removed page to tell user item was removed */
-router.get('/itemremoved', function(req, res) {
+router.get('/itemremoved', function (req, res) {
     res.render('itemremoved', {
         title: 'Removed item | HealthWeb'
     });
 });
 
 /* GET new item page where user can add new posts */
-router.get('/newitem', function(req, res) {
+router.get('/newitem', function (req, res) {
     res.render('newitem', {
         title: 'Add a new listing | HealthWeb'
     });
 });
 
 /* GET contact page where user can send HealthWeb an email */
-router.get('/contact', function(req, res) {
+router.get('/contact', function (req, res) {
     res.render('contact', {
         title: 'Contact us | HealthWeb'
     });
 });
 
 /* GET volunteer page*/
-router.get('/volunteer', function(req, res) {
+router.get('/volunteer', function (req, res) {
     res.render('volunteer', {
         title: 'Volunteer | HealthWeb'
     });
 });
 
 /* GET about page*/
-router.get('/about', function(req, res) {
+router.get('/about', function (req, res) {
     res.render('about', {
         title: 'About HealthWeb | HealthWeb'
     });
 });
 
 /* GET page to prompt user that item was added successfully */
-router.get('/addsuccess', function(req, res) {
+router.get('/addsuccess', function (req, res) {
     // console.log("calling add success");
     res.render('addsuccess', {
         title: 'Successfully added!'
@@ -212,7 +228,7 @@ router.get('/addsuccess', function(req, res) {
 });
 
 /* GET page to prompt user that item was not added properly */
-router.get('/addfail', function(req, res) {
+router.get('/addfail', function (req, res) {
     // console.log("calling add fail");
     res.render('addfail', {
         title: 'Failed to authenticate!'
@@ -221,23 +237,23 @@ router.get('/addfail', function(req, res) {
 
 //When user searches for item, several MongoDB databases are queried for results
 //JS promises are used to query each db. When all dbs are queried, results are returned as an array
-router.post('/search', function(req, res) {
+router.post('/search', function (req, res) {
     var searchText = req.body.searchItem;
 
     var posts = []; //Array that all posts found will be pushed to
 
     //Query Food DB and push results to posts
-    var foodPromise = new Promise(function(resolve, reject) {
+    var foodPromise = new Promise(function (resolve, reject) {
 
         Food.find({
             name: {
                 $regex: new RegExp(searchText, "i")
             }
-        }, function(err, results) {
+        }, function (err, results) {
             if (err) reject(Error("Could not query Food database"));
 
             if (results.length != 0) {
-                results.forEach(function(item) {
+                results.forEach(function (item) {
                     posts.push(item);
                 });
             }
@@ -246,17 +262,17 @@ router.post('/search', function(req, res) {
     });
 
     //Query Family DB and push results to posts
-    var familyPromise = new Promise(function(resolve, reject) {
+    var familyPromise = new Promise(function (resolve, reject) {
 
         Family.find({
             name: {
                 $regex: new RegExp(searchText, "i")
             }
-        }, function(err, results) {
+        }, function (err, results) {
             if (err) reject(Error("Could not query family database"));
 
             if (results.length != 0) {
-                results.forEach(function(item) {
+                results.forEach(function (item) {
                     posts.push(item);
                 });
             }
@@ -266,17 +282,17 @@ router.post('/search', function(req, res) {
     });
 
     //Query Legal DB and push results to posts
-    var legalPromise = new Promise(function(resolve, reject) {
+    var legalPromise = new Promise(function (resolve, reject) {
 
         Legal.find({
             name: {
                 $regex: new RegExp(searchText, "i")
             }
-        }, function(err, results) {
+        }, function (err, results) {
             if (err) reject(Error("Could not query legal database"));
 
             if (results.length != 0) {
-                results.forEach(function(item) {
+                results.forEach(function (item) {
                     posts.push(item);
                 });
             }
@@ -285,17 +301,17 @@ router.post('/search', function(req, res) {
     });
 
     //Query Housing DB and push results to posts
-    var housingPromise = new Promise(function(resolve, reject) {
+    var housingPromise = new Promise(function (resolve, reject) {
 
         Housing.find({
             name: {
                 $regex: new RegExp(searchText, "i")
             }
-        }, function(err, results) {
+        }, function (err, results) {
             if (err) reject(Error("Could not query housing database"));
 
             if (results.length != 0) {
-                results.forEach(function(item) {
+                results.forEach(function (item) {
                     posts.push(item);
                 });
             }
@@ -304,17 +320,17 @@ router.post('/search', function(req, res) {
     });
 
     //Query Education DB and push results to posts
-    var educationPromise = new Promise(function(resolve, reject) {
+    var educationPromise = new Promise(function (resolve, reject) {
 
         Education.find({
             name: {
                 $regex: new RegExp(searchText, "i")
             }
-        }, function(err, results) {
+        }, function (err, results) {
             if (err) reject(Error("Could not query education database"));
 
             if (results.length != 0) {
-                results.forEach(function(item) {
+                results.forEach(function (item) {
                     posts.push(item);
                 });
             }
@@ -324,17 +340,17 @@ router.post('/search', function(req, res) {
     });
 
     //Query Health DB and push results to posts
-    var healthPromise = new Promise(function(resolve, reject) {
+    var healthPromise = new Promise(function (resolve, reject) {
 
         Health.find({
             name: {
                 $regex: new RegExp(searchText, "i")
             }
-        }, function(err, results) {
+        }, function (err, results) {
             if (err) reject(Error("Could not query health database"));
 
             if (results.length != 0) {
-                results.forEach(function(item) {
+                results.forEach(function (item) {
                     posts.push(item);
                 });
             }
@@ -344,17 +360,17 @@ router.post('/search', function(req, res) {
     });
 
     //Query Employment DB and push results to posts
-    var employmentPromise = new Promise(function(resolve, reject) {
+    var employmentPromise = new Promise(function (resolve, reject) {
 
         Employment.find({
             name: {
                 $regex: new RegExp(searchText, "i")
             }
-        }, function(err, results) {
+        }, function (err, results) {
             if (err) reject(Error("Could not query Employment database"));
 
             if (results.length != 0) {
-                results.forEach(function(item) {
+                results.forEach(function (item) {
                     posts.push(item);
                 });
             }
@@ -364,17 +380,37 @@ router.post('/search', function(req, res) {
     });
 
     //Query Dental DB and push results to posts
-    var dentalPromise = new Promise(function(resolve, reject) {
+    var dentalPromise = new Promise(function (resolve, reject) {
 
         Dental.find({
             name: {
                 $regex: new RegExp(searchText, "i")
             }
-        }, function(err, results) {
+        }, function (err, results) {
             if (err) reject(Error("Could not query dental database"));
 
             if (results.length != 0) {
-                results.forEach(function(item) {
+                results.forEach(function (item) {
+                    posts.push(item);
+                });
+            }
+            resolve("Stuff worked");
+
+        });
+    });
+
+    //Query Financial collection and push results to posts
+    var financialPromise = new Promise(function (resolve, reject) {
+
+        Financial.find({
+            name: {
+                $regex: new RegExp(searchText, "i")
+            }
+        }, function (err, results) {
+            if (err) reject(Error("Could not query financial database"));
+
+            if (results.length != 0) {
+                results.forEach(function (item) {
                     posts.push(item);
                 });
             }
@@ -384,7 +420,7 @@ router.post('/search', function(req, res) {
     });
 
     //when all promises have been fulfilled i.e all dbs queried, then render search results!
-    Promise.all([foodPromise, familyPromise, legalPromise, housingPromise, educationPromise, healthPromise, employmentPromise, dentalPromise]).then(function() {
+    Promise.all([foodPromise, familyPromise, legalPromise, housingPromise, educationPromise, healthPromise, employmentPromise, dentalPromise, financialPromise]).then(function () {
 
         //If search returned results from one (or more) of many databases, then return results to user
         if (posts.length > 0) {
@@ -405,7 +441,7 @@ router.post('/search', function(req, res) {
 });
 
 /* POST request to handle sending email to HealthWeb email address */
-router.post('/sendemail', function(req, res) {
+router.post('/sendemail', function (req, res) {
 
     //Fetch data from form
     var contactName = req.body.name;
@@ -446,7 +482,7 @@ var sendEmail = function email(contactName, contactEmail, contactNumber, optionS
 
 
     // send mail with defined sendmail object
-    nodemailer.send(msg, function(error, info) {
+    nodemailer.send(msg, function (error, info) {
         if (error) {
             console.log("Could not send email via SendGrid ", error);
         } else {
@@ -456,7 +492,7 @@ var sendEmail = function email(contactName, contactEmail, contactNumber, optionS
 }
 
 /* For given item ID, delete the particular item from MongoDB database */
-router.get('/delete/:Item/:id', function(req, res) {
+router.get('/delete/:Item/:id', function (req, res) {
 
     //Get id of element from request
     var id = req.params.id;
@@ -464,66 +500,73 @@ router.get('/delete/:Item/:id', function(req, res) {
 
     //Depending on the item type of the post, delete it from respective database
     if (ItemType == "Forms") {
-        Forms.findById(id, function(err, item) {
+        Forms.findById(id, function (err, item) {
             if (err) throw err;
             // console.log(item);
-            item.remove(function(err) {
+            item.remove(function (err) {
                 res.redirect('/itemremoved');
             });
         });
     } else if (ItemType === "Family") {
-        Family.findById(id, function(err, item) {
+        Family.findById(id, function (err, item) {
             if (err) throw err;
-            item.remove(function(err) {
+            item.remove(function (err) {
                 res.redirect('/itemremoved');
             });
         });
     } else if (ItemType === "Housing") {
-        Housing.findById(id, function(err, item) {
+        Housing.findById(id, function (err, item) {
             if (err) throw err;
-            item.remove(function(err) {
+            item.remove(function (err) {
                 res.redirect('/itemremoved');
             });
         });
     } else if (ItemType === "Food") {
-        Food.findById(id, function(err, item) {
+        Food.findById(id, function (err, item) {
             if (err) throw err;
-            item.remove(function(err) {
+            item.remove(function (err) {
                 res.redirect('/itemremoved');
             });
         });
     } else if (ItemType === "Legal") {
-        Legal.findById(id, function(err, item) {
+        Legal.findById(id, function (err, item) {
             if (err) throw err;
-            item.remove(function(err) {
+            item.remove(function (err) {
                 res.redirect('/itemremoved');
             });
         });
     } else if (ItemType === "Education") {
-        Education.findById(id, function(err, item) {
+        Education.findById(id, function (err, item) {
             if (err) throw err;
-            item.remove(function(err) {
+            item.remove(function (err) {
                 res.redirect('/itemremoved');
             });
         });
     } else if (ItemType === "Health") {
-        Health.findById(id, function(err, item) {
+        Health.findById(id, function (err, item) {
             if (err) throw err;
-            item.remove(function(err) {
+            item.remove(function (err) {
                 res.redirect('/itemremoved');
             });
         });
     } else if (ItemType === "Employment") {
-        Employment.findById(id, function(err, item) {
+        Employment.findById(id, function (err, item) {
             if (err) throw err;
-            item.remove(function(err) {
+            item.remove(function (err) {
                 res.redirect('/itemremoved');
             });
         });
     } else if (ItemType === "Dental") {
-        Dental.findById(id, function(err, item) {
+        Dental.findById(id, function (err, item) {
             if (err) throw err;
-            item.remove(function(err) {
+            item.remove(function (err) {
+                res.redirect('/itemremoved');
+            });
+        });
+    } else if (ItemType === "Financial") {
+        Financial.findById(id, function (err, item) {
+            if (err) throw err;
+            item.remove(function (err) {
                 res.redirect('/itemremoved');
             });
         });
@@ -532,7 +575,7 @@ router.get('/delete/:Item/:id', function(req, res) {
 
 });
 
-router.get('/login', function(req, res) {
+router.get('/login', function (req, res) {
     authenticated = true;
     res.cookie('user', "secretuser", {
         maxAge: 900000,
@@ -544,7 +587,7 @@ router.get('/login', function(req, res) {
 });
 
 /* Add item to relevant DB with a post request */
-router.post('/additem', function(req, res) {
+router.post('/additem', function (req, res) {
 
     //Get form values from front-end form
     var itemName = req.body.itemname;
@@ -593,7 +636,7 @@ router.post('/additem', function(req, res) {
                 user: secretuser
             });
 
-            food.save(function(err) {
+            food.save(function (err) {
                 if (err) {
                     throw err;
                 }
@@ -614,7 +657,7 @@ router.post('/additem', function(req, res) {
                 user: secretuser
             });
 
-            housing.save(function(err) {
+            housing.save(function (err) {
                 if (err) throw err;
             });
         }
@@ -632,7 +675,7 @@ router.post('/additem', function(req, res) {
                 user: secretuser
             });
 
-            family.save(function(err) {
+            family.save(function (err) {
                 if (err) throw err;
             });
         }
@@ -650,7 +693,7 @@ router.post('/additem', function(req, res) {
                 user: secretuser
             });
 
-            legal.save(function(err) {
+            legal.save(function (err) {
                 if (err) throw err;
             });
 
@@ -669,7 +712,7 @@ router.post('/additem', function(req, res) {
                 user: secretuser
             });
 
-            health.save(function(err) {
+            health.save(function (err) {
                 if (err) throw err;
             });
 
@@ -688,7 +731,7 @@ router.post('/additem', function(req, res) {
                 user: secretuser
             });
 
-            education.save(function(err) {
+            education.save(function (err) {
                 if (err) throw err;
             });
 
@@ -708,29 +751,47 @@ router.post('/additem', function(req, res) {
                 user: secretuser
             });
 
-            employment.save(function(err) {
+            employment.save(function (err) {
+                if (err) throw err;
+            });
+        }
+
+        if (options.indexOf("dental") != -1) {
+
+            var dental = new Dental({
+                name: itemName,
+                number: itemNumber,
+                location: itemLocation,
+                imageURL: itemLogoURL,
+                services: itemServices,
+                requirements: itemRequirements,
+                hours: itemHours,
+                website: itemWebsite,
+                user: secretuser
+            });
+
+            dental.save(function (err) {
                 if (err) throw err;
             });
 
-            if (options.indexOf("dental") != -1) {
+        }
+        if (options.indexOf("financial") != -1) {
 
-                var dental = new Dental({
-                    name: itemName,
-                    number: itemNumber,
-                    location: itemLocation,
-                    imageURL: itemLogoURL,
-                    services: itemServices,
-                    requirements: itemRequirements,
-                    hours: itemHours,
-                    website: itemWebsite,
-                    user: secretuser
-                });
+            var financial = new Financial({
+                name: itemName,
+                number: itemNumber,
+                location: itemLocation,
+                imageURL: itemLogoURL,
+                services: itemServices,
+                requirements: itemRequirements,
+                hours: itemHours,
+                website: itemWebsite,
+                user: secretuser
+            });
 
-                dental.save(function(err) {
-                    if (err) throw err;
-                });
-
-            }
+            financial.save(function (err) {
+                if (err) throw err;
+            });
 
         }
 
@@ -739,8 +800,8 @@ router.post('/additem', function(req, res) {
 });
 
 // Get users page - no users page as of now, but soon to come.
-router.get('/users', function(req, res, next) {
-    mongoose.model('users').find(function(err, users) {
+router.get('/users', function (req, res, next) {
+    mongoose.model('users').find(function (err, users) {
         res.send(users);
     });
 });
