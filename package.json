@@ -19,7 +19,7 @@
     "fs": "latest",
     "jade": "~1.11.0",
     "kerberos": "~0.0",
-    "mongodb": "2.0",
+    "mongodb": "^2.0.55",
     "mongoose": "latest",
     "mongoose-schema-extend": "latest",
     "monk": "https://github.com/vccabral/monk.git",

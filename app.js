@@ -9,10 +9,7 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
 var configs = require('./config/config.json');
-
-//connecting to database
 var mongo = require('mongodb');
-
 var mongoose = require('mongoose');
 
 var users = require('./routes/users');
@@ -21,6 +18,11 @@ var users = require('./routes/users');
 //once app is deployed, will connect to mongolab
 mongoose.connect(configs.MONGO_URL);
 
+//attach lister to connected event
+mongoose.connection.once('connected', function() {
+	console.log("Connected to database")
+});
+
 var fs = require('fs'); //file system to load in models
 
 var app = express();
@@ -28,7 +30,6 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
