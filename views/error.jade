@@ -1,6 +1,15 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+	br
+	br
+	br
+	.page-header
+		.container
+			h1 Looks like we couldn't find your page at this time... 
+			br
+			h4#success Please get in touch with rvahealthweb@gmail.com to report this.
+			br
+			.row#homebutton
+				a(href="/")
+					button.btn.btn-primary#home Homepage

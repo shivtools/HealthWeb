@@ -262,7 +262,7 @@ module.exports = function (passport) {
 
         var searchText = req.body.searchItem;
 
-        var uniqueEntries = new Set();
+        // var uniqueEntries = new Set();
 
         var posts = []; //Array that all posts found will be pushed to
 
@@ -278,10 +278,7 @@ module.exports = function (passport) {
 
                 if (results.length != 0) {
                     results.forEach(function (item) {
-                        if (!uniqueEntries.has(item.name)) {
-                            uniqueEntries.add(item.name);
-                            posts.push(item);
-                        }
+                        posts.push(item);
                     });
                 }
                 resolve("Stuff worked");
@@ -300,10 +297,7 @@ module.exports = function (passport) {
 
                 if (results.length != 0) {
                     results.forEach(function (item) {
-                        if (!uniqueEntries.has(item.name)) {
-                            uniqueEntries.add(item.name);
-                            posts.push(item);
-                        }
+                        posts.push(item);
                     });
                 }
                 resolve("Stuff worked");
@@ -323,10 +317,7 @@ module.exports = function (passport) {
 
                 if (results.length != 0) {
                     results.forEach(function (item) {
-                        if (!uniqueEntries.has(item.name)) {
-                            uniqueEntries.add(item.name);
-                            posts.push(item);
-                        }
+                        posts.push(item);
                     });
                 }
                 resolve("Stuff worked");
@@ -345,10 +336,7 @@ module.exports = function (passport) {
 
                 if (results.length != 0) {
                     results.forEach(function (item) {
-                        if (!uniqueEntries.has(item.name)) {
-                            uniqueEntries.add(item.name);
-                            posts.push(item);
-                        }
+                        posts.push(item);
                     });
                 }
                 resolve("Stuff worked");
@@ -367,10 +355,7 @@ module.exports = function (passport) {
 
                 if (results.length != 0) {
                     results.forEach(function (item) {
-                        if (!uniqueEntries.has(item.name)) {
-                            uniqueEntries.add(item.name);
-                            posts.push(item);
-                        }
+                        posts.push(item);
                     });
                 }
                 resolve("Stuff worked");
@@ -390,10 +375,7 @@ module.exports = function (passport) {
 
                 if (results.length != 0) {
                     results.forEach(function (item) {
-                        if (!uniqueEntries.has(item.name)) {
-                            uniqueEntries.add(item.name);
-                            posts.push(item);
-                        }
+                        posts.push(item);
                     });
                 }
                 resolve("Stuff worked");
@@ -413,10 +395,7 @@ module.exports = function (passport) {
 
                 if (results.length != 0) {
                     results.forEach(function (item) {
-                        if (!uniqueEntries.has(item.name)) {
-                            uniqueEntries.add(item.name);
-                            posts.push(item);
-                        }
+                        posts.push(item);
                     });
                 }
                 resolve("Stuff worked");
@@ -436,10 +415,7 @@ module.exports = function (passport) {
 
                 if (results.length != 0) {
                     results.forEach(function (item) {
-                        if (!uniqueEntries.has(item.name)) {
-                            uniqueEntries.add(item.name);
-                            posts.push(item);
-                        }
+                        posts.push(item);
                     });
                 }
                 resolve("Stuff worked");
@@ -459,10 +435,7 @@ module.exports = function (passport) {
 
                 if (results.length != 0) {
                     results.forEach(function (item) {
-                        if (!uniqueEntries.has(item.name)) {
-                            uniqueEntries.add(item.name);
-                            posts.push(item);
-                        }
+                        posts.push(item);
                     });
                 }
                 resolve("Stuff worked");
@@ -851,7 +824,8 @@ module.exports = function (passport) {
             res.render('addsuccess', {
                 title: 'Successfully added!'
             });
-        } else {
+        }
+        else {
             res.render('addfail', {
                 title: 'Authentication failed!'
             });
