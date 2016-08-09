@@ -5,24 +5,23 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
+var passport = require('passport');
+var flash = require('connect-flash');
+var session = require('express-session');
+var configs = require('./config/config.json');
 
 //connecting to database
 var mongo = require('mongodb');
 
-var mongoose = require('mongoose'); 
-var routes = require('./routes/index');
+var mongoose = require('mongoose');
+
 var users = require('./routes/users');
 
-//link db to localhost for the time being. 
+//link db to localhost for the time being.
 //once app is deployed, will connect to mongolab
+mongoose.connect(configs.MONGO_URL);
 
-mongoose.connect('mongodb://shiv:Richmond15@ds023088.mlab.com:23088/healthweb');
-
-//To be connected once deployed on digital ocean or any other hosting service.
-//remember to include host in url in connect.js
-//dbconnection = require('./config/connect.js')
-
-var fs = require('fs'); //file system to load in models 
+var fs = require('fs'); //file system to load in models
 
 var app = express();
 
@@ -30,31 +29,38 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
 app.use(logger('dev'));
-app.use(flash());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-/* Commented out since we are using mongoose and not monk*/
-//Make db accessible to router.
-// app.use(function(req,res,next){
-//     req.db = db; //add monk collection object to every http request that app makes
-//     next();
-// });
+// Initialize Passport
 
-//middleware for express 
+app.use(session({
+    secret: configs.SESSION_SECRET
+}));
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
+app.use(flash());
+
+var initPassport = require('./passport/init');
+initPassport(passport);
+
+var routes = require('./routes/index')(passport);
+//middleware for express
 app.use('/', routes);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handlers
@@ -62,20 +68,19 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
     });
-  });
-
 }
 
 //load up models in models dir into app using fs from models directory
-fs.readdirSync(__dirname + '/models').forEach(function(filename){
-  //console.log(filename);
-  if(~filename.indexOf('.js')) require(__dirname + '/models/' + filename);
+fs.readdirSync(__dirname + '/models').forEach(function (filename) {
+    //console.log(filename);
+    if (~filename.indexOf('.js')) require(__dirname + '/models/' + filename);
 });
 
 

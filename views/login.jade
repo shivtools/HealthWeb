@@ -1,21 +1,25 @@
 extends layout
 
 block content
+
 	br
 	br
 	br
-	.page-header
-		.container
-			h1#success You're now logged in to HealthWeb :)
-			br
-			h4#success You can now add/edit/delete any listing you'd like! Also make sure cookies are enabled in your browser!
-			br
-			.row#homebutton
-				.col-xs-3
-				.col-xs-3.text-left
-					a(href="/")
-						button.btn.btn-primary#home Homepage
-				.col-xs-1
-				.col-xs-3
-					a(href="/newitem")
-						button.btn.btn-info#home Add item
+	br
+	
+	div.container
+		div.row
+			div.col-sm-6.col-md-4.col-md-offset-4
+				h1.text-center.login-title Sign in to Healthweb
+					div.account-wall
+						img(style='width: 100px; height: 100px' class='profile-img', src='http://springrivermh.org/wp-content/uploads/sites/52/2011/01/Blank-person-photo1.png')
+						form(class='form-signin', action='/login', method='POST')
+							input(type='text', name='username' class='form-control', placeholder='Email',required, autofocus)
+							br
+							input(type='password', name='password' class='form-control', placeholder='Password', required)
+							br
+							button(class='btn btn-lg btn-primary btn-block', type='submit') Sign in
+							span.clearfix
+					#message
+					if message
+						h1.text-center.error-message #{message}

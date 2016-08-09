@@ -18,7 +18,7 @@ The main functionality of HealthWeb is to access these listings and easily fetch
 
 ![Google Maps](https://raw.githubusercontent.com/shivtools/HealthWeb/master/markdown/googlemaps.png)
 
-HealthWeb also provides functionality to send emails to HealthWeb's email address (rvahealthweb@gmail.com), using the SendGrid API. User's can send this email address an email using our 'Contact Us' form. 
+HealthWeb also provides functionality to send emails to HealthWeb's email address (rvahealthweb@gmail.com), using the SendGrid API. User's can send this email address an email using our 'Contact Us' form.
 
 ![Contact us](https://raw.githubusercontent.com/shivtools/HealthWeb/master/markdown/contactus.png)
 ![Email](https://raw.githubusercontent.com/shivtools/HealthWeb/master/markdown/email.png)
@@ -33,10 +33,10 @@ HealthWeb is a [Node.js](https://nodejs.org/en/)/[Express app](http://expressjs.
 
 We are all part of ACM's Web Development group and worked very hard to bring you HealthWeb. Shoutout to all the developers in the house!
 
+* [Shiv Toolsidass](https://github.com/shivtools) - full stack engineer and project manager for HealthWeb. Built the backend for Healthweb using Node.js. I currently work on scaling, maintaining and securing the website.
 * [Nasheya Rahman](https://github.com/nasheya) - project manager and front end guru for HealthWeb.  Crafted and engineered HealthWeb's beautiful front-end!
 * [Matt Santa](https://github.com/vsantav) - mapping ninja who made HealthWeb's mapping feature possible. He began coding a few months ago but is already a pro!
 * [Michael Dombrowski](https://github.com/md100play) - coding hero who I must thank for all of your assistance with our maps and for your ideas on authentication!
-* [Shiv Toolsidass](https://github.com/shivtools) - backend padawan and project manager for HealthWeb. Worked on the backend for HealthWeb and some of the mapping functionality.
 * [David Brakman](https://github.com/dbrakman) - front-end engineer
 * [Ruth Dumay](https://github.com/monroi) - front-end engineer
 * [Alan Malayev](https://github.com/alan459) - front-end engineer
@@ -44,11 +44,11 @@ We are all part of ACM's Web Development group and worked very hard to bring you
 
 ## License:
 
-Create Commons License. Feel free to fork this repo and improve upon our existing codebase! 
+Create Commons License. Feel free to fork this repo and improve upon our existing codebase!
 
-### Instructions on how to set up this app and run it locally in your browser: 
+### Instructions on how to set up this app and run it locally in your browser:
 
-In case you'd like to use this app and develop it further, this will be tell you how to run it locally on your computer! 
+In case you'd like to use this app and develop it further, this will be tell you how to run it locally on your computer!
 Note that this will code is meant for a Mac/Unix environment. If you have Windows, you'll have to download the Node.js msi file from the node website. Here are step by step instructions:
 
 *Note:* If you have Windows, you'll have to use Git Bash to do the following!
@@ -58,7 +58,7 @@ Note that this will code is meant for a Mac/Unix environment. If you have Window
 * Once you have that installed, navigate to the directory where you have cloned a copy of this repo and use the following commands:
 
 ```
-npm install 
+npm install
 npm start
 ```
 
@@ -77,7 +77,6 @@ npm start
 http://localhost:3000
 ```
 
-* Please make all of your changes in separate branches and do not commit to the master branch (I've made this mistake countless times and it is a pain to refactor code). To figure out how to branch, use this [git tutorial](http://rogerdudler.github.io/git-guide/). 
+* Please make all of your changes in separate branches and do not commit to the master branch (I've made this mistake countless times and it is a pain to refactor code). To figure out how to branch, use this [git tutorial](http://rogerdudler.github.io/git-guide/).
 
 * Feel free to reach out with questions!
-

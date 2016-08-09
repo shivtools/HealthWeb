@@ -2,4 +2,6 @@
 npm-debug.log
 .DS_Store
 /*.env
+config.json
+test.js
 public/images/Misc/richmond.jpg
