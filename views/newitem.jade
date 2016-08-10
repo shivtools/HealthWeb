@@ -77,17 +77,5 @@ block content
 				label
 					input(type="checkbox" name="options" value = "financial")
 					| Emergency Financial assistance
-			//.checkbox
-			//	label
-			//		input(type="checkbox" name="options", value = "forms")
-			//		| Forms
 			br
-			button.btn-danger#btnSubmit(onclick="formcheck(); return false").btn.btn-default Submit
-
-	//- Modal triggered if user has not entered sufficient info
-	.modal.fade#warning(tabindex="-1" role="dialog")
-		.modal-dialog.has-error
-			.modal-content
-				.modal-header
-					button.close(type="button" data-dismiss="modal")
-					h3#warning-text Error
+			button.btn-danger#btnSubmit.btn.btn-default Submit

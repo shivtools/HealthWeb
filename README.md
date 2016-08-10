@@ -33,7 +33,7 @@ HealthWeb is a [Node.js](https://nodejs.org/en/)/[Express app](http://expressjs.
 
 We are all part of ACM's Web Development group and worked very hard to bring you HealthWeb. Shoutout to all the developers in the house!
 
-* [Shiv Toolsidass](https://github.com/shivtools) - full stack engineer and project manager for HealthWeb. Built the backend for Healthweb using Node.js. I currently work on scaling, maintaining and securing the website.
+* [Shiv Toolsidass](https://github.com/shivtools) - full stack engineer and project manager for HealthWeb. Built the backend for Healthweb using Node.js, added SSL functionality and built a login system. I currently work on scaling, maintaining and securing the website.
 * [Nasheya Rahman](https://github.com/nasheya) - project manager and front end guru for HealthWeb.  Crafted and engineered HealthWeb's beautiful front-end!
 * [Matt Santa](https://github.com/vsantav) - mapping ninja who made HealthWeb's mapping feature possible. He began coding a few months ago but is already a pro!
 * [Michael Dombrowski](https://github.com/md100play) - coding hero who I must thank for all of your assistance with our maps and for your ideas on authentication!
